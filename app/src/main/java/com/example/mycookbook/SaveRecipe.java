@@ -21,9 +21,12 @@ public class SaveRecipe extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle b = getIntent().getExtras();
+        String uriString = b.getString("uri");
         setContentView(R.layout.activity_save_recipe);
         header=(EditText)findViewById(R.id.header);
         uriText=(TextView)findViewById(R.id.uriData);
+        uriText.setText(uriString);
         description=(EditText)findViewById(R.id.description);
         Button acceptButton=(Button)findViewById(R.id.accept);
         acceptButton.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +49,7 @@ public class SaveRecipe extends AppCompatActivity {
                 finish();
             }
         });
-        onSharedIntent();
+        //onSharedIntent();
     }
 
     private void onSharedIntent() {
