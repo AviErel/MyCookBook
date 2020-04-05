@@ -1,5 +1,6 @@
 package com.example.mycookbook;
 
+import Model.FireBaseModel;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -15,6 +16,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class SaveRecipe extends AppCompatActivity {
 
@@ -61,7 +66,7 @@ public class SaveRecipe extends AppCompatActivity {
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                JSONObject recipe=new JSONObject();
+                Map<String, Object> recipe=new HashMap<>();
                 if(courseSpin.getSelectedItem().equals("") || DietSpin.getSelectedItem().equals("") ||
                 header.getText().toString().equals("")){
                     Context context = getApplicationContext();
@@ -72,12 +77,14 @@ public class SaveRecipe extends AppCompatActivity {
                     toast.show();
                 }else{
                     try{
+//                        recipe.put("id", UUID.randomUUID());
+                        recipe.put("name",header.getText().toString());
                         recipe.put("Course",courseSpin.getSelectedItem().toString());
                         recipe.put("Diet",DietSpin.getSelectedItem().toString());
-                        recipe.put("header",header.getText());
-                        recipe.put("uri",uriText.getText());
-                        recipe.put("description",description.getText());
+                        recipe.put("uri",uriText.getText().toString());
+                        recipe.put("description",description.getText().toString());
                         //send to Manor
+                        FireBaseModel.SaveRecipe(recipe);
                     }catch (Exception e){}
                 }
 
