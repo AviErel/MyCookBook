@@ -1,3 +1,38 @@
 <resources>
     <string name="app_name">MyCookBook</string>
+    <string name="title_activity_save_recipe">SaveRecipe</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+
+    <string name="saveHeader">Enter recipe header</string>
+    <string name="saveUri">Selected Uri</string>
+    <string name="saveDescription">Recipe Description</string>
+    <string name="saveAccept">Save</string>
+    <string name="saveDiscard">Cancel</string>
+    <string name="saveCourses">Course Type</string>
+    <string name="saveDiets">Diet Type</string>
+    <string-array name="saveCourse">
+        <item></item>
+        <item>Appetizer</item>
+        <item>Main Course</item>
+        <item>Extras</item>
+        <item>Salad</item>
+        <item>Dessert</item>
+    </string-array>
+    <string-array name="saveDiet">
+        <item></item>
+        <item>Carnivore</item>
+        <item>Dairy</item>
+        <item>Vegetarian</item>
+        <item>Vegan</item>
+    </string-array>
+
 </resources>
