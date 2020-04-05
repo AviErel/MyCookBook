@@ -1,6 +1,8 @@
 package com.example.mycookbook;
 
 import Model.FireBaseModel;
+import Model.Statics;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -26,6 +28,7 @@ public class SaveRecipe extends AppCompatActivity {
     EditText header;
     EditText description;
     TextView uriText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,17 +80,17 @@ public class SaveRecipe extends AppCompatActivity {
                     toast.show();
                 }else{
                     try{
-//                        recipe.put("id", UUID.randomUUID());
-                        recipe.put("name",header.getText().toString());
-                        recipe.put("Course",courseSpin.getSelectedItem().toString());
-                        recipe.put("Diet",DietSpin.getSelectedItem().toString());
+                        recipe.put("userId", Statics.userId);
+                        recipe.put("header",header.getText().toString());
+                        recipe.put("course",courseSpin.getSelectedItem().toString());
+                        recipe.put("diet",DietSpin.getSelectedItem().toString());
                         recipe.put("uri",uriText.getText().toString());
                         recipe.put("description",description.getText().toString());
                         //send to Manor
                         FireBaseModel.SaveRecipe(recipe);
                     }catch (Exception e){}
                 }
-
+                finish();
             }
         });
 
