@@ -50,7 +50,7 @@ public class FireBaseModel {
 
     private static Map<String, Object> recipeToMap(Recipe recipe){
         Map<String, Object> recipeMap = new HashMap<>();
-        recipeMap.put("id", recipe.GetId());
+        recipeMap.put("id", recipe.GetId().toString());
         recipeMap.put("Header", recipe.GetHeader());
         recipeMap.put("Course", recipe.GetCourse());
         recipeMap.put("Diet", recipe.GetDiet());
