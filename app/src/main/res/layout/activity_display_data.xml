@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisplayData">
+    tools:context=".DisplayData"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
         android:id="@+id/recipesView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5px"
+        android:layout_margin="10dp"
         />
 
     <LinearLayout
@@ -41,6 +42,7 @@
             android:layout_height="wrap_content"
             android:text="@string/displayBack"
             android:id="@+id/backButton"
+            android:gravity="center_horizontal"
             />
     </LinearLayout>
 

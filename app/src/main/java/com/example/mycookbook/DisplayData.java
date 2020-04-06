@@ -28,8 +28,8 @@ import Model.Statics;
 public class DisplayData extends AppCompatActivity implements Statics.GetDataListener {
 
     ListView lst;
-    List<Recipe> recipesList=null;
-    List<Recipe> showList=null;
+    List<Recipe> recipesList;
+    List<Recipe> showList;
     Spinner cSpin,
             dSpin;
     Button backButton;
@@ -39,6 +39,9 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_data);
+
+        recipesList=new LinkedList<>();
+        showList=new LinkedList<>();
 
         cSpin=findViewById(R.id.course);
         ArrayAdapter<CharSequence> cAdapter = ArrayAdapter.createFromResource(this,
@@ -52,11 +55,17 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
                 showList.clear();
-                for(Recipe recipe:recipesList)
-                {
-                    if(recipe.GetCourse().equals(cSpin.getItemAtPosition(position).toString())){
-                        showList.add(recipe);
+                if(position>0){
+                    for(Recipe recipe:recipesList)
+                    {
+                        if(recipe.GetCourse().equals(cSpin.getItemAtPosition(position).toString())){
+                            showList.add(recipe);
+                        }
                     }
+                }
+                else
+                {
+                    showList.addAll(recipesList);
                 }
                 UpdateView();
             }
@@ -69,7 +78,7 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
 
         dSpin=findViewById(R.id.diet);
         ArrayAdapter<CharSequence> dAdapter = ArrayAdapter.createFromResource(this,
-                R.array.saveCourse, android.R.layout.simple_spinner_item);
+                R.array.saveDiet, android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
         cAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
@@ -79,11 +88,17 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
                 showList.clear();
-                for(Recipe recipe:recipesList)
-                {
-                    if(recipe.GetDiet().equals(dSpin.getItemAtPosition(position).toString())){
-                        showList.add(recipe);
+                if (position > 0) {
+                    for(Recipe recipe:recipesList)
+                    {
+                        if(recipe.GetDiet().equals(dSpin.getItemAtPosition(position).toString())){
+                            showList.add(recipe);
+                        }
                     }
+                }
+                else
+                {
+                    showList.addAll(recipesList);
                 }
                 UpdateView();
             }
@@ -116,12 +131,14 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
             }
         });
 
+        UpdateView();
+
     }
 
     @Override
     public void onComplete(List<Recipe> data) {
-        recipesList=data;
-        showList=data;
+        recipesList.addAll(data);
+        showList.addAll(data);
         UpdateView();
     }
 
@@ -133,6 +150,8 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
     private void UpdateView(){
         lst.setAdapter(new ReportAdapter(DisplayData.this,showList));
     }
+
+
 }
 
 class ReportAdapter extends BaseAdapter{
