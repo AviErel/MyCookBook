@@ -16,6 +16,9 @@ public class MainActivity extends AppCompatActivity {
     Intent showMe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent logginIntet = new Intent(this, loggin.class);
+        startActivity(logginIntet);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Statics.userId="Manor&Avi";
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(showMe);
             }
         });
+
+
     }
 
     private void onSharedIntent() {
