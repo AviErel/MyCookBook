@@ -16,9 +16,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import Model.FireBaseModel;
 import Model.Recipe;
+import Model.Statics;
 
-public class DisplayData extends AppCompatActivity {
+public class DisplayData extends AppCompatActivity implements Statics.GetDataListener {
 
     ListView lst;
     List<Recipe> recipesList=null;
@@ -29,7 +31,8 @@ public class DisplayData extends AppCompatActivity {
         setContentView(R.layout.activity_display_data);
 
         lst=findViewById(R.id.recipesView);
-        //get Data from Manor
+        FireBaseModel.GetAllRecupesByUserId("",this);
+
 
         lst.setAdapter(new ReportAdapter(DisplayData.this,recipesList));
 
@@ -41,6 +44,16 @@ public class DisplayData extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         });
+
+    }
+
+    @Override
+    public void onComplete(List<Recipe> data) {
+        recipesList=data;
+    }
+
+    @Override
+    public void onCancled(String error) {
 
     }
 }

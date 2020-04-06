@@ -79,7 +79,8 @@ public class SaveRecipe extends AppCompatActivity {
                     try{
                         recipe=new Recipe(UUID.randomUUID(),header.getText().toString(),
                                 courseSpin.getSelectedItem().toString(),DietSpin.getSelectedItem().toString()
-                                ,uriText.getText().toString(),description.getText().toString(),Statics.userId);
+                                ,uriText.getText().toString(),description.getText().toString(),
+                                Statics.userId,false);
                         //send to Manor
                         FireBaseModel.SaveRecipe(recipe);
                     }catch (Exception e){}
