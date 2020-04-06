@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import Model.FireBaseModel;
@@ -64,7 +65,10 @@ class ReportAdapter extends BaseAdapter{
     LayoutInflater inf;
 
     ReportAdapter(Context con, List<Recipe>data){
-        recipes=data;
+        recipes=new LinkedList<>();
+        if(data!=null){
+            recipes=data;
+        }
         inf=LayoutInflater.from(con);
     }
 
