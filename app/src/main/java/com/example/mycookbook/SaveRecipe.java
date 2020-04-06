@@ -17,12 +17,6 @@ import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 public class SaveRecipe extends AppCompatActivity {
 
     EditText header;
@@ -69,7 +63,7 @@ public class SaveRecipe extends AppCompatActivity {
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String, Object> recipe=new HashMap<>();
+                Recipe recipe;
                 if(courseSpin.getSelectedItem().equals("") || DietSpin.getSelectedItem().equals("") ||
                 header.getText().toString().equals("")){
                     Context context = getApplicationContext();
@@ -80,12 +74,9 @@ public class SaveRecipe extends AppCompatActivity {
                     toast.show();
                 }else{
                     try{
-                        recipe.put("userId", Statics.userId);
-                        recipe.put("header",header.getText().toString());
-                        recipe.put("course",courseSpin.getSelectedItem().toString());
-                        recipe.put("diet",DietSpin.getSelectedItem().toString());
-                        recipe.put("uri",uriText.getText().toString());
-                        recipe.put("description",description.getText().toString());
+                        recipe=new Recipe(Statics.userId,header.getText().toString(),
+                                courseSpin.getSelectedItem().toString(),DietSpin.getSelectedItem().toString()
+                                ,uriText.getText().toString(),description.getText().toString(),false);
                         //send to Manor
                         FireBaseModel.SaveRecipe(recipe);
                     }catch (Exception e){}

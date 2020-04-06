@@ -16,8 +16,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import Model.Recipe;
-
 public class DisplayData extends AppCompatActivity {
 
     ListView lst;
