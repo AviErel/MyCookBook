@@ -7,7 +7,7 @@ public class Recipe {
 
     }
 
-    public Recipe(UUID id, String header, String course, String diet, String uri, String description, String userId){
+    public Recipe(UUID id, String header, String course, String diet, String uri, String description, String userId, Boolean publicated){
         this._id = id;
         this._header = header;
         this._course = course;
@@ -15,6 +15,7 @@ public class Recipe {
         this._uri = uri;
         this._description = description;
         this._userId = userId;
+        this._publicated = publicated;
     }
 
     private UUID _id;
