@@ -77,7 +77,7 @@ public class SaveRecipe extends AppCompatActivity {
                     toast.show();
                 }else{
                     try{
-                        recipe=new Recipe(UUID.randomUUID(),header.getText().toString(),
+                        recipe=new Recipe(UUID.randomUUID().toString(),header.getText().toString(),
                                 courseSpin.getSelectedItem().toString(),DietSpin.getSelectedItem().toString()
                                 ,uriText.getText().toString(),description.getText().toString(),
                                 "Manor&Avi",false);

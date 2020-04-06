@@ -35,8 +35,6 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
         FireBaseModel.GetAllRecupesByUserId("",this);
 
 
-        lst.setAdapter(new ReportAdapter(DisplayData.this,recipesList));
-
         lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -51,6 +49,7 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
     @Override
     public void onComplete(List<Recipe> data) {
         recipesList=data;
+        lst.setAdapter(new ReportAdapter(DisplayData.this,recipesList));
     }
 
     @Override
