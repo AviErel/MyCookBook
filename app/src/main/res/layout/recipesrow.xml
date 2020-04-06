@@ -8,12 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rowHeader"
+        android:textStyle="bold"
+        android:textSize="6px"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/rowDescription"
+        android:layout_marginStart="5px"
         />
 
 </LinearLayout>

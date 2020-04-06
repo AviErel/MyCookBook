@@ -34,4 +34,6 @@
         <item>Vegan</item>
     </string-array>
 
+    <string name="displayBack">Back</string>
+
 </resources>
