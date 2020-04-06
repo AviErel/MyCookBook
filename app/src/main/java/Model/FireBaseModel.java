@@ -34,13 +34,8 @@ public class FireBaseModel {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<Recipe> recipes = new LinkedList<>();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    try {
-                        Recipe newRecipe = snapshot.getValue(Recipe.class);
-                        recipes.add(newRecipe);
-                    }
-                    catch (Exception e){
-                        Log.println(1, "error",e.getMessage());
-                    }
+                    Map<String, Object> recipeMap = (Map<String, Object>) snapshot.getValue();
+                    recipes.add(MapToRecipe(recipeMap));
                 }
 
                 listener.onComplete(recipes);
@@ -65,5 +60,13 @@ public class FireBaseModel {
         recipeMap.put("publicated", recipe.GetPublicated());
 
         return recipeMap;
+    }
+
+    private static Recipe MapToRecipe(Map<String, Object> recipeMap){
+        Recipe recipe = new Recipe(recipeMap.get("id").toString(), recipeMap.get("header").toString(),
+                recipeMap.get("course").toString(), recipeMap.get("diet").toString(),
+                recipeMap.get("uri").toString(), recipeMap.get("description").toString(),
+                recipeMap.get("userId").toString(), (recipeMap.get("publicated").toString().equals("true")));
+        return recipe;
     }
 }

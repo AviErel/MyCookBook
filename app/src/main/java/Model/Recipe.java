@@ -7,7 +7,7 @@ public class Recipe {
 
     }
 
-    public Recipe(UUID id, String header, String course, String diet, String uri, String description, String userId, Boolean publicated){
+    public Recipe(String id, String header, String course, String diet, String uri, String description, String userId, Boolean publicated){
         this.id = id;
         this.header = header;
         this.course = course;
@@ -18,7 +18,7 @@ public class Recipe {
         this.publicated = publicated;
     }
 
-    UUID id;
+    String id;
     String header;
     String course;
     String diet;
@@ -27,8 +27,8 @@ public class Recipe {
     String userId;
     Boolean publicated;
 
-    public void SetId(UUID id){this.id = id;}
-    public UUID GetId(){return this.id;}
+    public void SetId(String id){this.id = id;}
+    public String GetId(){return this.id;}
 
     public void SetHeader(String header){this.header = header;}
     public String GetHeader(){return this.header;}
