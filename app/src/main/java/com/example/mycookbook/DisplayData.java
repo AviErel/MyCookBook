@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import Model.Recipe;
+
 public class DisplayData extends AppCompatActivity {
 
     ListView lst;
@@ -35,7 +37,7 @@ public class DisplayData extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(recipesList.get(position).uri));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(recipesList.get(position).GetUri()));
                 startActivity(browserIntent);
             }
         });
@@ -73,8 +75,8 @@ class ReportAdapter extends BaseAdapter{
         convertView=inf.inflate(R.layout.recipesrow,null);
         TextView header=convertView.findViewById(R.id.rowHeader);
         TextView description=convertView.findViewById(R.id.rowDescription);
-        header.setText(recipes.get(position).header);
-        description.setText(recipes.get(position).description);
+        header.setText(recipes.get(position).GetHeader());
+        description.setText(recipes.get(position).GetDescription());
         return convertView;
     }
 }

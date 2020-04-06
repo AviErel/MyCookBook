@@ -1,6 +1,7 @@
 package com.example.mycookbook;
 
 import Model.FireBaseModel;
+import Model.Recipe;
 import Model.Statics;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.UUID;
 
 public class SaveRecipe extends AppCompatActivity {
 
@@ -74,9 +77,9 @@ public class SaveRecipe extends AppCompatActivity {
                     toast.show();
                 }else{
                     try{
-                        recipe=new Recipe(Statics.userId,header.getText().toString(),
+                        recipe=new Recipe(UUID.randomUUID(),header.getText().toString(),
                                 courseSpin.getSelectedItem().toString(),DietSpin.getSelectedItem().toString()
-                                ,uriText.getText().toString(),description.getText().toString(),false);
+                                ,uriText.getText().toString(),description.getText().toString(),Statics.userId);
                         //send to Manor
                         FireBaseModel.SaveRecipe(recipe);
                     }catch (Exception e){}
