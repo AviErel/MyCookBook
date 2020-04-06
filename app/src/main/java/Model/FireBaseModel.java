@@ -10,19 +10,19 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import androidx.annotation.NonNull;
 
 public class FireBaseModel {
 
-    public static void SaveRecipe(Map<String,Object> recipe){
+    public static void SaveRecipe(Recipe recipe){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("recipe").child(UUID.randomUUID().toString());
-        myRef.setValue(recipe);
+        DatabaseReference myRef = database.getReference("recipe").child(recipe.GetId().toString());
+        myRef.setValue(recipeToMap(recipe));
     }
 
     public static void GetAllRecupesByUserId(String userId, final Statics.GetDataListener listener){
@@ -46,5 +46,19 @@ public class FireBaseModel {
                 listener.onCancled(databaseError.getMessage());
             }
         });
+    }
+
+    private static Map<String, Object> recipeToMap(Recipe recipe){
+        Map<String, Object> recipeMap = new HashMap<>();
+        recipeMap.put("id", recipe.GetId());
+        recipeMap.put("Header", recipe.GetHeader());
+        recipeMap.put("Course", recipe.GetCourse());
+        recipeMap.put("Diet", recipe.GetDiet());
+        recipeMap.put("Uri", recipe.GetUri());
+        recipeMap.put("Description", recipe.GetDescription());
+        recipeMap.put("UserId", recipe.GetUserId());
+        recipeMap.put("Publicated", recipe.GetPublicated());
+
+        return recipeMap;
     }
 }
