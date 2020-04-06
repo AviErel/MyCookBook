@@ -34,8 +34,13 @@ public class FireBaseModel {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<Recipe> recipes = new LinkedList<>();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    Recipe newRecipe = snapshot.getValue(Recipe.class);
-                    recipes.add(newRecipe);
+                    try {
+                        Recipe newRecipe = snapshot.getValue(Recipe.class);
+                        recipes.add(newRecipe);
+                    }
+                    catch (Exception e){
+                        Log.println(1, "error",e.getMessage());
+                    }
                 }
 
                 listener.onComplete(recipes);
@@ -51,13 +56,13 @@ public class FireBaseModel {
     private static Map<String, Object> recipeToMap(Recipe recipe){
         Map<String, Object> recipeMap = new HashMap<>();
         recipeMap.put("id", recipe.GetId().toString());
-        recipeMap.put("Header", recipe.GetHeader());
-        recipeMap.put("Course", recipe.GetCourse());
-        recipeMap.put("Diet", recipe.GetDiet());
-        recipeMap.put("Uri", recipe.GetUri());
-        recipeMap.put("Description", recipe.GetDescription());
-        recipeMap.put("UserId", recipe.GetUserId());
-        recipeMap.put("Publicated", recipe.GetPublicated());
+        recipeMap.put("header", recipe.GetHeader());
+        recipeMap.put("course", recipe.GetCourse());
+        recipeMap.put("diet", recipe.GetDiet());
+        recipeMap.put("uri", recipe.GetUri());
+        recipeMap.put("description", recipe.GetDescription());
+        recipeMap.put("userId", recipe.GetUserId());
+        recipeMap.put("publicated", recipe.GetPublicated());
 
         return recipeMap;
     }
