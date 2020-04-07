@@ -1,14 +1,10 @@
 package Model;
 
-import android.util.Log;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -46,6 +42,26 @@ public class FireBaseModel {
                 listener.onCancled(databaseError.getMessage());
             }
         });
+    }
+
+    public static void DeleteRecipe(String id){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.getReference("Recipe").child(id).removeValue();
+    }
+
+    public static void UpdateRecipe(Recipe recipe){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference recipeToUpdate = database.getReference("Recipe").child(recipe.GetId());
+
+        if(recipeToUpdate != null){
+            recipeToUpdate.child("header").setValue(recipe.GetHeader());
+            recipeToUpdate.child("course").setValue(recipe.GetCourse());
+            recipeToUpdate.child("diet").setValue(recipe.GetDiet());
+            recipeToUpdate.child("uri").setValue(recipe.GetUri());
+            recipeToUpdate.child("description").setValue(recipe.GetDescription());
+            recipeToUpdate.child("userId").setValue(recipe.GetUserId());
+            recipeToUpdate.child("publicated").setValue(recipe.GetPublicated());
+        }
     }
 
     private static Map<String, Object> recipeToMap(Recipe recipe){
