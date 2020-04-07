@@ -18,20 +18,15 @@ public class MainActivity extends AppCompatActivity {
         Intent logginIntet = new Intent(this, LogginActivity.class);
         startActivity(logginIntet);
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         onSharedIntent();
+
+        while (Statics.userId.equals("")){}
+
         showMe=new Intent(this,DisplayData.class);
-        Button show=findViewById(R.id.showData);
-        show.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(showMe);
-            }
-        });
-
-
+        startActivity(showMe);
     }
 
     private void onSharedIntent() {

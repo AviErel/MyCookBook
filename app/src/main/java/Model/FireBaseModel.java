@@ -23,7 +23,7 @@ public class FireBaseModel {
         myRef.setValue(recipeToMap(recipe));
     }
 
-    public static void GetAllRecupesByUserId(String userId, final Statics.GetDataListener listener){
+    public static void GetAllRecupesByUserId(final String userId, final Statics.GetDataListener listener){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("recipe");
 
@@ -33,7 +33,10 @@ public class FireBaseModel {
                 List<Recipe> recipes = new LinkedList<>();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Map<String, Object> recipeMap = (Map<String, Object>) snapshot.getValue();
-                    recipes.add(MapToRecipe(recipeMap));
+
+                    if((recipeMap.get("userId").toString()).equals(userId)) {
+                        recipes.add(MapToRecipe(recipeMap));
+                    }
                 }
 
                 listener.onComplete(recipes);
