@@ -115,6 +115,8 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
 
     @Override
     public void onComplete(List<Recipe> data) {
+        recipesList.clear();
+        showList.clear();
         recipesList.addAll(data);
         showList.addAll(data);
         flag=true;
@@ -168,8 +170,8 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
 
     public void delRow(View v){
         int position=Integer.parseInt(v.getTag().toString());
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
-        startActivity(browserIntent);
+        FireBaseModel.DeleteRecipe(showList.get(position).GetId());
+        FireBaseModel.GetAllRecupesByUserId("",this);
     }
 
     public void updateRow(View v){
