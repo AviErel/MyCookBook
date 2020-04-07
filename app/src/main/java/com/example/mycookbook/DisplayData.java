@@ -183,6 +183,7 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
         Intent updateMe = new Intent(this,SaveRecipe.class);
         updateMe.putExtra("recipe", data);
         startActivity(updateMe);
+        UpdateView();
     }
 }
 
