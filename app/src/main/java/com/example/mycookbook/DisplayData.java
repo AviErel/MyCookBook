@@ -55,7 +55,8 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
         cSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
-                showList.clear();
+                filterAway(dSpin.getSelectedItem().toString(),cSpin.getSelectedItem().toString());
+/*                showList.clear();
                 if(position>0){
                     for(Recipe recipe:recipesList)
                     {
@@ -69,6 +70,7 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
                     showList.addAll(recipesList);
                 }
                 UpdateView();
+*/
             }
 
             @Override
@@ -88,7 +90,8 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
         dSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
-                showList.clear();
+                filterAway(dSpin.getSelectedItem().toString(),cSpin.getSelectedItem().toString());
+/*                showList.clear();
                 if (position > 0) {
                     for(Recipe recipe:recipesList)
                     {
@@ -102,6 +105,7 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
                     showList.addAll(recipesList);
                 }
                 UpdateView();
+*/
             }
 
             @Override
@@ -150,6 +154,34 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
 
     private void UpdateView(){
         lst.setAdapter(new ReportAdapter(DisplayData.this,showList));
+    }
+
+    private void filterAway(String diet,String course){
+        List<Recipe> temp=new LinkedList<>();
+        temp.addAll(recipesList);
+        showList.clear();
+        if(!course.equals(""))
+        {
+            temp.clear();
+            for(Recipe recipe:recipesList)
+            {
+                if(recipe.GetCourse().equals(course)){
+                    temp.add(recipe);
+                }
+            }
+        }
+        showList.addAll(temp);
+        if(!diet.equals(""))
+        {
+            showList.clear();
+            for(Recipe recipe:temp)
+            {
+                if(recipe.GetDiet().equals(diet)){
+                    showList.add(recipe);
+                }
+            }
+        }
+       UpdateView();
     }
 
 
