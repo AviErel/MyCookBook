@@ -1,5 +1,7 @@
 package Model;
 
+import android.util.Log;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,12 +48,12 @@ public class FireBaseModel {
 
     public static void DeleteRecipe(String id){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        database.getReference("Recipe").child(id).removeValue();
+        database.getReference("recipe").child(id).removeValue();
     }
 
     public static void UpdateRecipe(Recipe recipe){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference recipeToUpdate = database.getReference("Recipe").child(recipe.GetId());
+        DatabaseReference recipeToUpdate = database.getReference("recipe").child(recipe.GetId());
 
         if(recipeToUpdate != null){
             recipeToUpdate.child("header").setValue(recipe.GetHeader());

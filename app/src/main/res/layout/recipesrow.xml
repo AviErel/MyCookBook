@@ -9,25 +9,68 @@
     >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rowHeader"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            />
+            android:orientation="vertical"
+            >
 
-        <TextView
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rowHeader"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rowDescription"
+                android:layout_marginStart="10dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rowDescription"
-            android:layout_marginStart="10dp"
-            />
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+
+            <ImageButton
+                android:layout_width="150px"
+                android:layout_height="150px"
+                android:id="@+id/deleteRow"
+                android:src="@drawable/deletebutton"
+                android:layout_margin="15px"
+                android:onClick="delRow"
+                />
+
+            <ImageButton
+                android:layout_width="150px"
+                android:layout_height="150px"
+                android:id="@+id/updateRow"
+                android:src="@drawable/updatebutton"
+                android:layout_margin="15px"
+                android:onClick="updateRow"
+                />
+
+            <ImageButton
+                android:layout_width="150px"
+                android:layout_height="150px"
+                android:id="@+id/viewRow"
+                android:src="@drawable/viewbutton"
+                android:layout_margin="15px"
+                android:onClick="showRow"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>
