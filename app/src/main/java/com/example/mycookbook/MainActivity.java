@@ -18,13 +18,14 @@ public class MainActivity extends AppCompatActivity {
         Intent logginIntet = new Intent(this, LogginActivity.class);
         startActivity(logginIntet);
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         onSharedIntent();
+    }
 
-        while (Statics.userId.equals("")){}
-
+    @Override
+    protected void onStart(){
+        super.onStart();
         showMe=new Intent(this,DisplayData.class);
         startActivity(showMe);
     }
