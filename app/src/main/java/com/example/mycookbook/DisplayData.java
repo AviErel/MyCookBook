@@ -102,7 +102,7 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
         });
 
         lst=findViewById(R.id.recipesView);
-        FireBaseModel.GetAllRecupesByUserId("",this);
+        FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
 
 
         lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -175,7 +175,7 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
     public void delRow(View v){
         int position=Integer.parseInt(v.getTag().toString());
         FireBaseModel.DeleteRecipe(showList.get(position).GetId());
-        FireBaseModel.GetAllRecupesByUserId("",this);
+        FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
     }
 
     public void updateRow(View v){

@@ -98,7 +98,7 @@ public class SaveRecipe extends AppCompatActivity {
                         recipe=new Recipe(uuid,header.getText().toString(),
                                 courseSpin.getSelectedItem().toString(),DietSpin.getSelectedItem().toString()
                                 ,uriText.getText().toString(),description.getText().toString(),
-                                "Manor&Avi",false);
+                                Statics.userId,false);
                         if(recipeData==null){
                             FireBaseModel.SaveRecipe(recipe);
                         }
