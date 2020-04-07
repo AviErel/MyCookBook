@@ -44,6 +44,26 @@ public class FireBaseModel {
         });
     }
 
+    public static void DeleteRecipe(String id){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.getReference("Recipe").child(id).removeValue();
+    }
+
+    public static void UpdateRecipe(Recipe recipe){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference recipeToUpdate = database.getReference("Recipe").child(recipe.GetId());
+
+        if(recipeToUpdate != null){
+            recipeToUpdate.child("header").setValue(recipe.GetHeader());
+            recipeToUpdate.child("course").setValue(recipe.GetCourse());
+            recipeToUpdate.child("diet").setValue(recipe.GetDiet());
+            recipeToUpdate.child("uri").setValue(recipe.GetUri());
+            recipeToUpdate.child("description").setValue(recipe.GetDescription());
+            recipeToUpdate.child("userId").setValue(recipe.GetUserId());
+            recipeToUpdate.child("publicated").setValue(recipe.GetPublicated());
+        }
+    }
+
     private static Map<String, Object> recipeToMap(Recipe recipe){
         Map<String, Object> recipeMap = new HashMap<>();
         recipeMap.put("id", recipe.GetId().toString());
