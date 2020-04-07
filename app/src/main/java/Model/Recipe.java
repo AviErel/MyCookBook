@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Recipe {
+public class Recipe implements Serializable {
     public Recipe(){
 
     }

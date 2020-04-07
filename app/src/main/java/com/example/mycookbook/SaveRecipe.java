@@ -18,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.UUID;
 
 public class SaveRecipe extends AppCompatActivity {
@@ -32,10 +34,11 @@ public class SaveRecipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
         String uriString = b.getString("uri");
+        final Recipe recipeData=(Recipe)b.getSerializable("recipe");
+
         setContentView(R.layout.activity_save_recipe);
         header=(EditText)findViewById(R.id.header);
         uriText=(TextView)findViewById(R.id.uriData);
-        uriText.setText(uriString);
         description=(EditText)findViewById(R.id.description);
 
         final Spinner courseSpin = (Spinner) findViewById(R.id.Courses);
@@ -59,10 +62,23 @@ public class SaveRecipe extends AppCompatActivity {
 // Apply the adapter to the spinner
         DietSpin.setAdapter(dAdapter);
 
-
+        if(recipeData!=null){
+            uriText.setText(recipeData.GetUri());
+            header.setText(recipeData.GetHeader());
+            description.setText(recipeData.GetDescription());
+            int spinPos=cAdapter.getPosition(recipeData.GetCourse());
+            courseSpin.setSelection(spinPos);
+            spinPos=dAdapter.getPosition(recipeData.GetDiet());
+            DietSpin.setSelection(spinPos);
+        }else
+        {
+            uriText.setText(uriString);
+        }
 
 
         Button acceptButton=(Button)findViewById(R.id.accept);
+        if(recipeData!=null)
+            acceptButton.setText("Update");
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,12 +93,19 @@ public class SaveRecipe extends AppCompatActivity {
                     toast.show();
                 }else{
                     try{
-                        recipe=new Recipe(UUID.randomUUID().toString(),header.getText().toString(),
+                        String uuid=(recipeData==null?UUID.randomUUID().toString():recipeData.GetId());
+
+                        recipe=new Recipe(uuid,header.getText().toString(),
                                 courseSpin.getSelectedItem().toString(),DietSpin.getSelectedItem().toString()
                                 ,uriText.getText().toString(),description.getText().toString(),
                                 "Manor&Avi",false);
-                        //send to Manor
-                        FireBaseModel.SaveRecipe(recipe);
+                        if(recipeData==null){
+                            FireBaseModel.SaveRecipe(recipe);
+                        }
+                        else
+                        {
+                            FireBaseModel.UpdateRecipe(recipe);
+                        }
                     }catch (Exception e){}
                 }
                 finish();
@@ -96,7 +119,7 @@ public class SaveRecipe extends AppCompatActivity {
                 finish();
             }
         });
-        //onSharedIntent();
+
     }
 
     private void onSharedIntent() {
