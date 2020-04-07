@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
+import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -175,9 +179,10 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
     }
 
     public void updateRow(View v){
-        int position=Integer.parseInt(v.getTag().toString());
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
-        startActivity(browserIntent);
+        Recipe data=(Recipe)(v.getTag());
+        Intent updateMe = new Intent(this,SaveRecipe.class);
+        updateMe.putExtra("recipe", data);
+        startActivity(updateMe);
     }
 }
 
@@ -220,7 +225,7 @@ class ReportAdapter extends BaseAdapter{
         del.setTag(position);
 
         update=convertView.findViewById(R.id.updateRow);
-        update.setTag(position);
+        update.setTag(recipes.get(position));
 
         view=convertView.findViewById(R.id.viewRow);
         view.setTag(position);
