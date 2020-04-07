@@ -34,7 +34,7 @@ public class FireBaseModel {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Map<String, Object> recipeMap = (Map<String, Object>) snapshot.getValue();
 
-                    if((recipeMap.get("userId").toString()).equals(userId)) {
+                    if((recipeMap.get("userId")!= null)&&(recipeMap.get("userId").toString()).equals(userId)) {
                         recipes.add(MapToRecipe(recipeMap));
                     }
                 }
@@ -87,7 +87,8 @@ public class FireBaseModel {
         Recipe recipe = new Recipe(recipeMap.get("id").toString(), recipeMap.get("header").toString(),
                 recipeMap.get("course").toString(), recipeMap.get("diet").toString(),
                 recipeMap.get("uri").toString(), recipeMap.get("description").toString(),
-                recipeMap.get("userId").toString(), (recipeMap.get("publicated").toString().equals("true")));
+                recipeMap.get("userId")!= null? recipeMap.get("userId").toString():"",
+                (recipeMap.get("publicated").toString().equals("true")));
         return recipe;
     }
 }
