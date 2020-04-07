@@ -21,9 +21,11 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.tasks.Task;
 
-public class loggin extends AppCompatActivity implements View.OnClickListener {
+public class LogginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_SIGN_IN = 497;
+    private static final String TAG = "SignInGoogle";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,7 @@ public class loggin extends AppCompatActivity implements View.OnClickListener {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account!= null){
-            Statics.userId = account.getId();
-            finish();
+            handleUi(account);
         }
     }
 
@@ -55,16 +56,7 @@ public class loggin extends AppCompatActivity implements View.OnClickListener {
             case R.id.sign_in_button:
                 signIn();
                 break;
-            default:
-                finish();
-            // ...
         }
-
-    }
-
-    private void signIn(){
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, 2);
     }
 
     @Override
@@ -72,7 +64,7 @@ public class loggin extends AppCompatActivity implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == 2) {
+        if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -80,28 +72,26 @@ public class loggin extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    private void handleAcount(){
-//        Task<GoogleSignInAccount> googleSignInAccountTask = mGoogleSignInClient.silentSignIn();
-//        handleSignInResult(googleSignInAccountTask);
+    private void signIn(){
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        onActivityResult(2,0,signInIntent);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Statics.userId = account.getId();
-            finish();
+            handleUi(account);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w("", "signInResult:failed code=" + e.getStatusCode());
-            Log.println(1,"", "signInResult:failed code=" + e.getStatusCode());
-//            handleAcount();
-//            updateUI(null);
+            Log.println(1,TAG, "signInResult:failed code=" + e.getStatusCode());
         }
-        catch (Exception e){
-            Log.w("", e.getMessage());
+    }
+
+    private void handleUi(GoogleSignInAccount account){
+        if(account!=null){
+            Statics.userId = account.getId();
+            finish();
         }
     }
 }
