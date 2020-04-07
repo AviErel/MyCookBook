@@ -3,17 +3,20 @@ package com.example.mycookbook;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,13 +37,14 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
     Spinner cSpin,
             dSpin;
     ImageButton backButton;
+    boolean flag;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_data);
-
+        flag=false;
         recipesList=new LinkedList<>();
         showList=new LinkedList<>();
 
@@ -56,21 +60,6 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
                 filterAway(dSpin.getSelectedItem().toString(),cSpin.getSelectedItem().toString());
-/*                showList.clear();
-                if(position>0){
-                    for(Recipe recipe:recipesList)
-                    {
-                        if(recipe.GetCourse().equals(cSpin.getItemAtPosition(position).toString())){
-                            showList.add(recipe);
-                        }
-                    }
-                }
-                else
-                {
-                    showList.addAll(recipesList);
-                }
-                UpdateView();
-*/
             }
 
             @Override
@@ -91,21 +80,6 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
                 filterAway(dSpin.getSelectedItem().toString(),cSpin.getSelectedItem().toString());
-/*                showList.clear();
-                if (position > 0) {
-                    for(Recipe recipe:recipesList)
-                    {
-                        if(recipe.GetDiet().equals(dSpin.getItemAtPosition(position).toString())){
-                            showList.add(recipe);
-                        }
-                    }
-                }
-                else
-                {
-                    showList.addAll(recipesList);
-                }
-                UpdateView();
-*/
             }
 
             @Override
@@ -130,7 +104,6 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
         lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
                 startActivity(browserIntent);
             }
@@ -144,6 +117,7 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
     public void onComplete(List<Recipe> data) {
         recipesList.addAll(data);
         showList.addAll(data);
+        flag=true;
         UpdateView();
     }
 
@@ -153,7 +127,9 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
     }
 
     private void UpdateView(){
-        lst.setAdapter(new ReportAdapter(DisplayData.this,showList));
+        if(flag){
+            lst.setAdapter(new ReportAdapter(DisplayData.this,showList));
+        }
     }
 
     private void filterAway(String diet,String course){
@@ -184,13 +160,30 @@ public class DisplayData extends AppCompatActivity implements Statics.GetDataLis
        UpdateView();
     }
 
+    public void showRow(View v){
+        int position=Integer.parseInt(v.getTag().toString());
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
+        startActivity(browserIntent);
+    }
 
+    public void delRow(View v){
+        int position=Integer.parseInt(v.getTag().toString());
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
+        startActivity(browserIntent);
+    }
+
+    public void updateRow(View v){
+        int position=Integer.parseInt(v.getTag().toString());
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
+        startActivity(browserIntent);
+    }
 }
 
 class ReportAdapter extends BaseAdapter{
 
     private List<Recipe> recipes;
     LayoutInflater inf;
+    ImageButton del,update,view;
 
     ReportAdapter(Context con, List<Recipe>data){
         recipes=new LinkedList<>();
@@ -220,8 +213,19 @@ class ReportAdapter extends BaseAdapter{
         convertView=inf.inflate(R.layout.recipesrow,null);
         TextView header=convertView.findViewById(R.id.rowHeader);
         TextView description=convertView.findViewById(R.id.rowDescription);
+
+        del=convertView.findViewById(R.id.deleteRow);
+        del.setTag(position);
+
+        update=convertView.findViewById(R.id.updateRow);
+        update.setTag(position);
+
+        view=convertView.findViewById(R.id.viewRow);
+        view.setTag(position);
+
         header.setText(recipes.get(position).GetHeader());
         description.setText(recipes.get(position).GetDescription());
+
         return convertView;
     }
 }
