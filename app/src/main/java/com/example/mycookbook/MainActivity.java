@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import Model.Statics;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Base {
 
     Intent showMe;
     @Override
@@ -22,14 +22,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         onSharedIntent();
     }
-
+/*
     @Override
     protected void onStart(){
         super.onStart();
         showMe=new Intent(this,DisplayData.class);
         startActivity(showMe);
     }
-
+*/
     private void onSharedIntent() {
         Intent receiverdIntent = getIntent();
         String receivedAction = receiverdIntent.getAction();

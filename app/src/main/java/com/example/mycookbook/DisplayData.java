@@ -33,7 +33,7 @@ import Model.FireBaseModel;
 import Model.Recipe;
 import Model.Statics;
 
-public class DisplayData extends AppCompatActivity implements Statics.GetDataListener {
+public class DisplayData extends Base implements Statics.GetDataListener {
 
     ListView lst;
     List<Recipe> recipesList;

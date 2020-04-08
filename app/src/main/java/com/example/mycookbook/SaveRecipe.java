@@ -22,7 +22,7 @@ import org.json.JSONObject;
 
 import java.util.UUID;
 
-public class SaveRecipe extends AppCompatActivity {
+public class SaveRecipe extends Base {
 
     EditText header;
     EditText description;
