@@ -21,7 +21,7 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.tasks.Task;
 
-public class LogginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LogginActivity extends Base implements View.OnClickListener {
 
     private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 497;

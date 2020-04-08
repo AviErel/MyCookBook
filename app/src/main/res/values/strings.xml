@@ -11,6 +11,12 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 
+    <!-- menu section-->
+    <string name="showList">My Recipes</string>
+    <string name="logOff">Log off</string>
+
+
+    <!--Save action section-->
     <string name="saveHeader">Enter recipe header</string>
     <string name="saveUri">Selected Uri</string>
     <string name="saveDescription">Recipe Description</string>
@@ -34,6 +40,7 @@
         <item>Vegan</item>
     </string-array>
 
+    <!--Display Action section-->
     <string name="displayBack">Back</string>
 
 </resources>
