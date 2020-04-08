@@ -9,10 +9,7 @@
     android:background="@drawable/design"
     android:layoutDirection="ltr">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@drawable/food4"/>
+    <include layout="@layout/activity_base"/>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"

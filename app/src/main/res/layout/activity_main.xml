@@ -8,4 +8,6 @@
     android:background="@drawable/design"
     tools:context=".MainActivity">
 
+    <include layout="@layout/activity_base"/>
+
 </androidx.appcompat.widget.LinearLayoutCompat>
