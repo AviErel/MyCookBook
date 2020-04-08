@@ -31,6 +31,10 @@ public class SaveRecipe extends Base {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(Statics.userId.equals("")){
+            Intent logginIntet = new Intent(this, LogginActivity.class);
+            startActivity(logginIntet);
+        }
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
         String uriString = b.getString("uri");
