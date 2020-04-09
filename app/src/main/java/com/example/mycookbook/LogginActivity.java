@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +33,7 @@ public class LogginActivity extends Base implements View.OnClickListener {
         setContentView(R.layout.activity_loggin);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestProfile()
                 .build();
         Statics.mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
@@ -90,6 +92,8 @@ public class LogginActivity extends Base implements View.OnClickListener {
     private void handleUi(GoogleSignInAccount account){
         if(account!=null){
             Statics.userId = account.getId();
+            Statics.photoUrl = account.getPhotoUrl();
+            Statics.userName = account.getGivenName();
             finish();
         }
     }
