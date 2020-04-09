@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SaveRecipe"
     android:orientation="vertical"
-    android:background="@drawable/design"
-    android:layoutDirection="ltr">
+    android:background="@drawable/design">
 
     <include layout="@layout/activity_base"/>
     <LinearLayout
@@ -32,7 +31,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/headerLabel"
                     android:text="@string/saveHeader"
-                    android:fontFamily="@font/mighty_brush_demo"
                     android:gravity="start"
                     android:layout_marginEnd="20dp"
                     android:layout_marginStart="10dp"
@@ -60,7 +58,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/descriptionLabel"
                     android:text="@string/saveDescription"
-                    android:fontFamily="@font/mighty_brush_demo"
                     android:gravity="start"
                     android:layout_marginEnd="20dp"
                     android:layout_marginStart="10dp"
@@ -90,7 +87,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/uriLabel"
                     android:text="@string/saveUri"
-                    android:fontFamily="@font/mighty_brush_demo"
                     android:gravity="start"
                     android:layout_marginEnd="20dp"
                     android:layout_marginStart="10dp"
@@ -99,7 +95,6 @@
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/uriData"
-                    android:fontFamily="@font/mighty_brush_demo"
                     android:gravity="end"
                     android:layout_marginStart="20dp"
                     />
@@ -126,7 +121,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/saveCourses"
-                    android:fontFamily="@font/mighty_brush_demo"
                     android:padding="15dp"
                     />
 
@@ -149,7 +143,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/saveDiets"
-                    android:fontFamily="@font/mighty_brush_demo"
                     android:padding="15dp"
                     />
 
@@ -180,7 +173,6 @@
             android:id="@+id/accept"
             android:text="@string/saveAccept"
             android:layout_margin="30dp"
-            android:fontFamily="@font/mighty_brush_demo"
             android:background="@color/white"
             />
 
@@ -190,7 +182,6 @@
             android:id="@+id/discard"
             android:text="@string/saveDiscard"
             android:layout_margin="30dp"
-            android:fontFamily="@font/mighty_brush_demo"
             android:background="@color/white"
             />
 

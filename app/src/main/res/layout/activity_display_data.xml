@@ -20,13 +20,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/course"
-            android:fontFamily="@font/mighty_brush_demo"
             />
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/diet"
-            android:fontFamily="@font/mighty_brush_demo"
             />
     </LinearLayout>
 
