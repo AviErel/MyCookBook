@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">ספר המתכונים שלי</string>
-    <string name="title_activity_save_recipe" translatable="false">שמור מתכונים</string>
+    <string name="app_name">ספר המתכונים שלי</string>
+    <string name="title_activity_save_recipe">שמור מתכונים</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -13,19 +13,19 @@
 
 
     <!-- menu section-->
-    <string name="showList" translatable="false">המתכונים שלי</string>
-    <string name="logOff" translatable="false">התנתק</string>
+    <string name="showList">המתכונים שלי</string>
+    <string name="logOff">התנתק</string>
     <string name="language">שפות</string>
     <string name="english">אנגלית</string>
     <string name="hebrew">עברית</string>
 
 
     <!--Save action section-->
-    <string name="saveHeader" translatable="false">שם המתכון</string>
-    <string name="saveUri" translatable="false">כתובת</string>
-    <string name="saveDescription" translatable="false">תיאור מתכון</string>
-    <string name="saveAccept" translatable="false">שמור</string>
-    <string name="saveUpdate" translatable="false">עדכן</string>
+    <string name="saveHeader">שם המתכון</string>
+    <string name="saveUri">כתובת</string>
+    <string name="saveDescription">תיאור מתכון</string>
+    <string name="saveAccept">שמור</string>
+    <string name="saveUpdate">עדכן</string>
     <string name="saveDiscard">ביטול</string>
     <string name="saveCourses">מנה</string>
     <string name="saveDiets">תזונה</string>
