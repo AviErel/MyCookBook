@@ -17,8 +17,10 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -42,7 +44,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
             dSpin;
     ImageButton backButton;
     boolean flag;
-
+    private ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,8 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         flag=false;
         recipesList=new LinkedList<>();
         showList=new LinkedList<>();
+        spinner = findViewById(R.id.progressBar);
+        spinner.setVisibility(View.VISIBLE);
 
         cSpin=findViewById(R.id.course);
         ArrayAdapter<CharSequence> cAdapter = ArrayAdapter.createFromResource(this,
@@ -134,6 +138,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
 
     private void UpdateView(){
         if(flag){
+            spinner.setVisibility(View.GONE);
             lst.setAdapter(new ReportAdapter(DisplayData.this,showList));
         }
     }
@@ -192,6 +197,7 @@ class ReportAdapter extends BaseAdapter{
     private List<Recipe> recipes;
     LayoutInflater inf;
     ImageButton del,update,view;
+    ImageView del1, update1, view1;
 
     ReportAdapter(Context con, List<Recipe>data){
         recipes=new LinkedList<>();

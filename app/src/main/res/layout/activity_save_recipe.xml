@@ -28,12 +28,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/saveCourses"
+                android:fontFamily="@font/mighty_brush_demo"
                 />
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Courses"
                 android:text="@string/saveHeader"
+                android:fontFamily="@font/mighty_brush_demo"
                 />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -46,11 +48,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/saveDiets"
+                android:fontFamily="@font/mighty_brush_demo"
                 />
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Diets"
+                android:fontFamily="@font/mighty_brush_demo"
                 />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -68,6 +72,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/headerLabel"
             android:text="@string/saveHeader"
+            android:fontFamily="@font/mighty_brush_demo"
             />
         <EditText
             android:layout_width="250dp"
@@ -88,6 +93,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/uriLabel"
             android:text="@string/saveUri"
+            android:fontFamily="@font/mighty_brush_demo"
             />
         <TextView
             android:layout_width="250dp"
@@ -108,6 +114,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/descriptionLabel"
             android:text="@string/saveDescription"
+            android:fontFamily="@font/mighty_brush_demo"
             />
         <EditText
             android:inputType="textMultiLine"
@@ -134,6 +141,7 @@
             android:id="@+id/accept"
             android:text="@string/saveAccept"
             android:layout_margin="30dp"
+            android:fontFamily="@font/mighty_brush_demo"
             />
 
         <Button
@@ -142,6 +150,7 @@
             android:id="@+id/discard"
             android:text="@string/saveDiscard"
             android:layout_margin="30dp"
+            android:fontFamily="@font/mighty_brush_demo"
             />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
