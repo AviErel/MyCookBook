@@ -5,13 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15.0dp"
     android:elevation="30.0dp"
-    app:cardBackgroundColor="@color/wheat"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -23,8 +22,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/rowHeader"
-                android:textStyle="bold"
                 android:textSize="20dp"
+                android:fontFamily="@font/felixti"
                 />
 
             <TextView
@@ -32,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/rowDescription"
                 android:layout_marginStart="10dp"
+                android:fontFamily="@font/felixti"
                 />
 
         </LinearLayout>
@@ -44,30 +44,39 @@
             >
 
             <ImageButton
-                android:layout_width="150px"
-                android:layout_height="150px"
+                android:layout_width="120px"
+                android:layout_height="120px"
                 android:id="@+id/deleteRow"
-                android:src="@drawable/deletebutton"
-                android:layout_margin="15px"
+                android:src="@drawable/garbage"
                 android:onClick="delRow"
+                android:padding="20px"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@null"
                 />
 
             <ImageButton
-                android:layout_width="150px"
-                android:layout_height="150px"
+                android:layout_width="120px"
+                android:layout_height="120px"
                 android:id="@+id/updateRow"
-                android:src="@drawable/updatebutton"
-                android:layout_margin="15px"
+                android:src="@drawable/edit"
                 android:onClick="updateRow"
+                android:padding="20px"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@null"
                 />
 
             <ImageButton
-                android:layout_width="150px"
-                android:layout_height="150px"
+                android:layout_width="120px"
+                android:layout_height="120px"
                 android:id="@+id/viewRow"
-                android:src="@drawable/viewbutton"
-                android:layout_margin="15px"
+                android:src="@drawable/worldwide"
                 android:onClick="showRow"
+                android:padding="20px"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@null"
                 />
 
         </LinearLayout>
