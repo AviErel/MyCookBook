@@ -18,8 +18,16 @@ import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 public class SaveRecipe extends Base {
@@ -27,6 +35,7 @@ public class SaveRecipe extends Base {
     EditText header;
     EditText description;
     TextView uriText;
+    private AdView mAdView;
 
 
     @Override
@@ -36,6 +45,7 @@ public class SaveRecipe extends Base {
             startActivity(logginIntet);
         }
         super.onCreate(savedInstanceState);
+
         Bundle b = getIntent().getExtras();
         String uriString = b.getString("uri");
         final Recipe recipeData=(Recipe)b.getSerializable("recipe");
@@ -123,7 +133,27 @@ public class SaveRecipe extends Base {
                 finish();
             }
         });
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadGoogleAdd();
+    }
+
+    private void loadGoogleAdd(){
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        MobileAds.setRequestConfiguration(
+                new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("ABCDEF012345"))
+                        .build());
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     private void onSharedIntent() {
