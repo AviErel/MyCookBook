@@ -44,14 +44,7 @@
         android:gravity="center_horizontal"
         >
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/backbutton"
-            android:id="@+id/backButton"
-            >
 
-        </ImageButton>
 
         <ProgressBar
             style="?android:attr/progressBarStyleLarge"
@@ -67,5 +60,18 @@
         <!--            android:layout_alignLeft="@+id/textview"-->
         <!--            android:layout_alignStart="@+id/textview"-->
     </LinearLayout>
+
+    <ImageButton
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:src="@drawable/back"
+        android:id="@+id/backButton"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:layout_gravity="bottom"
+        >
+
+    </ImageButton>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -17,13 +17,13 @@
 
 
     <!--Save action section-->
-    <string name="saveHeader">Enter recipe header</string>
-    <string name="saveUri">Selected Uri</string>
-    <string name="saveDescription">Recipe Description</string>
+    <string name="saveHeader">Title</string>
+    <string name="saveUri">URL</string>
+    <string name="saveDescription">Description</string>
     <string name="saveAccept">Save</string>
     <string name="saveDiscard">Cancel</string>
-    <string name="saveCourses">Course Type</string>
-    <string name="saveDiets">Diet Type</string>
+    <string name="saveCourses">Course</string>
+    <string name="saveDiets">Diet</string>
     <string-array name="saveCourse">
         <item></item>
         <item>Appetizer</item>

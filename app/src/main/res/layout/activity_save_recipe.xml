@@ -10,129 +10,168 @@
     android:layoutDirection="ltr">
 
     <include layout="@layout/activity_base"/>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        >
+        android:orientation="vertical">
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--Title-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/headerLabel"
+                    android:text="@string/saveHeader"
+                    android:fontFamily="@font/mighty_brush_demo"
+                    android:gravity="start"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="10dp"
+                    />
+                <EditText
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/header"
+                    android:paddingStart="25px"
+                    android:gravity="end"
+                    android:layout_marginStart="30dp"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!--description-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/descriptionLabel"
+                    android:text="@string/saveDescription"
+                    android:fontFamily="@font/mighty_brush_demo"
+                    android:gravity="start"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="10dp"
+                    />
+                <EditText
+                    android:inputType="textMultiLine"
+                    android:maxLines="10"
+                    android:lines="6"
+                    android:scrollbars="vertical"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/description"
+                    android:gravity="end"
+                    android:layout_marginStart="20dp"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <!--url-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/uriLabel"
+                    android:text="@string/saveUri"
+                    android:fontFamily="@font/mighty_brush_demo"
+                    android:gravity="start"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="10dp"
+                    />
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/uriData"
+                    android:fontFamily="@font/mighty_brush_demo"
+                    android:gravity="end"
+                    android:layout_marginStart="20dp"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+<!--        spinners-->
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
             >
-            <TextView
+<!--            courses-->
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/saveCourses"
-                android:fontFamily="@font/mighty_brush_demo"
-                />
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Courses"
-                android:text="@string/saveHeader"
-                android:fontFamily="@font/mighty_brush_demo"
-                />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/saveDiets"
-                android:fontFamily="@font/mighty_brush_demo"
-                />
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Diets"
-                android:fontFamily="@font/mighty_brush_demo"
-                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/saveCourses"
+                    android:fontFamily="@font/mighty_brush_demo"
+                    android:padding="15dp"
+                    />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Courses"
+                    android:text="@string/saveHeader"
+                    />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+<!--diet-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/saveDiets"
+                    android:fontFamily="@font/mighty_brush_demo"
+                    android:padding="15dp"
+                    />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Diets"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </LinearLayout>
+
+<!--buttons-->
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/headerLabel"
-            android:text="@string/saveHeader"
-            android:fontFamily="@font/mighty_brush_demo"
-            />
-        <EditText
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/header"
-            />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/uriLabel"
-            android:text="@string/saveUri"
-            android:fontFamily="@font/mighty_brush_demo"
-            />
-        <TextView
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/uriData"
-            />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/descriptionLabel"
-            android:text="@string/saveDescription"
-            android:fontFamily="@font/mighty_brush_demo"
-            />
-        <EditText
-            android:inputType="textMultiLine"
-            android:maxLines="10"
-            android:lines="6"
-            android:scrollbars="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/description"
-            />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:gravity="center"
         >
 
         <Button
@@ -142,6 +181,7 @@
             android:text="@string/saveAccept"
             android:layout_margin="30dp"
             android:fontFamily="@font/mighty_brush_demo"
+            android:background="@color/white"
             />
 
         <Button
@@ -151,6 +191,7 @@
             android:text="@string/saveDiscard"
             android:layout_margin="30dp"
             android:fontFamily="@font/mighty_brush_demo"
+            android:background="@color/white"
             />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
