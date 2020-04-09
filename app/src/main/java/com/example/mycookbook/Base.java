@@ -1,9 +1,12 @@
 package com.example.mycookbook;
 
+import Model.Statics;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -12,6 +15,10 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.Locale;
 
@@ -29,10 +36,10 @@ public class Base extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mainmenu, menu);
 
-        if(menu instanceof MenuBuilder){
-            MenuBuilder m = (MenuBuilder) menu;
-            m.setOptionalIconsVisible(true);
-        }
+//        if(menu instanceof MenuBuilder){
+//            MenuBuilder m = (MenuBuilder) menu;
+//            m.setOptionalIconsVisible(true);
+//        }
         return true;
     }
 
@@ -51,10 +58,27 @@ public class Base extends AppCompatActivity {
                 startActivity(showMe);
                 return true;
             case R.id.menu_logoff:
+                if(!Statics.userId.equals("")) {
+                    logoff();
+                    item.setTitle(R.string.login);
+                }
+                else {
+                    item.setTitle(R.string.logOff);
+                    startActivity(new Intent(this, LogginActivity.class));
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void logoff(){
+        Statics.mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Statics.userId="";
+            }
+        });
     }
 
     public void setLocale(String lang) {
@@ -63,9 +87,12 @@ public class Base extends AppCompatActivity {
         DisplayMetrics dm = res.getDisplayMetrics();
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
-        res.updateConfiguration(conf, dm);
         Intent refresh=getIntent();
         finish();
         startActivity(refresh);
+        conf.setLayoutDirection(myLocale);
+
+        res.updateConfiguration(conf, dm);
+
     }
 }

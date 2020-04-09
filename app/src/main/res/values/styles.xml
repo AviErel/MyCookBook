@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/mighty_brush_demo</item>
+        <item name="android:direction">left_to_right</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
