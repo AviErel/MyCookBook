@@ -8,9 +8,6 @@
     android:background="@drawable/design"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@drawable/food4"/>
+    <include layout="@layout/activity_base"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

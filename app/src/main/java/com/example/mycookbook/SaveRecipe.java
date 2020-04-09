@@ -22,7 +22,7 @@ import org.json.JSONObject;
 
 import java.util.UUID;
 
-public class SaveRecipe extends AppCompatActivity {
+public class SaveRecipe extends Base {
 
     EditText header;
     EditText description;
@@ -31,6 +31,10 @@ public class SaveRecipe extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(Statics.userId.equals("")){
+            Intent logginIntet = new Intent(this, LogginActivity.class);
+            startActivity(logginIntet);
+        }
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
         String uriString = b.getString("uri");
