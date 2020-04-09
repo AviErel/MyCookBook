@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name" translatable="false">My Cook Book</string>
-    <string name="title_activity_save_recipe" translatable="false">Save Recipe</string>
+    <string name="app_name">My Cook Book</string>
+    <string name="title_activity_save_recipe">Save Recipe</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -24,6 +24,7 @@
     <string name="saveUri">URL</string>
     <string name="saveDescription">Description</string>
     <string name="saveAccept">Save</string>
+    <string name="saveUpdate">Update</string>
     <string name="saveDiscard">Cancel</string>
     <string name="saveCourses">Course</string>
     <string name="saveDiets">Diet</string>
