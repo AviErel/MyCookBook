@@ -23,7 +23,6 @@ import com.google.android.gms.tasks.Task;
 
 public class LogginActivity extends Base implements View.OnClickListener {
 
-    private GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 497;
     private static final String TAG = "SignInGoogle";
 
@@ -34,7 +33,7 @@ public class LogginActivity extends Base implements View.OnClickListener {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        Statics.mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
@@ -73,7 +72,7 @@ public class LogginActivity extends Base implements View.OnClickListener {
     }
 
     private void signIn(){
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        Intent signInIntent = Statics.mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
