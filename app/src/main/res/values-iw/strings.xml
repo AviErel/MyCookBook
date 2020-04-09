@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">ספר המתכונים שלי</string>
+    <string name="title_activity_save_recipe" translatable="false">שמור מתכונים</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+    <!-- menu section-->
+    <string name="showList" translatable="false">המתכונים שלי</string>
+    <string name="logOff" translatable="false">התנתק</string>
+    <string name="language">שפות</string>
+    <string name="english">אנגלית</string>
+    <string name="hebrew">עברית</string>
+
+
+    <!--Save action section-->
+    <string name="saveHeader" translatable="false">שם המתכון</string>
+    <string name="saveUri" translatable="false">כתובת</string>
+    <string name="saveDescription" translatable="false">תיאור מתכון</string>
+    <string name="saveAccept" translatable="false">שמור</string>
+    <string name="saveUpdate" translatable="false">עדכן</string>
+    <string name="saveDiscard">ביטול</string>
+    <string name="saveCourses">מנה</string>
+    <string name="saveDiets">תזונה</string>
+    <string-array name="saveCourse">
+        <item></item>
+        <item>מתאבן</item>
+        <item>עיקרית</item>
+        <item>תוספות</item>
+        <item>סלט</item>
+        <item>קינוח</item>
+    </string-array>
+    <string-array name="saveDiet">
+        <item></item>
+        <item>בשרי</item>
+        <item>חלבי</item>
+        <item>צמחוני</item>
+        <item>טבעוני</item>
+    </string-array>
+
+    <!--Display Action section-->
+    <string name="displayBack">חזור</string>
+
+</resources>

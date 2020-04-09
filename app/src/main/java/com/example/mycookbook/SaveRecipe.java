@@ -82,7 +82,7 @@ public class SaveRecipe extends Base {
 
         Button acceptButton=(Button)findViewById(R.id.accept);
         if(recipeData!=null)
-            acceptButton.setText("Update");
+            acceptButton.setText(getText(R.string.saveUpdate));
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
