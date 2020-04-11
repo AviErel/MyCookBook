@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item
+    android:title=""
+    android:icon="@drawable/more"
+    app:showAsAction="always"
+
+    >
+<menu >
     <item
-        android:title="@string/language">
+        android:title="@string/language"
+        android:icon="@drawable/language_icon">
         <menu>
             <item android:title="@string/english"
-                android:id="@+id/eng"/>
+                android:id="@+id/eng"
+                />
             <item
                 android:title="@string/hebrew"
                 android:id="@+id/heb"/>
@@ -13,13 +23,14 @@
     <item
         android:id="@+id/menu_show"
         android:title="@string/showList"
-        android:icon="@drawable/notebook"
-        android:fontFamily="@font/mighty_brush_demo"
+        android:icon="@drawable/list_recipe"
         />
     <item
         android:id="@+id/menu_logoff"
         android:title="@string/logOff"
-        android:icon="@drawable/exit"
-        android:fontFamily="@font/mighty_brush_demo"
+        android:icon="@drawable/logoff_icon"
+        app:showAsAction="ifRoom"
         />
+</menu>
+</item>
 </menu>

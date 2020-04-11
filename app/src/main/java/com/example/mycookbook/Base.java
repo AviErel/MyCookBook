@@ -2,20 +2,20 @@ package com.example.mycookbook;
 
 import Model.Statics;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +28,21 @@ public class Base extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        ActionBar supportActionBar = this.getSupportActionBar();
+        supportActionBar.setDisplayShowHomeEnabled(true);
+        String userName = "    " +getResources().getString(R.string.hello)+" "+ Statics.userName + "    ";
+        supportActionBar.setTitle(userName);
+
+        supportActionBar.setLogo(R.drawable.app_icon_2);
+        supportActionBar.setDisplayUseLogoEnabled(true);
+        Drawable color;
+        color = new ColorDrawable(getResources().getColor(R.color.blue2));
+        supportActionBar.setBackgroundDrawable(color);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
     }
 
     @SuppressLint("RestrictedApi")
@@ -36,10 +51,6 @@ public class Base extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mainmenu, menu);
 
-//        if(menu instanceof MenuBuilder){
-//            MenuBuilder m = (MenuBuilder) menu;
-//            m.setOptionalIconsVisible(true);
-//        }
         return true;
     }
 
