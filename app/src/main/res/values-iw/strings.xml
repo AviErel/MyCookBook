@@ -31,8 +31,10 @@
     <string name="saveDiscard">ביטול</string>
     <string name="saveCourses">מנה</string>
     <string name="saveDiets">תזונה</string>
+    <string name="saveTags">תגיות</string>
     <string-array name="saveCourse">
         <item></item>
+        <item>מרק</item>
         <item>מתאבן</item>
         <item>עיקרית</item>
         <item>תוספות</item>

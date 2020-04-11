@@ -65,6 +65,7 @@ public class FireBaseModel {
             recipeToUpdate.child("uri").setValue(recipe.GetUri());
             recipeToUpdate.child("description").setValue(recipe.GetDescription());
             recipeToUpdate.child("userId").setValue(recipe.GetUserId());
+            recipeToUpdate.child("tags").setValue(Statics.FlatArray(recipe.GetTags()));
             recipeToUpdate.child("publicated").setValue(recipe.GetPublicated());
         }
     }
@@ -78,6 +79,7 @@ public class FireBaseModel {
         recipeMap.put("uri", recipe.GetUri());
         recipeMap.put("description", recipe.GetDescription());
         recipeMap.put("userId", recipe.GetUserId());
+        recipeMap.put("tags",Statics.FlatArray(recipe.GetTags()));
         recipeMap.put("publicated", recipe.GetPublicated());
 
         return recipeMap;
@@ -88,6 +90,7 @@ public class FireBaseModel {
                 recipeMap.get("course").toString(), recipeMap.get("diet").toString(),
                 recipeMap.get("uri").toString(), recipeMap.get("description").toString(),
                 recipeMap.get("userId")!= null? recipeMap.get("userId").toString():"",
+                recipeMap.get("tags")!=null? Statics.BuildArray(recipeMap.get("tags").toString()): Statics.BuildArray(""),
                 (recipeMap.get("publicated").toString().equals("true")));
         return recipe;
     }

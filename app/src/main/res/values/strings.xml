@@ -32,8 +32,10 @@
     <string name="saveDiscard">Cancel</string>
     <string name="saveCourses">Course</string>
     <string name="saveDiets">Diet</string>
+    <string name="saveTags">Tag</string>
     <string-array name="saveCourse">
         <item></item>
+        <item>Soup</item>
         <item>Appetizer</item>
         <item>Main Course</item>
         <item>Extras</item>

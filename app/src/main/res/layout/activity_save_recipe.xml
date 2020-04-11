@@ -5,199 +5,230 @@
     android:layout_height="match_parent">
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SaveRecipe"
-    android:orientation="vertical"
-    android:background="@drawable/design">
-
-    <include layout="@layout/activity_base"/>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!--Title-->
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/headerLabel"
-                    android:text="@string/saveHeader"
-                    android:gravity="start"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginStart="10dp"
-                    />
-                <EditText
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/header"
-                    android:paddingStart="25px"
-                    android:gravity="end"
-                    android:layout_marginStart="30dp"
-                    />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <!--description-->
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/descriptionLabel"
-                    android:text="@string/saveDescription"
-                    android:gravity="start"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginStart="10dp"
-                    />
-                <EditText
-                    android:inputType="textMultiLine"
-                    android:maxLines="10"
-                    android:lines="6"
-                    android:scrollbars="vertical"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/description"
-                    android:gravity="end"
-                    android:layout_marginStart="20dp"
-                    />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-            <!--url-->
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/uriLabel"
-                    android:text="@string/saveUri"
-                    android:gravity="start"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginStart="10dp"
-                    />
-                <TextView
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/uriData"
-                    android:gravity="end"
-                    android:layout_marginStart="20dp"
-                    />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-<!--        spinners-->
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            >
-<!--            courses-->
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/saveCourses"
-                    android:padding="15dp"
-                    />
-
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/Courses"
-                    android:text="@string/saveHeader"
-                    />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-<!--diet-->
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/saveDiets"
-                    android:padding="15dp"
-                    />
-
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/Diets"
-                    />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </LinearLayout>
-
-<!--buttons-->
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
+        android:layout_height="match_parent"
         >
+        <androidx.appcompat.widget.LinearLayoutCompat
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".SaveRecipe"
+            android:orientation="vertical"
+            android:background="@drawable/design">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/accept"
-            android:text="@string/saveAccept"
-            android:layout_margin="30dp"
-            android:background="@color/blue2"
-            android:textColor="@color/white"
-            />
+            <include layout="@layout/activity_base"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/discard"
-            android:text="@string/saveDiscard"
-            android:layout_margin="30dp"
-            android:background="@color/blue2"
-            android:textColor="@color/white"
-            />
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!--Title-->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/headerLabel"
+                            android:text="@string/saveHeader"
+                            android:gravity="start"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="10dp"
+                            />
+                        <EditText
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/header"
+                            android:paddingStart="25px"
+                            android:gravity="end"
+                            android:layout_marginStart="30dp"
+                            />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <!--description-->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/descriptionLabel"
+                            android:text="@string/saveDescription"
+                            android:gravity="start"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="10dp"
+                            />
+                        <EditText
+                            android:inputType="textMultiLine"
+                            android:maxLines="10"
+                            android:lines="6"
+                            android:scrollbars="vertical"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/description"
+                            android:gravity="end"
+                            android:layout_marginStart="20dp"
+                            />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <!--url-->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/uriLabel"
+                            android:text="@string/saveUri"
+                            android:gravity="start"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="10dp"
+                            />
+                        <TextView
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/uriData"
+                            android:gravity="end"
+                            android:layout_marginStart="20dp"
+                            />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
+                <!--        spinners-->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    >
+                    <!--            courses-->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/saveCourses"
+                            android:padding="15dp"
+                            />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/Courses"
+                            android:text="@string/saveHeader"
+                            />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <!--diet-->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/saveDiets"
+                            android:padding="15dp"
+                            />
+
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/Diets"
+                            />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <!--tags-->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tagLabel"
+                        android:text="@string/saveTags"
+                        android:gravity="start"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="10dp"
+                        />
+                    <EditText
+                        android:inputType="textMultiLine"
+                        android:maxLines="3"
+                        android:lines="2"
+                        android:scrollbars="vertical"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tags"
+                        android:gravity="end"
+                        android:layout_marginStart="20dp"
+                        />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </LinearLayout>
+
+            <!--buttons-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/accept"
+                    android:text="@string/saveAccept"
+                    android:layout_margin="30dp"
+                    android:background="@color/blue2"
+                    android:textColor="@color/white"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/discard"
+                    android:text="@string/saveDiscard"
+                    android:layout_margin="30dp"
+                    android:background="@color/blue2"
+                    android:textColor="@color/white"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
 
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"

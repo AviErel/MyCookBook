@@ -33,7 +33,7 @@ import java.util.UUID;
 public class SaveRecipe extends Base {
 
     EditText header;
-    EditText description;
+    EditText description,tags;
     TextView uriText;
     private AdView mAdView;
 
@@ -54,6 +54,7 @@ public class SaveRecipe extends Base {
         header=(EditText)findViewById(R.id.header);
         uriText=(TextView)findViewById(R.id.uriData);
         description=(EditText)findViewById(R.id.description);
+        tags=(EditText)findViewById(R.id.tags);
 
         final Spinner courseSpin = (Spinner) findViewById(R.id.Courses);
 
@@ -80,9 +81,11 @@ public class SaveRecipe extends Base {
             uriText.setText(recipeData.GetUri());
             header.setText(recipeData.GetHeader());
             description.setText(recipeData.GetDescription());
-            int spinPos=cAdapter.getPosition(recipeData.GetCourse());
+            tags.setText(Statics.FlatArray(recipeData.GetTags()));
+
+            int spinPos=Integer.parseInt(recipeData.GetCourse());
             courseSpin.setSelection(spinPos);
-            spinPos=dAdapter.getPosition(recipeData.GetDiet());
+            spinPos=Integer.parseInt(recipeData.GetDiet());
             DietSpin.setSelection(spinPos);
         }else
         {
@@ -110,9 +113,9 @@ public class SaveRecipe extends Base {
                         String uuid=(recipeData==null?UUID.randomUUID().toString():recipeData.GetId());
 
                         recipe=new Recipe(uuid,header.getText().toString(),
-                                courseSpin.getSelectedItem().toString(),DietSpin.getSelectedItem().toString()
+                                String.valueOf(courseSpin.getSelectedItemPosition()),String.valueOf(DietSpin.getSelectedItemPosition())
                                 ,uriText.getText().toString(),description.getText().toString(),
-                                Statics.userId,false);
+                                Statics.userId,Statics.BuildArray(tags.getText().toString()),false);
                         if(recipeData==null){
                             FireBaseModel.SaveRecipe(recipe);
                         }
@@ -139,6 +142,13 @@ public class SaveRecipe extends Base {
     protected void onStart() {
         super.onStart();
         loadGoogleAdd();
+    }
+    private String StringUtils(String[] data){
+        String answer="";
+        for(String n : data){
+            answer+=n+",";
+        }
+        return answer.substring(0,answer.length()-1);
     }
 
     private void loadGoogleAdd(){
