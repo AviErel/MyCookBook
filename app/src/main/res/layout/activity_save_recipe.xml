@@ -179,7 +179,8 @@
             android:id="@+id/accept"
             android:text="@string/saveAccept"
             android:layout_margin="30dp"
-            android:background="@color/white"
+            android:background="@color/blue2"
+            android:textColor="@color/white"
             />
 
         <Button
@@ -188,7 +189,8 @@
             android:id="@+id/discard"
             android:text="@string/saveDiscard"
             android:layout_margin="30dp"
-            android:background="@color/white"
+            android:background="@color/blue2"
+            android:textColor="@color/white"
             />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

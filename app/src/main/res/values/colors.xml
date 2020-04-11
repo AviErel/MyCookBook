@@ -8,4 +8,13 @@
     <color name="blue">#89F3D4</color>
     <color name="white">#FBFFFE</color>
     <color name="blue2">#AAC5FF</color>
+    <color name="blue3">#AAD6FF</color>
+
+    <color name="purpleStart">#F8EBF9</color>
+    <color name="purpleCenter">#F8E4F8</color>
+    <color name="purpleEnd">#F8DCF9</color>
+
+    <color name="grayStart">#EFF1F0</color>
+    <color name="grayCenter">#E7E8E7</color>
+    <color name="grayEnd">#DCDFDE</color>
 </resources>
