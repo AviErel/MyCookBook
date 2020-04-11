@@ -13,6 +13,7 @@ public class Statics {
     public static Uri photoUrl;
     public static String userName = "";
     public static GoogleSignInClient mGoogleSignInClient;
+    public static String lang_prefer = "";
 
     public interface GetDataListener{
         void onComplete(List<Recipe> data);

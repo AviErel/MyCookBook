@@ -23,6 +23,17 @@ public class FireBaseModel {
         myRef.setValue(recipeToMap(recipe));
     }
 
+    public static void SaveUser(User user){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("user").child(user.GetId().toString());
+        myRef.setValue(UserToMap(user));
+    }
+
+    public static void GetUserLanguagePre(String userId){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("user").child(userId);
+    }
+
     public static void GetAllRecupesByUserId(final String userId, final Statics.GetDataListener listener){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("recipe");
@@ -93,5 +104,13 @@ public class FireBaseModel {
                 recipeMap.get("tags")!=null? Statics.BuildArray(recipeMap.get("tags").toString()): Statics.BuildArray(""),
                 (recipeMap.get("publicated").toString().equals("true")));
         return recipe;
+    }
+
+    private static Map<String, Object> UserToMap(User user){
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("id", user.GetId());
+        userMap.put("languagePreference", user.GetLanguagePreference());
+
+        return userMap;
     }
 }

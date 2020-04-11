@@ -1,6 +1,8 @@
 package com.example.mycookbook;
 
+import Model.FireBaseModel;
 import Model.Statics;
+import Model.User;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,8 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.tasks.Task;
+
+import java.util.Locale;
 
 public class LogginActivity extends Base implements View.OnClickListener {
 
@@ -82,6 +86,8 @@ public class LogginActivity extends Base implements View.OnClickListener {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            FireBaseModel.SaveUser(new User(account.getId(), ""));
+            Statics.lang_prefer = Locale.getDefault().getLanguage();
             handleUi(account);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
