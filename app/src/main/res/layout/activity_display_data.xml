@@ -15,6 +15,7 @@
         android:orientation="vertical"
         android:background="@drawable/design">
 
+            <include layout="@layout/activity_base"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,7 +62,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:id="@+id/searchZone"
                 android:visibility="gone"
                 >
@@ -72,26 +73,42 @@
                     android:id="@+id/searchData"
                     />
 
-                <CheckBox
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/headerOption"
-                    android:checked="true"
-                    />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/displayHead"
+                        />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/headerOption"
+                        android:checked="true"
+                        />
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tagsOption"
-                    android:checked="true"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/displayTagsLabel"
+                        />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tagsOption"
+                        android:checked="true"
+                        />
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/searchButton"
-                    android:src="@drawable/search_icon"
-                    />
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/searchButton"
+                        android:src="@drawable/search_icon"
+                        />
+                </LinearLayout>
+
             </LinearLayout>
 
             <ListView

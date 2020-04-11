@@ -220,16 +220,18 @@ public class DisplayData extends Base implements Statics.GetDataListener {
             showList.addAll(temp);
         }
         else{
-            for(Recipe r : temp){
-                if(head){
-                    for (String d : array){
-                        if(r.GetHeader().contains(d)){
+            if(head){
+                for(Recipe r : temp) {
+                    for (String d : array) {
+                        if (r.GetHeader().contains(d)) {
                             showList.add(r);
                             temp.remove(r);
                         }
                     }
                 }
-                if(tag){
+            }
+            if(tag){
+                for(Recipe r:temp){
                     for(String d:array){
                         for(String t:r.GetTags()){
                             if(d.equals(t)){
@@ -244,7 +246,6 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         }
         UpdateView();
     }
-
 
     public void showRow(View v){
         int position=Integer.parseInt(v.getTag().toString());

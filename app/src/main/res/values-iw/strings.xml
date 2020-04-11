@@ -51,5 +51,7 @@
 
     <!--Display Action section-->
     <string name="displayBack">חזור</string>
+    <string name="displayHead">חפש בכותרת</string>
+    <string name="displayTagsLabel">בתגיות</string>
 
 </resources>
