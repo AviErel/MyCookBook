@@ -50,7 +50,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/header"
                             android:paddingStart="25px"
-                            android:gravity="end"
+                            android:gravity="start"
                             android:layout_marginStart="30dp"
                             />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -80,11 +80,12 @@
                             android:layout_width="250dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/description"
-                            android:gravity="end"
+                            android:gravity="start"
                             android:layout_marginStart="20dp"
                             />
                     </androidx.appcompat.widget.LinearLayoutCompat>
                     <!--url-->
+<!--
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -109,7 +110,7 @@
                             android:layout_marginStart="20dp"
                             />
                     </androidx.appcompat.widget.LinearLayoutCompat>
-
+-->
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <!--        spinners-->
@@ -122,48 +123,22 @@
                     android:gravity="center"
                     >
                     <!--            courses-->
-                    <androidx.appcompat.widget.LinearLayoutCompat
+                    <Spinner
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/saveCourses"
-                            android:padding="15dp"
-                            />
-
-                        <Spinner
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/Courses"
-                            android:text="@string/saveHeader"
-                            />
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                        android:layout_height="wrap_content"
+                        android:id="@+id/Courses"
+                        android:text="@string/saveHeader"
+                        />
 
                     <!--diet-->
-                    <androidx.appcompat.widget.LinearLayoutCompat
+                    <Spinner
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/saveDiets"
-                            android:padding="15dp"
-                            />
-
-                        <Spinner
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/Diets"
-                            />
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                        android:layout_height="wrap_content"
+                        android:id="@+id/Diets"
+                        />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
                 <!--tags-->
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -189,7 +164,7 @@
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/tags"
-                        android:gravity="end"
+                        android:gravity="start"
                         android:layout_marginStart="20dp"
                         />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -227,6 +202,9 @@
                     />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150px"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
 
