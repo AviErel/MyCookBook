@@ -1,12 +1,16 @@
 package Model;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
+import android.util.DisplayMetrics;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
 import org.json.JSONArray;
 
 import java.util.List;
+import java.util.Locale;
 
 public class Statics {
     public static String userId="";
@@ -18,6 +22,11 @@ public class Statics {
     public interface GetDataListener{
         void onComplete(List<Recipe> data);
         void onCancled(String error);
+    }
+
+    public interface GetUserListener{
+        void onComplete(User user);
+        void onCancled(String error, String accountId);
     }
 
     public static String FlatArray(String[] data){
@@ -39,4 +48,13 @@ public class Statics {
         }
     }
 
+    public static void SetAppLanguage(String lang, Resources res){
+        Locale myLocale = new Locale(lang);
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        conf.setLayoutDirection(myLocale);
+        res.updateConfiguration(conf, dm);
+        lang_prefer = lang;
+    }
 }
