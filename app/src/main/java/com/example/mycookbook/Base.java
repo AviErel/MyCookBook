@@ -1,5 +1,6 @@
 package com.example.mycookbook;
 
+import Model.FireBaseModel;
 import Model.Statics;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -93,17 +94,12 @@ public class Base extends AppCompatActivity {
     }
 
     public void setLocale(String lang) {
-        Locale myLocale = new Locale(lang);
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
+        Statics.SetAppLanguage(lang, getResources());
+        FireBaseModel.SetUserLanguagePref();
+
+        //refresh
         Intent refresh=getIntent();
         finish();
         startActivity(refresh);
-        conf.setLayoutDirection(myLocale);
-
-        res.updateConfiguration(conf, dm);
-
     }
 }

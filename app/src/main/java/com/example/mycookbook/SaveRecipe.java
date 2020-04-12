@@ -44,6 +44,11 @@ public class SaveRecipe extends Base {
             Intent logginIntet = new Intent(this, LogginActivity.class);
             startActivity(logginIntet);
         }
+
+        if(!Statics.lang_prefer.equals("")){
+            Statics.SetAppLanguage(Statics.lang_prefer, getResources());
+        }
+
         super.onCreate(savedInstanceState);
 
         Bundle b = getIntent().getExtras();
