@@ -123,14 +123,15 @@ public class SaveRecipe extends Base {
                                 Statics.userId,Statics.BuildArray(tags.getText().toString()),false);
                         if(recipeData==null){
                             FireBaseModel.SaveRecipe(recipe);
+                            endSession(true);
                         }
                         else
                         {
                             FireBaseModel.UpdateRecipe(recipe);
+                            endSession(false);
                         }
                     }catch (Exception e){}
                 }
-                finish();
             }
         });
 
@@ -141,6 +142,14 @@ public class SaveRecipe extends Base {
                 finish();
             }
         });
+    }
+
+    private void endSession(boolean update){
+        if(update){
+            Intent list=new Intent(this,DisplayData.class);
+            startActivity(list);
+        }
+        finish();
     }
 
     @Override
