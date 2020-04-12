@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Layout;
 import android.view.LayoutInflater;
+import android.view.SearchEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -68,8 +69,6 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         flag=false;
         recipesList=new LinkedList<>();
         showList=new LinkedList<>();
-        spinner = findViewById(R.id.progressBar);
-        spinner.setVisibility(View.VISIBLE);
 
         cSpin=findViewById(R.id.course);
         ArrayAdapter<CharSequence> cAdapter = ArrayAdapter.createFromResource(this,
@@ -140,10 +139,23 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         });
 
         lst=findViewById(R.id.recipesView);
+
+        loadData();
+    }
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+        loadData();
+    }
+
+    private void loadData(){
+        spinner = findViewById(R.id.progressBar);
+        spinner.setVisibility(View.VISIBLE);
         FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
 
         UpdateView();
-
     }
 
     private void loadGoogleAdd(){
