@@ -30,6 +30,7 @@ public class MainActivity extends Base {
     private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         Intent logginIntet = new Intent(this, LogginActivity.class);
         startActivity(logginIntet);
 
@@ -37,21 +38,15 @@ public class MainActivity extends Base {
         setContentView(R.layout.activity_main);
         onSharedIntent();
         loadGoogleAdd();
-
-//        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//        getSupportActionBar().setCustomView(R.layout.action_bar);
-
-//        ImageView profilePic = (ImageView) findViewById(R.id.actionBarProfilePic);
-//        profilePic.setImageURI(Statics.photoUrl!=null?Statics.photoUrl:null);
     }
-/*
+
     @Override
     protected void onStart(){
         super.onStart();
-        showMe=new Intent(this,DisplayData.class);
-        startActivity(showMe);
+        String userName = "    " +getResources().getString(R.string.hello)+" "+ Statics.userName + "    ";
+        getSupportActionBar().setTitle(userName);
     }
-*/
+
 
     private void loadGoogleAdd(){
         MobileAds.initialize(this, new OnInitializationCompleteListener() {

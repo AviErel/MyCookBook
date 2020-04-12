@@ -27,7 +27,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.Locale;
 
-public class LogginActivity extends Base implements View.OnClickListener {
+public class LogginActivity extends Base implements View.OnClickListener, Statics.GetUserListener {
 
     private static final int RC_SIGN_IN = 497;
     private static final String TAG = "SignInGoogle";
@@ -52,6 +52,7 @@ public class LogginActivity extends Base implements View.OnClickListener {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account!= null){
+            FireBaseModel.GetUserLanguagePre(account.getId(), this);
             handleUi(account);
         }
     }
@@ -86,14 +87,17 @@ public class LogginActivity extends Base implements View.OnClickListener {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            FireBaseModel.SaveUser(new User(account.getId(), ""));
-            Statics.lang_prefer = Locale.getDefault().getLanguage();
+            saveUserToFB(account.getId(), "");
             handleUi(account);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.println(1,TAG, "signInResult:failed code=" + e.getStatusCode());
         }
+    }
+
+    private void saveUserToFB(String accountId, String langpre){
+        FireBaseModel.SaveUser(new User(accountId, ""));
     }
 
     private void handleUi(GoogleSignInAccount account){
@@ -103,5 +107,18 @@ public class LogginActivity extends Base implements View.OnClickListener {
             Statics.userName = account.getGivenName();
             finish();
         }
+    }
+
+    @Override
+    public void onComplete(User user) {
+        if(!user.GetLanguagePreference().equals("")){
+            Statics.SetAppLanguage(user.GetLanguagePreference(), getResources());
+        }
+    }
+
+    @Override
+    public void onCancled(String error, String accountId) {
+        String langPre = Statics.lang_prefer.equals("")?"":Statics.lang_prefer;
+        saveUserToFB(accountId, langPre);
     }
 }

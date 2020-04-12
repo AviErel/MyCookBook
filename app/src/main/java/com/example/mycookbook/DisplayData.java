@@ -58,6 +58,9 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(!Statics.lang_prefer.equals("")){
+            Statics.SetAppLanguage(Statics.lang_prefer, getResources());
+        }
         setContentView(R.layout.activity_display_data);
 
         loadGoogleAdd();

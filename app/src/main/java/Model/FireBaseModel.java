@@ -29,9 +29,35 @@ public class FireBaseModel {
         myRef.setValue(UserToMap(user));
     }
 
-    public static void GetUserLanguagePre(String userId){
+    public static void GetUserLanguagePre(final String userId, final Statics.GetUserListener listener){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("user").child(userId);
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map<String, Object> userMap = (HashMap<String, Object>)dataSnapshot.getValue();
+                if(userMap != null) {
+                    User user = MapToUser(userMap);
+                    listener.onComplete(user);
+                }
+                else{
+                    listener.onCancled("This user not sign in our db", userId);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onCancled(databaseError.getMessage(), userId);
+            }
+        });
+    }
+
+    public static void SetUserLanguagePref(){
+        User user = new User(Statics.userId, Statics.lang_prefer);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("user").child(user.GetId());
+        myRef.setValue(UserToMap(user));
     }
 
     public static void GetAllRecupesByUserId(final String userId, final Statics.GetDataListener listener){
@@ -49,7 +75,6 @@ public class FireBaseModel {
                         recipes.add(MapToRecipe(recipeMap));
                     }
                 }
-
                 listener.onComplete(recipes);
             }
 
@@ -112,5 +137,11 @@ public class FireBaseModel {
         userMap.put("languagePreference", user.GetLanguagePreference());
 
         return userMap;
+    }
+
+    private static User MapToUser(Map<String, Object> userMap){
+        User user = new User(userMap.get("id").toString(),
+                userMap.get("languagePreference")!= null?userMap.get("languagePreference").toString():"");
+        return user;
     }
 }
