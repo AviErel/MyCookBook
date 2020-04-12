@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.Layout;
 import android.view.LayoutInflater;
+import android.view.SearchEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -16,6 +18,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,7 +54,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     List<Recipe> showList;
     Spinner cSpin,
             dSpin;
-    ImageButton backButton;
+    ImageButton searchButton,filterZone,searchZone;
     boolean flag;
     private ProgressBar spinner;
     private AdView mAdView;
@@ -68,8 +72,6 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         flag=false;
         recipesList=new LinkedList<>();
         showList=new LinkedList<>();
-        spinner = findViewById(R.id.progressBar);
-        spinner.setVisibility(View.VISIBLE);
 
         cSpin=findViewById(R.id.course);
         ArrayAdapter<CharSequence> cAdapter = ArrayAdapter.createFromResource(this,
@@ -82,7 +84,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         cSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
-                filterAway(dSpin.getSelectedItem().toString(),cSpin.getSelectedItem().toString());
+                filterAway(dSpin.getSelectedItemPosition(),cSpin.getSelectedItemPosition());
             }
 
             @Override
@@ -102,7 +104,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         dSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
-                filterAway(dSpin.getSelectedItem().toString(),cSpin.getSelectedItem().toString());
+                filterAway(dSpin.getSelectedItemPosition(),cSpin.getSelectedItemPosition());
             }
 
             @Override
@@ -111,29 +113,52 @@ public class DisplayData extends Base implements Statics.GetDataListener {
             }
         });
 
-        backButton=findViewById(R.id.backButton);
-
-        backButton.setOnClickListener(new View.OnClickListener() {
+        filterZone=findViewById(R.id.filterButton);
+        filterZone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                findViewById(R.id.filterZone).setVisibility(View.VISIBLE);
+            }
+        });
+
+        searchZone=findViewById(R.id.searchOptions);
+        searchZone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findViewById(R.id.searchZone).setVisibility(View.VISIBLE);
+            }
+        });
+        searchButton=findViewById(R.id.searchButton);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText serchPattern=(EditText)(findViewById(R.id.searchData));
+                String[] array=Statics.BuildArray(serchPattern.getText().toString());
+                CheckBox head=findViewById(R.id.headerOption);
+                CheckBox tags=findViewById(R.id.tagsOption);
+                searchAway(array,head.isChecked(),tags.isChecked());
             }
         });
 
         lst=findViewById(R.id.recipesView);
+
+        loadData();
+    }
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+        loadData();
+    }
+
+    private void loadData(){
+        spinner = findViewById(R.id.progressBar);
+        spinner.setVisibility(View.VISIBLE);
         FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
 
-
-        lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
-                startActivity(browserIntent);
-            }
-        });
-
         UpdateView();
-
     }
 
     private void loadGoogleAdd(){
@@ -173,32 +198,68 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         }
     }
 
-    private void filterAway(String diet,String course){
+    private void filterAway(int diet,int course){
         List<Recipe> temp=new LinkedList<>();
         temp.addAll(recipesList);
         showList.clear();
-        if(!course.equals(""))
+        if(course>0)
         {
             temp.clear();
             for(Recipe recipe:recipesList)
             {
-                if(recipe.GetCourse().equals(course)){
+                if(recipe.GetCourse().equals(String.valueOf(course))){
                     temp.add(recipe);
                 }
             }
         }
         showList.addAll(temp);
-        if(!diet.equals(""))
+        if(diet>0)
         {
             showList.clear();
             for(Recipe recipe:temp)
             {
-                if(recipe.GetDiet().equals(diet)){
+                if(recipe.GetDiet().equals(String.valueOf(diet))){
                     showList.add(recipe);
                 }
             }
         }
        UpdateView();
+    }
+
+    private void searchAway(String[] array,boolean head,boolean tag){
+        List<Recipe>temp=new LinkedList<>();
+        filterAway(dSpin.getSelectedItemPosition(),cSpin.getSelectedItemPosition());
+        temp.addAll(showList);
+        showList.clear();
+        if(array.length==0){
+            showList.addAll(temp);
+        }
+        else{
+            if(head){
+                for(Recipe r : temp) {
+                    for (String d : array) {
+                        if (r.GetHeader().contains(d)) {
+                            showList.add(r);
+                            temp.remove(r);
+                        }
+                    }
+                }
+            }
+            if(tag){
+                for(Recipe r:temp){
+                    for(String d:array){
+                        for(String t:r.GetTags()){
+                            if(d.equals(t)){
+                                showList.add(r);
+                                temp.remove(r);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        UpdateView();
     }
 
     public void showRow(View v){

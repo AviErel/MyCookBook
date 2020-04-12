@@ -34,7 +34,7 @@
     <string name="saveDiets">Diet</string>
     <string name="saveTags">Tag</string>
     <string-array name="saveCourse">
-        <item></item>
+        <item>Course...</item>
         <item>Soup</item>
         <item>Appetizer</item>
         <item>Main Course</item>
@@ -43,7 +43,7 @@
         <item>Dessert</item>
     </string-array>
     <string-array name="saveDiet">
-        <item></item>
+        <item>Diet...</item>
         <item>Carnivore</item>
         <item>Dairy</item>
         <item>Vegetarian</item>
@@ -52,5 +52,7 @@
 
     <!--Display Action section-->
     <string name="displayBack">Back</string>
+    <string name="displayHead">Serch in header</string>
+    <string name="displayTagsLabel"> tags</string>
 
 </resources>

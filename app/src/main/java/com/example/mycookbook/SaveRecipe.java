@@ -105,7 +105,7 @@ public class SaveRecipe extends Base {
             @Override
             public void onClick(View v) {
                 Recipe recipe;
-                if(courseSpin.getSelectedItem().equals("") || DietSpin.getSelectedItem().equals("") ||
+                if(courseSpin.getSelectedItemPosition()<1 || DietSpin.getSelectedItemPosition()<1 ||
                 header.getText().toString().equals("")){
                     Context context = getApplicationContext();
                     CharSequence text = "Need to select course, diet and enter header";

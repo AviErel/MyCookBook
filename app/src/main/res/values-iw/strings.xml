@@ -33,7 +33,7 @@
     <string name="saveDiets">תזונה</string>
     <string name="saveTags">תגיות</string>
     <string-array name="saveCourse">
-        <item></item>
+        <item>מנה...</item>
         <item>מרק</item>
         <item>מתאבן</item>
         <item>עיקרית</item>
@@ -42,7 +42,7 @@
         <item>קינוח</item>
     </string-array>
     <string-array name="saveDiet">
-        <item></item>
+        <item>סוג...</item>
         <item>בשרי</item>
         <item>חלבי</item>
         <item>צמחוני</item>
@@ -51,5 +51,7 @@
 
     <!--Display Action section-->
     <string name="displayBack">חזור</string>
+    <string name="displayHead">חפש בכותרת</string>
+    <string name="displayTagsLabel">בתגיות</string>
 
 </resources>
