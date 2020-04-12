@@ -36,6 +36,7 @@ public class SaveRecipe extends Base {
     EditText description,tags;
     TextView uriText;
     private AdView mAdView;
+    String uriString;
 
 
     @Override
@@ -52,12 +53,12 @@ public class SaveRecipe extends Base {
         super.onCreate(savedInstanceState);
 
         Bundle b = getIntent().getExtras();
-        String uriString = b.getString("uri");
+        uriString = b.getString("uri");
         final Recipe recipeData=(Recipe)b.getSerializable("recipe");
 
         setContentView(R.layout.activity_save_recipe);
         header=(EditText)findViewById(R.id.header);
-        uriText=(TextView)findViewById(R.id.uriData);
+//        uriText=(TextView)findViewById(R.id.uriData);
         description=(EditText)findViewById(R.id.description);
         tags=(EditText)findViewById(R.id.tags);
 
@@ -83,7 +84,8 @@ public class SaveRecipe extends Base {
         DietSpin.setAdapter(dAdapter);
 
         if(recipeData!=null){
-            uriText.setText(recipeData.GetUri());
+//            uriText.setText(recipeData.GetUri());
+            uriString=recipeData.GetUri();
             header.setText(recipeData.GetHeader());
             description.setText(recipeData.GetDescription());
             tags.setText(Statics.FlatArray(recipeData.GetTags()));
@@ -92,11 +94,12 @@ public class SaveRecipe extends Base {
             courseSpin.setSelection(spinPos);
             spinPos=Integer.parseInt(recipeData.GetDiet());
             DietSpin.setSelection(spinPos);
-        }else
+        }
+/*        else
         {
             uriText.setText(uriString);
         }
-
+*/
 
         Button acceptButton=(Button)findViewById(R.id.accept);
         if(recipeData!=null)
@@ -119,7 +122,7 @@ public class SaveRecipe extends Base {
 
                         recipe=new Recipe(uuid,header.getText().toString(),
                                 String.valueOf(courseSpin.getSelectedItemPosition()),String.valueOf(DietSpin.getSelectedItemPosition())
-                                ,uriText.getText().toString(),description.getText().toString(),
+                                ,uriString,description.getText().toString(),
                                 Statics.userId,Statics.BuildArray(tags.getText().toString()),false);
                         if(recipeData==null){
                             FireBaseModel.SaveRecipe(recipe);
@@ -193,8 +196,9 @@ public class SaveRecipe extends Base {
                 String receivedText = receiverdIntent
                         .getStringExtra(Intent.EXTRA_TEXT);
                 if (receivedText != null) {
-                    TextView tv=(TextView)findViewById(R.id.uriData);
-                    tv.setText(receivedText);
+//                    TextView tv=(TextView)findViewById(R.id.uriData);
+//                    tv.setText(receivedText);
+                    uriString=receivedText;
                 }
             }
 
