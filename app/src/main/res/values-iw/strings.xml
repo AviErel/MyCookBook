@@ -57,4 +57,10 @@
     <string name="displayHead">חפש בכותרת</string>
     <string name="displayTagsLabel">בתגיות</string>
 
+    <!--    tools file-->
+    <string name="tools_file_name">user_tools</string>
+    <string name="user_name">name</string>
+    <string name="user_lang">lang</string>
+    <string name="is_refresh">false</string>
+
 </resources>

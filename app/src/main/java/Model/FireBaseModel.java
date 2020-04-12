@@ -25,7 +25,7 @@ public class FireBaseModel {
 
     public static void SaveUser(User user){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("user").child(user.GetId().toString());
+        DatabaseReference myRef = database.getReference("user").child(user.GetId());
         myRef.setValue(UserToMap(user));
     }
 

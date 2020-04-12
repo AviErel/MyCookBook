@@ -7,7 +7,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
@@ -17,6 +20,7 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -73,6 +77,7 @@ public class Base extends AppCompatActivity {
                 if(!Statics.userId.equals("")) {
                     logoff();
                     item.setTitle(R.string.login);
+                    getSupportActionBar().setTitle("    " +getResources().getString(R.string.hello)+" "+ "" + "    ");
                 }
                 else {
                     item.setTitle(R.string.logOff);
@@ -89,17 +94,50 @@ public class Base extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Statics.userId="";
+                Statics.userName = "";
+                SharedPreferences sharedPref = getSharedPreferences(getString(R.string.tools_file_name),Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(getString(R.string.user_name), "");
+                editor.putString(getString(R.string.user_lang), "");
+                editor.commit();
             }
         });
+    }
+
+    private void loadUserTools(){
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.tools_file_name),Context.MODE_PRIVATE);
+        String name = sharedPref.getString(getString(R.string.user_name), "");
+        String lang = sharedPref.getString(getString(R.string.user_lang), "");
+        String userName = "    " +getResources().getString(R.string.hello)+" "+ name + "    ";
+        Statics.userName = name;
+        getSupportActionBar().setTitle(userName);
+
+        if(!lang.equals("")){
+            Statics.SetAppLanguage(lang, getResources());
+        }
+    }
+
+    private void refreshView(){
+        Intent refresh=getIntent();
+        finish();
+        startActivity(refresh);
+    }
+
+    private boolean isToolsLoaded(){
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.tools_file_name),Context.MODE_PRIVATE);
+        return sharedPref.getBoolean(getString(R.string.is_refresh), false);
     }
 
     public void setLocale(String lang) {
         Statics.SetAppLanguage(lang, getResources());
         FireBaseModel.SetUserLanguagePref();
 
+        SharedPreferences sharedPref = getSharedPreferences("user_tools", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.user_lang), lang);
+        editor.commit();
+
         //refresh
-        Intent refresh=getIntent();
-        finish();
-        startActivity(refresh);
+        refreshView();
     }
 }
