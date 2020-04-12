@@ -117,7 +117,13 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         filterZone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findViewById(R.id.filterZone).setVisibility(View.VISIBLE);
+                LinearLayout fz=findViewById(R.id.filterZone);
+                if(fz.getVisibility()==View.VISIBLE)
+                {
+                    fz.setVisibility(View.GONE);
+                }else{
+                    fz.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -125,7 +131,12 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         searchZone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                findViewById(R.id.searchZone).setVisibility(View.VISIBLE);
+                LinearLayout sz=findViewById(R.id.searchZone);
+                if(sz.getVisibility()==View.VISIBLE){
+                    sz.setVisibility(View.GONE);
+                }else{
+                    sz.setVisibility(View.VISIBLE);
+                }
             }
         });
         searchButton=findViewById(R.id.searchButton);
