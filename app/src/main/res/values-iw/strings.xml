@@ -13,6 +13,9 @@
 
     <string name="hello">שלום</string>
 
+    <!--login page-->
+    <string name="loginGoogle">התחבר עם Google</string>
+
     <!-- menu section-->
     <string name="showList">המתכונים שלי</string>
     <string name="logOff">התנתק</string>
