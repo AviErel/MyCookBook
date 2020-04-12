@@ -7,7 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +26,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.internal.GetServiceRequest;
 import com.google.android.gms.tasks.Task;
 
 import java.util.Locale;
@@ -87,7 +91,9 @@ public class LogginActivity extends Base implements View.OnClickListener, Static
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            saveUserToFB(account.getId(), "");
+            FireBaseModel.GetUserLanguagePre(account.getId(), this);
+//            saveUserToFB(account.getId());
+            saveUserTools("name", account.getGivenName());
             handleUi(account);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
@@ -96,8 +102,20 @@ public class LogginActivity extends Base implements View.OnClickListener, Static
         }
     }
 
-    private void saveUserToFB(String accountId, String langpre){
-        FireBaseModel.SaveUser(new User(accountId, ""));
+    private void saveUserToFB(String accountId){
+        FireBaseModel.SaveUser(new User(accountId, getUserLang()));
+    }
+
+    private void saveUserTools(String key, String value){
+        SharedPreferences sharedPref = getSharedPreferences("user_tools",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    private String getUserLang(){
+        SharedPreferences sharedPref = getSharedPreferences("user_tools",Context.MODE_PRIVATE);
+        return sharedPref.getString(getString(R.string.user_lang),"");
     }
 
     private void handleUi(GoogleSignInAccount account){
@@ -113,12 +131,24 @@ public class LogginActivity extends Base implements View.OnClickListener, Static
     public void onComplete(User user) {
         if(!user.GetLanguagePreference().equals("")){
             Statics.SetAppLanguage(user.GetLanguagePreference(), getResources());
+            String lang = getUserLang();
+
+            if(!lang.equals("") || !lang.equals(user.GetLanguagePreference()))
+                saveUserTools(getString(R.string.user_lang), user.GetLanguagePreference());
         }
+
+        setRefreshSetting(false);
+    }
+
+    private void setRefreshSetting(Boolean isRefresh){
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.tools_file_name),Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(getString(R.string.is_refresh), isRefresh);
+        editor.commit();
     }
 
     @Override
     public void onCancled(String error, String accountId) {
-        String langPre = Statics.lang_prefer.equals("")?"":Statics.lang_prefer;
-        saveUserToFB(accountId, langPre);
+        saveUserToFB(accountId);
     }
 }

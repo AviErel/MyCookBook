@@ -4,7 +4,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.usage.StorageStats;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +33,11 @@ public class MainActivity extends Base {
     private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        if(!isToolsLoaded()){
+            setRefreshSetting(true);
+            refreshView();
+        }
+        loadUserTools();
         Intent logginIntet = new Intent(this, LogginActivity.class);
         startActivity(logginIntet);
 
@@ -41,12 +48,48 @@ public class MainActivity extends Base {
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
+        loadUserTools();
         super.onStart();
-        String userName = "    " +getResources().getString(R.string.hello)+" "+ Statics.userName + "    ";
-        getSupportActionBar().setTitle(userName);
     }
 
+    @Override
+    protected void onStop(){
+        super.onStop();
+        setRefreshSetting(false);
+    }
+
+    private void setRefreshSetting(Boolean isRefresh){
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.tools_file_name),Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(getString(R.string.is_refresh), isRefresh);
+        editor.commit();
+    }
+
+
+    private void loadUserTools(){
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.tools_file_name),Context.MODE_PRIVATE);
+        String name = sharedPref.getString(getString(R.string.user_name), "");
+        String lang = sharedPref.getString(getString(R.string.user_lang), "");
+        String userName = "    " +getResources().getString(R.string.hello)+" "+ name + "    ";
+        Statics.userName = name;
+        getSupportActionBar().setTitle(userName);
+
+        if(!lang.equals("")){
+            Statics.SetAppLanguage(lang, getResources());
+        }
+    }
+
+    private void refreshView(){
+        Intent refresh=getIntent();
+        finish();
+        startActivity(refresh);
+    }
+
+    private boolean isToolsLoaded(){
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.tools_file_name),Context.MODE_PRIVATE);
+        return sharedPref.getBoolean(getString(R.string.is_refresh), false);
+    }
 
     private void loadGoogleAdd(){
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
