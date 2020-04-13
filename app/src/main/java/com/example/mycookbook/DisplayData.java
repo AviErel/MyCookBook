@@ -1,5 +1,6 @@
 package com.example.mycookbook;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -34,6 +35,8 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONObject;
 
@@ -58,6 +61,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     boolean flag;
     private ProgressBar spinner;
     private AdView mAdView;
+    private View delView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -280,7 +284,29 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     }
 
     public void delRow(View v){
-        int position=Integer.parseInt(v.getTag().toString());
+        this.delView = v;
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.delete_alert_title)
+                .setMessage(R.string.delete_alert_message)
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton("", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteRecipe();
+                        // Continue with delete operation
+                    }
+                })
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setPositiveButtonIcon(getResources().getDrawable(R.drawable.yes_icon))
+                .setNegativeButton("", null)
+                .setNegativeButtonIcon(getResources().getDrawable(R.drawable.no_icon))
+                .setIcon(R.drawable.recipes)
+                .show();
+    }
+
+    private void deleteRecipe(){
+        int position=Integer.parseInt(delView.getTag().toString());
         FireBaseModel.DeleteRecipe(showList.get(position).GetId());
         FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
     }

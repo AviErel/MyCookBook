@@ -57,11 +57,23 @@
     <string name="displayBack">חזור</string>
     <string name="displayHead">חפש בכותרת</string>
     <string name="displayTagsLabel">בתגיות</string>
+    <string name="delete_alert_title">מחיקת מתכון</string>
+    <string name="delete_alert_message">אתה בטוח שאתה רוצה למחוק את המתכון</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
 
     <!--    tools file-->
     <string name="tools_file_name">user_tools</string>
     <string name="user_name">name</string>
     <string name="user_lang">lang</string>
     <string name="is_refresh">false</string>
+
+<!--    main explaination-->
+    <string name="first_sen">1. פתח מתכון בchrome או בyoutube</string>
+    <string name="sec_sen">2. בחר את אופצית השיתוף (share)</string>
+    <string name="thr_sen">3. בחר לשתף עם האפליקציה הזאת</string>
+    <string name="four_sen">4. שמור את המתכון</string>
+    <string name="good_luck">בהצלחה! לכו לבשל :)</string>
+    <string name="welcom">ברוכים הבאים לספר המתכונים!!</string>
 
 </resources>

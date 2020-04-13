@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@font/mighty_brush_demo</item>
+        <item name="android:fontFamily">@font/baloopaaji2_regular</item>
         <item name="android:direction">left_to_right</item>
         <item name="android:actionBarStyle">@style/MyActionBar</item>
     </style>
