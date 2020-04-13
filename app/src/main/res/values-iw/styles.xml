@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@font/ganclm_bold_webfont</item>
+        <item name="android:fontFamily">@font/davidlibre_regular</item>
         <item name="android:direction">right_to_left</item>
         <item name="android:actionBarStyle">@style/MyActionBar</item>
     </style>

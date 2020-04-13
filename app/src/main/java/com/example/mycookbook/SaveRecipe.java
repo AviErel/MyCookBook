@@ -37,6 +37,7 @@ public class SaveRecipe extends Base {
     TextView uriText;
     private AdView mAdView;
     String uriString;
+    Boolean isCreateMode;
 
 
     @Override
@@ -126,12 +127,16 @@ public class SaveRecipe extends Base {
                                 Statics.userId,Statics.BuildArray(tags.getText().toString()),false);
                         if(recipeData==null){
                             FireBaseModel.SaveRecipe(recipe);
-                            endSession(true);
+                            isCreateMode = true;
+                            finish();
+//                            endSession(true);
                         }
                         else
                         {
                             FireBaseModel.UpdateRecipe(recipe);
-                            endSession(false);
+                            isCreateMode = false;
+//                            endSession(false);
+                            finish();
                         }
                     }catch (Exception e){}
                 }
@@ -152,7 +157,6 @@ public class SaveRecipe extends Base {
             Intent list=new Intent(this,DisplayData.class);
             startActivity(list);
         }
-        finish();
     }
 
     @Override
@@ -160,6 +164,13 @@ public class SaveRecipe extends Base {
         super.onStart();
         loadGoogleAdd();
     }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        endSession(isCreateMode);
+    }
+
     private String StringUtils(String[] data){
         String answer="";
         for(String n : data){
