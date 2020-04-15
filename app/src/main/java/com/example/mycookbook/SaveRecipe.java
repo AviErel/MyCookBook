@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,14 +38,12 @@ public class SaveRecipe extends Base {
     TextView uriText;
     private AdView mAdView;
     String uriString;
-    Boolean isCreateMode;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if(Statics.userId.equals("")){
-            Intent logginIntet = new Intent(this, LogginActivity.class);
-            startActivity(logginIntet);
+            finish();
         }
 
         if(!Statics.lang_prefer.equals("")){
@@ -127,16 +126,12 @@ public class SaveRecipe extends Base {
                                 Statics.userId,Statics.BuildArray(tags.getText().toString()),false);
                         if(recipeData==null){
                             FireBaseModel.SaveRecipe(recipe);
-                            isCreateMode = true;
-                            finish();
-//                            endSession(true);
+                            endSession(true);
                         }
                         else
                         {
                             FireBaseModel.UpdateRecipe(recipe);
-                            isCreateMode = false;
-//                            endSession(false);
-                            finish();
+                            endSession(false);
                         }
                     }catch (Exception e){}
                 }
@@ -154,21 +149,17 @@ public class SaveRecipe extends Base {
 
     private void endSession(boolean update){
         if(update){
-            Intent list=new Intent(this,DisplayData.class);
+            Intent list=new Intent(getApplicationContext(),DisplayData.class);
             startActivity(list);
         }
+
+        finish();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         loadGoogleAdd();
-    }
-
-    @Override
-    protected void onStop(){
-        super.onStop();
-        endSession(isCreateMode);
     }
 
     private String StringUtils(String[] data){
@@ -194,30 +185,30 @@ public class SaveRecipe extends Base {
         mAdView.loadAd(adRequest);
     }
 
-    private void onSharedIntent() {
-        Intent receiverdIntent = getIntent();
-        String receivedAction = receiverdIntent.getAction();
-        String receivedType = receiverdIntent.getType();
+//    private void onSharedIntent() {
+//        Intent receiverdIntent = getIntent();
+//        String receivedAction = receiverdIntent.getAction();
+//        String receivedType = receiverdIntent.getType();
+//
+//        if (receivedAction.equals(Intent.ACTION_SEND)) {
+//
+//            // check mime type
+//            if (receivedType.startsWith("text/")) {
+//
+//                String receivedText = receiverdIntent
+//                        .getStringExtra(Intent.EXTRA_TEXT);
+//                if (receivedText != null) {
+////                    TextView tv=(TextView)findViewById(R.id.uriData);
+////                    tv.setText(receivedText);
+//                    uriString=receivedText;
+//                }
+//            }
 
-        if (receivedAction.equals(Intent.ACTION_SEND)) {
-
-            // check mime type
-            if (receivedType.startsWith("text/")) {
-
-                String receivedText = receiverdIntent
-                        .getStringExtra(Intent.EXTRA_TEXT);
-                if (receivedText != null) {
-//                    TextView tv=(TextView)findViewById(R.id.uriData);
-//                    tv.setText(receivedText);
-                    uriString=receivedText;
-                }
-            }
-
-        } else if (receivedAction.equals(Intent.ACTION_MAIN)) {
-
-            Log.e("", "onSharedIntent: nothing shared" );
-        }
-    }
+//        } else if (receivedAction.equals(Intent.ACTION_MAIN)) {
+//
+//            Log.e("", "onSharedIntent: nothing shared" );
+//        }
+//    }
 
 
 }
