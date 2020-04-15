@@ -1,24 +1,16 @@
 package com.example.mycookbook;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.text.Layout;
 import android.view.LayoutInflater;
-import android.view.SearchEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -35,20 +27,15 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONObject;
-
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Predicate;
 
 import Model.FireBaseModel;
 import Model.Recipe;
 import Model.Statics;
+import androidx.appcompat.app.AlertDialog;
 
 public class DisplayData extends Base implements Statics.GetDataListener {
 
@@ -255,7 +242,8 @@ public class DisplayData extends Base implements Statics.GetDataListener {
                     for (String d : array) {
                         if (r.GetHeader().contains(d)) {
                             showList.add(r);
-                            temp.remove(r);
+                            r.SetTags(new String[0]);
+                            break;
                         }
                     }
                 }
@@ -266,7 +254,6 @@ public class DisplayData extends Base implements Statics.GetDataListener {
                         for(String t:r.GetTags()){
                             if(d.equals(t)){
                                 showList.add(r);
-                                temp.remove(r);
                                 break;
                             }
                         }
