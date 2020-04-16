@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ספר המתכונים שלי</string>
+    <string name="title_activity_save_recipe">שמור מתכונים</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="hello">שלום</string>
+
+    <!--login page-->
+    <string name="loginGoogle">התחבר עם Google</string>
+
+    <!-- menu section-->
+    <string name="showList">המתכונים שלי</string>
+    <string name="logOff">התנתק</string>
+    <string name="login">התחבר</string>
+    <string name="language">שפות</string>
+    <string name="english">אנגלית</string>
+    <string name="hebrew">עברית</string>
+
+
+    <!--Save action section-->
+    <string name="saveHeader">שם המתכון</string>
+    <string name="saveUri">כתובת</string>
+    <string name="saveDescription">תיאור מתכון</string>
+    <string name="saveAccept">שמור</string>
+    <string name="saveUpdate">עדכן</string>
+    <string name="saveDiscard">ביטול</string>
+    <string name="saveCourses">מנה</string>
+    <string name="saveDiets">תזונה</string>
+    <string name="saveTags">תגיות</string>
+    <string-array name="saveCourse">
+        <item>מנה...</item>
+        <item>מרק</item>
+        <item>מתאבן</item>
+        <item>עיקרית</item>
+        <item>תוספות</item>
+        <item>סלט</item>
+        <item>קינוח</item>
+        <item>מאפים</item>
+    </string-array>
+    <string-array name="saveDiet">
+        <item>סוג...</item>
+        <item>בשרי</item>
+        <item>חלבי</item>
+        <item>צמחוני</item>
+        <item>טבעוני</item>
+    </string-array>
+
+    <!--Display Action section-->
+    <string name="displayBack">חזור</string>
+    <string name="displayHead">חפש בכותרת</string>
+    <string name="displayTagsLabel">בתגיות</string>
+    <string name="delete_alert_title">מחיקת מתכון</string>
+    <string name="delete_alert_message">אתה בטוח שאתה רוצה למחוק את המתכון</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
+
+    <!--    tools file-->
+    <string name="tools_file_name">user_tools</string>
+    <string name="user_name">name</string>
+    <string name="user_lang">lang</string>
+    <string name="is_refresh">false</string>
+
+<!--    main explaination-->
+    <string name="first_sen">1. פתח מתכון בchrome או בyoutube</string>
+    <string name="sec_sen">2. בחר את אופצית השיתוף (share)</string>
+    <string name="thr_sen">3. בחר לשתף עם האפליקציה הזאת</string>
+    <string name="four_sen">4. שמור את המתכון</string>
+    <string name="good_luck">בהצלחה! לכו לבשל :)</string>
+    <string name="welcom">ברוכים הבאים לספר המתכונים!!</string>
+
+    <!--    google-ad-keys-->
+    <string name="display_data_key">ca-app-pub-2739009739311215/2149837537</string>
+    <string name="main_key">ca-app-pub-2739009739311215/2041994506</string>
+    <string name="save_key">ca-app-pub-2739009739311215/5882033138</string>
+    <string name="debug_key">ca-app-pub-3940256099942544/6300978111</string>
+
+</resources>
