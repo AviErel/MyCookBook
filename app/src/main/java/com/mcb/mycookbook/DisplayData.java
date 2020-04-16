@@ -3,6 +3,7 @@ package com.mcb.mycookbook;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -312,7 +313,6 @@ class ReportAdapter extends BaseAdapter{
     private List<Recipe> recipes;
     LayoutInflater inf;
     ImageButton del,update,view;
-    ImageView del1, update1, view1;
 
     ReportAdapter(Context con, List<Recipe>data){
         recipes=new LinkedList<>();
@@ -339,7 +339,7 @@ class ReportAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView=inf.inflate(R.layout.recipesrow,null);
+        convertView=inf.inflate(R.layout.recipesrowarticle,null);
         TextView header=convertView.findViewById(R.id.rowHeader);
         TextView description=convertView.findViewById(R.id.rowDescription);
 
