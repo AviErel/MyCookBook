@@ -28,7 +28,45 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "427479896798-jqgriq9b742cs1mk2e0skemq5dikjnrg.apps.googleusercontent.com",
+              "client_id": "427479896798-sv74vvaig36psjn3lut2dhh0ggj9e6ln.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-2739009739311215~2975802220"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427479896798:android:5a72b21ea83a156cfca84f",
+        "android_client_info": {
+          "package_name": "com.mcb.mycookbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "427479896798-v8cce6gpctmcjvge8lj0oio1d8l6lpod.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mcb.mycookbook",
+            "certificate_hash": "ba8f798b53dcb074c868c2a2293a69d471abc84f"
+          }
+        },
+        {
+          "client_id": "427479896798-jqgriq9b742cs1mk2e0skemq5dikjnrg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3LdPSpP4bvqvWP92Q_kYHcIqapdu9Kzs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "427479896798-sv74vvaig36psjn3lut2dhh0ggj9e6ln.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

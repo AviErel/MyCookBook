@@ -5,13 +5,36 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 28
 
+    // When building Android App Bundles, the splits block is ignored.
+    splits {}
+
+    // Instead, use the bundle block to control which types of configuration APKs
+    // you want your app bundle to support.
+    bundle {
+        language {
+            // Specifies that the app bundle should not support
+            // configuration APKs for language resources. These
+            // resources are instead packaged with each base and
+            // dynamic feature APK.
+            enableSplit = false
+        }
+        density {
+            // This property is set to true by default.
+            enableSplit = true
+        }
+        abi {
+            // This property is set to true by default.
+            enableSplit = true
+        }
+    }
+
 
     defaultConfig {
-        applicationId "com.example.mycookbook"
+        applicationId "com.mcb.mycookbook"
         minSdkVersion 18
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.6"
+        versionCode 3
+        versionName "3.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,6 +55,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
     implementation 'com.google.android.gms:play-services-ads:19.0.1'
+    implementation "com.google.android.gms:play-services-instantapps:17.0.0"
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

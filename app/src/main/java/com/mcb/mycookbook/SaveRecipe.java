@@ -1,16 +1,12 @@
-package com.example.mycookbook;
+package com.mcb.mycookbook;
 
 import Model.FireBaseModel;
 import Model.Recipe;
 import Model.Statics;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,8 +21,6 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-
-import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.UUID;

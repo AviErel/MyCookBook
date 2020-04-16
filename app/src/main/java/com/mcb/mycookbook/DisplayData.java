@@ -1,4 +1,4 @@
-package com.example.mycookbook;
+package com.mcb.mycookbook;
 
 import android.content.Context;
 import android.content.DialogInterface;

@@ -1,4 +1,4 @@
-package com.example.mycookbook;
+package com.mcb.mycookbook;
 
 import org.junit.Test;
 

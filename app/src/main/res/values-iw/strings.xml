@@ -76,4 +76,10 @@
     <string name="good_luck">בהצלחה! לכו לבשל :)</string>
     <string name="welcom">ברוכים הבאים לספר המתכונים!!</string>
 
+    <!--    google-ad-keys-->
+    <string name="display_data_key">ca-app-pub-2739009739311215/2149837537</string>
+    <string name="main_key">ca-app-pub-2739009739311215/2041994506</string>
+    <string name="save_key">ca-app-pub-2739009739311215/5882033138</string>
+    <string name="debug_key">ca-app-pub-3940256099942544/6300978111</string>
+
 </resources>
