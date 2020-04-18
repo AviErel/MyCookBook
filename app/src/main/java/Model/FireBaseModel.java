@@ -116,6 +116,8 @@ public class FireBaseModel {
         recipeMap.put("description", recipe.GetDescription());
         recipeMap.put("userId", recipe.GetUserId());
         recipeMap.put("tags",Statics.FlatArray(recipe.GetTags()));
+        recipeMap.put("ingredients",recipe.GetIngredients());
+        recipeMap.put("preparations",recipe.GetPreparetions());
         recipeMap.put("publicated", recipe.GetPublicated());
 
         return recipeMap;
@@ -127,6 +129,8 @@ public class FireBaseModel {
                 recipeMap.get("uri").toString(), recipeMap.get("description").toString(),
                 recipeMap.get("userId")!= null? recipeMap.get("userId").toString():"",
                 recipeMap.get("tags")!=null? Statics.BuildArray(recipeMap.get("tags").toString()): Statics.BuildArray(""),
+                recipeMap.get("ingredients")!=null? recipeMap.get("ingredients").toString() : "",
+                recipeMap.get("preparations")!=null? recipeMap.get("preparations").toString() : "",
                 (recipeMap.get("publicated").toString().equals("true")));
         return recipe;
     }

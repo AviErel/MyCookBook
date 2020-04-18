@@ -117,7 +117,7 @@ public class SaveRecipe extends Base {
                         recipe=new Recipe(uuid,header.getText().toString(),
                                 String.valueOf(courseSpin.getSelectedItemPosition()),String.valueOf(DietSpin.getSelectedItemPosition())
                                 ,uriString,description.getText().toString(),
-                                Statics.userId,Statics.BuildArray(tags.getText().toString()),false);
+                                Statics.userId,Statics.BuildArray(tags.getText().toString()),"","",false);
                         if(recipeData==null){
                             FireBaseModel.SaveRecipe(recipe);
                             endSession(true);

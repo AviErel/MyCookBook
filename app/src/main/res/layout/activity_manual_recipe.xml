@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/design">
+
+            <include layout="@layout/activity_base"/>
+
+            <!--General Menu data-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/menuHeaderData"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!--Title-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/headerLabel"
+                            android:text="@string/saveHeader"
+                            android:gravity="start"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="10dp"
+                            />
+                        <EditText
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/header"
+                            android:paddingStart="25px"
+                            android:gravity="start"
+                            android:layout_marginStart="30dp"
+                            />
+                    </LinearLayout>
+
+                    <!--description-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/descriptionLabel"
+                            android:text="@string/saveDescription"
+                            android:gravity="start"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="10dp"
+                            />
+                        <EditText
+                            android:inputType="textMultiLine"
+                            android:maxLines="10"
+                            android:lines="6"
+                            android:scrollbars="vertical"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/description"
+                            android:gravity="start"
+                            android:layout_marginStart="20dp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--        spinners-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    >
+                    <!--            courses-->
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/Courses"
+                        android:text="@string/saveHeader"
+                        />
+
+                    <!--diet-->
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/Diets"
+                        />
+
+                </LinearLayout>
+
+                <!--tags-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tagLabel"
+                        android:text="@string/saveTags"
+                        android:gravity="start"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="10dp"
+                        />
+                    <EditText
+                        android:inputType="textMultiLine"
+                        android:maxLines="3"
+                        android:lines="2"
+                        android:scrollbars="vertical"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tags"
+                        android:gravity="start"
+                        android:layout_marginStart="20dp"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Menu build-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/menuBuild"
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
+
+                <!--Ingredients-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/manualIngredientsHeader"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="12">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/manualIngredientHint"
+                            android:id="@+id/ingredient"
+                            android:layout_weight="6"/>
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/manualQuantityHint"
+                            android:id="@+id/quantity"
+                            android:inputType="number"
+                            android:layout_weight="2"/>
+
+                        <Spinner
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/measure"
+                            android:layout_weight="3"/>
+
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="+"
+                            android:id="@+id/addIngredient"/>
+
+                    </LinearLayout>
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/ingrediantsView"/>
+
+                </LinearLayout>
+
+                <!--Preparations-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/manualPreparationsHeader"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="12">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/manualPreparationHint"
+                            android:id="@+id/preparation"
+                            android:maxLines="3"
+                            android:layout_weight="11"/>
+
+                        <Button
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="+"
+                            android:id="@+id/addStage"/>
+
+                    </LinearLayout>
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/stagesView"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--buttons-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/build"
+                    android:text="@string/saveBuild"
+                    android:layout_margin="10dp"
+                    android:background="@color/blue2"
+                    android:textColor="@color/white"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/accept"
+                    android:text="@string/saveAccept"
+                    android:layout_margin="10dp"
+                    android:background="@color/blue2"
+                    android:textColor="@color/white"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/discard"
+                    android:text="@string/saveDiscard"
+                    android:layout_margin="10dp"
+                    android:background="@color/blue2"
+                    android:textColor="@color/white"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!--Extra Space-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150px"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/save_key"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+    </com.google.android.gms.ads.AdView>
+</androidx.constraintlayout.widget.ConstraintLayout>

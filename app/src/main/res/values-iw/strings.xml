@@ -62,6 +62,25 @@
     <string name="yes">כן</string>
     <string name="no">לא</string>
 
+    <!--Build Recipe Manually-->
+    <string name="saveBuild">פירוט</string>
+    <string name="manualIngredientsHeader">רכיבים</string>
+    <string name="manualIngredientHint">הרכיב....</string>
+    <string name="manualQuantityHint">כמות...</string>
+    <string name="manualPreparationsHeader">הוראות הכנה</string>
+    <string name="manualPreparationHint">הצעד הבא.....</string>
+
+    <string-array name="manualMeasurment">
+        <item>גרם</item>
+        <item>ק"ג</item>
+        <item>מ"ל</item>
+        <item>ליטר</item>
+        <item>כפית</item>
+        <item>כף</item>
+        <item>כוס</item>
+    </string-array>
+
+
     <!--    tools file-->
     <string name="tools_file_name">user_tools</string>
     <string name="user_name">name</string>

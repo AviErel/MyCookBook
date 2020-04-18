@@ -8,7 +8,8 @@ public class Recipe implements Serializable {
 
     }
 
-    public Recipe(String id, String header, String course, String diet, String uri, String description, String userId,String[] tags, Boolean publicated){
+    public Recipe(String id, String header, String course, String diet, String uri, String description,
+                  String userId,String[] tags,String ingredients,String preparations, Boolean publicated){
         this.id = id;
         this.header = header;
         this.course = course;
@@ -17,6 +18,8 @@ public class Recipe implements Serializable {
         this.description = description;
         this.userId = userId;
         this.tags=tags;
+        this.ingredients=ingredients;
+        this.preparations=preparations;
         this.publicated = publicated;
     }
 
@@ -29,6 +32,8 @@ public class Recipe implements Serializable {
     String userId;
     Boolean publicated;
     String[] tags;
+    String ingredients;
+    String preparations;
 
     public void SetId(String id){this.id = id;}
     public String GetId(){return this.id;}
@@ -53,6 +58,12 @@ public class Recipe implements Serializable {
 
     public void SetTags(String[] tags){this.tags=tags;}
     public String[] GetTags(){return tags;}
+
+    public void SetIngredients(String ingredients){this.ingredients=ingredients;}
+    public String GetIngredients(){return ingredients;}
+
+    public void SetPreparetions(String preps){this.preparations=preps;}
+    public String GetPreparetions(){return preparations;}
 
     public void SetPublicated(Boolean publicated){this.publicated = publicated;}
     public Boolean GetPublicated(){return this.publicated;}
