@@ -158,17 +158,19 @@
                 <!--Ingredients-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/manualIngredientsHeader"/>
+                        android:layout_height="match_parent"
+                        android:text="@string/manualIngredientsHeader"
+                        />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:weightSum="12">
 
@@ -202,18 +204,27 @@
 
                     </LinearLayout>
 
-                    <ListView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/ingrediantsView"/>
+                        >
+
+                        <ListView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/ingrediantsView"
+                            />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
                 <!--Preparations-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
 
                     <TextView
                         android:layout_width="match_parent"

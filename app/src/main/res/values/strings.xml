@@ -77,6 +77,7 @@
     <string name="buildButtonBack">BACK</string>
 
     <string-array name="manualMeasurment">
+        <item></item>
         <item>gr</item>
         <item>Kg</item>
         <item>cc</item>
@@ -84,6 +85,7 @@
         <item>Teaspoon</item>
         <item>Spoon</item>
         <item>Coup</item>
+        <item>Pcs.</item>
     </string-array>
 
     <!--    tools file-->
@@ -106,7 +108,7 @@
     <string name="save_key">ca-app-pub-2739009739311215/5882033138</string>
     <string name="debug_key">ca-app-pub-3940256099942544/6300978111</string>
 
-<!--    toast messages-->
+    <!--    toast messages-->
     <string name="created_recipe">Recipe saved</string>
     <string name="error_created_recipe">Error while save the recipe, please try again</string>
     <string name="delete_recipe">recipe deleted</string>

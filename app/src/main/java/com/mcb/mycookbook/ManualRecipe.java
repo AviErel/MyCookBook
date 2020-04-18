@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -181,7 +182,12 @@ public class ManualRecipe extends AppCompatActivity {
         discardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                endSession(true);
+                if(recipeData!=null)
+                {
+                    endSession(false);
+                }else{
+                    endSession(true);
+                }
             }
         });
 
@@ -194,7 +200,7 @@ public class ManualRecipe extends AppCompatActivity {
                 ingredients.add(ingredient);
                 ((EditText)findViewById(R.id.ingredient)).setText("");
                 ((EditText)findViewById(R.id.quantity)).setText("");
-                measures.setSelection(-1);
+                measures.setSelection(0);
                 updateLists();
             }
         });
@@ -225,6 +231,7 @@ public class ManualRecipe extends AppCompatActivity {
             menuBuild.setVisibility(View.VISIBLE);
             acceptButton.setVisibility(View.VISIBLE);
             buildButton.setText(getResources().getString(R.string.buildButtonBack));
+            updateLists();
         }
         else
         {
@@ -236,8 +243,26 @@ public class ManualRecipe extends AppCompatActivity {
     }
 
     private void updateLists(){
-        ings.setAdapter(new RowsAdapter(ManualRecipe.this,ingredients));
-        stages.setAdapter(new RowsAdapter(ManualRecipe.this,preparations));
+        ings.setAdapter(new RowsIngredientsEditAdapter(ManualRecipe.this,ingredients));
+        ViewGroup.LayoutParams iParam=ings.getLayoutParams();
+        iParam.height=ingredients.size()*100;
+        ings.setLayoutParams(iParam);
+        stages.setAdapter(new RowsStagesEditAdapter(ManualRecipe.this,preparations));
+        ViewGroup.LayoutParams sParam=stages.getLayoutParams();
+        sParam.height=preparations.size()*100;
+        stages.setLayoutParams(sParam);
+    }
+
+    public void delIngredientRow(View v){
+        int position=Integer.parseInt(v.getTag().toString());
+        ingredients.remove(position);
+        updateLists();
+    }
+
+    public void delStageRow(View v){
+        int position=Integer.parseInt(v.getTag().toString());
+        preparations.remove(position);
+        updateLists();
     }
 
     @Override

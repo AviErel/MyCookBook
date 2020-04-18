@@ -73,6 +73,7 @@
     <string name="buildButtonBack">חזור</string>
 
     <string-array name="manualMeasurment">
+        <item></item>
         <item>גרם</item>
         <item>ק"ג</item>
         <item>מ"ל</item>
@@ -80,6 +81,7 @@
         <item>כפית</item>
         <item>כף</item>
         <item>כוס</item>
+        <item>יחידות</item>
     </string-array>
 
 

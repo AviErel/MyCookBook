@@ -276,6 +276,11 @@ public class DisplayData extends Base implements Statics.GetDataListener {
             viewImageIntent.putExtra("recipe", showList.get(position));
             startActivity(viewImageIntent);
         }
+        else {
+            Intent viewManualIntent = new Intent(this, ViewManualRecipeActivity.class);
+            viewManualIntent.putExtra("recipe", showList.get(position));
+            startActivity(viewManualIntent);
+        }
     }
 
     public void delRow(View v){
@@ -344,9 +349,16 @@ public class DisplayData extends Base implements Statics.GetDataListener {
 
     public void updateRow(View v){
         Recipe data=(Recipe)(v.getTag());
-        Intent updateMe = new Intent(this,SaveRecipe.class);
-        updateMe.putExtra("recipe", data);
-        startActivity(updateMe);
+        if(data.GetIngredients().equals("")){
+            Intent updateMe = new Intent(this,SaveRecipe.class);
+            updateMe.putExtra("recipe", data);
+            startActivity(updateMe);
+        }
+        else {
+            Intent updateMe = new Intent(this,ManualRecipe.class);
+            updateMe.putExtra("recipe", data);
+            startActivity(updateMe);
+        }
         UpdateView();
     }
 }

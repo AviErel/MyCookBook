@@ -12,15 +12,16 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/recipes"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:targetSandboxVersion="2">
-        <activity android:name=".ManualRecipe"></activity>
-        <activity android:name=".viewImageActivity"></activity>
-        <activity android:name="com.mcb.mycookbook.Base"></activity>
-        <activity android:name="com.mcb.mycookbook.LogginActivity" />
-        <activity android:name="com.mcb.mycookbook.DisplayData" />
-        <activity android:name="com.mcb.mycookbook.SaveRecipe" />
-        <activity android:name="com.mcb.mycookbook.MainActivity">
+        android:targetSandboxVersion="2"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ViewManualRecipeActivity"></activity>
+        <activity android:name=".ManualRecipe" />
+        <activity android:name=".viewImageActivity" />
+        <activity android:name=".Base" />
+        <activity android:name=".LogginActivity" />
+        <activity android:name=".DisplayData" />
+        <activity android:name=".SaveRecipe" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
