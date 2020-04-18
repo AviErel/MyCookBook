@@ -35,10 +35,10 @@ public class ViewManualRecipeActivity extends AppCompatActivity {
         List<String> ingredients= Arrays.asList(Statics.BuildArray(recipeData.GetIngredients()));
         List<String> stages=Arrays.asList(Statics.BuildArray(recipeData.GetPreparetions()));
 
-        ((TextView)findViewById(R.id.header)).setText(recipeData.GetHeader());
+        ((TextView)findViewById(R.id.viewHeader)).setText(recipeData.GetHeader());
 
         RowsAdapter adapter;
-        ListView ings=(ListView)findViewById(R.id.ingrediantsView);
+        ListView ings=(ListView)findViewById(R.id.ingredientsView);
         adapter=new RowsAdapter(ViewManualRecipeActivity.this,ingredients);
         ings.setAdapter(adapter);
 
