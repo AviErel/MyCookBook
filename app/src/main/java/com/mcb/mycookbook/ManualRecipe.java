@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +25,7 @@ import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -44,6 +45,9 @@ public class ManualRecipe extends AppCompatActivity {
     Recipe recipeData;
 
     Button acceptButton,buildButton,discardButton;
+
+    ListView ings,stages;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -69,8 +73,8 @@ public class ManualRecipe extends AppCompatActivity {
         description=(EditText)findViewById(R.id.description);
         tags=(EditText)findViewById(R.id.tags);
 
-        ingredients=new ArrayList<>();
-        preparations=new ArrayList<>();
+        ingredients=new LinkedList<>();
+        preparations=new LinkedList<>();
 
         menuHeader=findViewById(R.id.menuHeaderData);
         menuBuild=findViewById(R.id.menuBuild);
@@ -82,6 +86,9 @@ public class ManualRecipe extends AppCompatActivity {
 
         addIngredients=(ImageButton)findViewById(R.id.addIngredient);
         addStage=(ImageButton)findViewById(R.id.addStage);
+
+        ings=findViewById(R.id.ingrediantsView);
+        stages=findViewById(R.id.stagesView);
 
         final Spinner courseSpin = (Spinner) findViewById(R.id.Courses);
 
@@ -188,6 +195,7 @@ public class ManualRecipe extends AppCompatActivity {
                 ((EditText)findViewById(R.id.ingredient)).setText("");
                 ((EditText)findViewById(R.id.quantity)).setText("");
                 measures.setSelection(-1);
+                updateLists();
             }
         });
 
@@ -195,6 +203,8 @@ public class ManualRecipe extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 preparations.add(((EditText)findViewById(R.id.preparation)).getText().toString());
+                ((EditText)findViewById(R.id.preparation)).setText("");
+                updateLists();
             }
         });
     }
@@ -223,6 +233,11 @@ public class ManualRecipe extends AppCompatActivity {
             acceptButton.setVisibility(View.GONE);
             buildButton.setText(getResources().getString(R.string.saveBuild));
         }
+    }
+
+    private void updateLists(){
+        ings.setAdapter(new RowsAdapter(ManualRecipe.this,ingredients));
+        stages.setAdapter(new RowsAdapter(ManualRecipe.this,preparations));
     }
 
     @Override
