@@ -176,6 +176,8 @@ public class FireBaseModel {
             recipeToUpdate.child("description").setValue(recipe.GetDescription());
             recipeToUpdate.child("userId").setValue(recipe.GetUserId());
             recipeToUpdate.child("tags").setValue(Statics.FlatArray(recipe.GetTags()));
+            recipeToUpdate.child("ingredients").setValue(recipe.GetIngredients());
+            recipeToUpdate.child("preparations").setValue(recipe.GetPreparetions());
             recipeToUpdate.child("publicated").setValue(recipe.GetPublicated());
         }
     }
