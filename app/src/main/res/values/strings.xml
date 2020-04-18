@@ -24,6 +24,7 @@
     <string name="language">Language</string>
     <string name="english">English</string>
     <string name="hebrew">Hebrew</string>
+    <string name="addRecipe">Create Recipe</string>
 
 
     <!--Save action section-->
@@ -36,6 +37,7 @@
     <string name="saveCourses">Course</string>
     <string name="saveDiets">Diet</string>
     <string name="saveTags">Tag</string>
+
     <string-array name="saveCourse">
         <item>Course...</item>
         <item>Soup</item>
@@ -46,6 +48,7 @@
         <item>Dessert</item>
         <item>Bakery</item>
     </string-array>
+
     <string-array name="saveDiet">
         <item>Diet...</item>
         <item>Carnivore</item>
@@ -62,6 +65,26 @@
     <string name="delete_alert_message">Are you sure you want to delete this recipe?</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+
+
+    <!--Build Recipe Manually-->
+    <string name="saveBuild">Build\nRecipe</string>
+    <string name="manualIngredientsHeader">INGREDIENTS</string>
+    <string name="manualIngredientHint">ingredient....</string>
+    <string name="manualQuantityHint">quantity....</string>
+    <string name="manualPreparationsHeader">PREPARATION</string>
+    <string name="manualPreparationHint">next stage....</string>
+    <string name="buildButtonBack">BACK</string>
+
+    <string-array name="manualMeasurment">
+        <item>gr</item>
+        <item>Kg</item>
+        <item>cc</item>
+        <item>Liter</item>
+        <item>Teaspoon</item>
+        <item>Spoon</item>
+        <item>Coup</item>
+    </string-array>
 
     <!--    tools file-->
     <string name="tools_file_name">user_tools</string>
