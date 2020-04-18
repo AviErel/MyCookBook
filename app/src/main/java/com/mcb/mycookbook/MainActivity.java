@@ -42,6 +42,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import Model.Statics;
@@ -147,22 +148,43 @@ public class MainActivity extends Base {
                 String receivedText = receiverdIntent
                         .getStringExtra(Intent.EXTRA_TEXT);
                 if (receivedText != null) {
-                    Intent saveActivity = new Intent(this, SaveRecipe.class);
-                    saveActivity.putExtra("uri", receivedText);
-                    startActivity(saveActivity);
+                    openSaveIntent("uri", receivedText);
                 }
-            } else if (receivedType.startsWith("image/")) {
+            }
+            else if (receivedType.startsWith("image/")) {
 
                 Uri imageUri = (Uri) receiverdIntent.getParcelableExtra(Intent.EXTRA_STREAM);
                 if (imageUri != null) {
-                        Intent saveActivity = new Intent(this, SaveRecipe.class);
-                        saveActivity.putExtra("imageUrl", imageUri.toString());
-                        startActivity(saveActivity);
+                    ArrayList<Uri> imageUris = new ArrayList<>();
+                    imageUris.add(imageUri);
+                    openSaveIntent("imagesUri", imageUris);
                 }
             }
-        } else if (receivedAction.equals(Intent.ACTION_MAIN)) {
+
+        }
+        else if (Intent.ACTION_SEND_MULTIPLE.equals(receivedAction) && receivedType != null) {
+            if (receivedType.startsWith("image/")) {
+                ArrayList<Uri> imageUris = getIntent().getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+                if (imageUris != null) {
+                    // Update UI to reflect multiple images being shared
+                    openSaveIntent("imagesUri", imageUris);
+                }
+            }
+        }else if (receivedAction.equals(Intent.ACTION_MAIN)) {
 
             Log.e("", "onSharedIntent: nothing shared");
         }
+    }
+
+    private void openSaveIntent(String key, ArrayList<Uri> objToSend){
+        Intent saveActivity = new Intent(this, SaveRecipe.class);
+        saveActivity.putExtra(key, objToSend);
+        startActivity(saveActivity);
+    }
+
+    private void openSaveIntent(String key, String objToSend){
+        Intent saveActivity = new Intent(this, SaveRecipe.class);
+        saveActivity.putExtra(key, objToSend);
+        startActivity(saveActivity);
     }
 }
