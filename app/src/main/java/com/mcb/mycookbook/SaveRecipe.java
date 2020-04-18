@@ -41,10 +41,10 @@ public class SaveRecipe extends Base {
     private AdView mAdView;
     String uriString;
     String imageName;
-    Bitmap image;
-    String uriImage;
+    List<Bitmap> images;
     Recipe recipeToSave;
     ProgressBar spinner;
+    int count=0, listSize=0;
 
 
     @Override
@@ -58,13 +58,14 @@ public class SaveRecipe extends Base {
         }
 
         super.onCreate(savedInstanceState);
+        images = new ArrayList<>();
         Bundle b = getIntent().getExtras();
         uriString = b.getString("uri");
         final Recipe recipeData=(Recipe)b.getSerializable("recipe");
-        uriImage = b.getString("imageUrl");
+        ArrayList<Uri> myList = (ArrayList<Uri>) getIntent().getSerializableExtra("imagesUri");
 
-        if(uriImage!= null)
-            handleImageRecipe();
+        if(myList!= null)
+            handleImageRecipe(myList);
 
         setContentView(R.layout.activity_save_recipe);
         header=(EditText)findViewById(R.id.header);
@@ -130,9 +131,13 @@ public class SaveRecipe extends Base {
                         spinner.setVisibility(View.VISIBLE);
                         findViewById(R.id.save_layout).setVisibility(View.GONE);
                         findViewById(R.id.buttonLayout).setVisibility(View.GONE);
-                        if(image != null){
-                            imageName = uuid + "image" + imagesNames.size();
-                            imagesNames.add(imageName);
+                        if(images != null){
+                            int c = 0;
+                            for(Bitmap img:images) {
+                                imageName = uuid + "image" + c;
+                                imagesNames.add(imageName);
+                                c++;
+                            }
                         }
 
                         recipeToSave=new Recipe(uuid,header.getText().toString(),
@@ -141,23 +146,28 @@ public class SaveRecipe extends Base {
                                 Statics.userId,Statics.BuildArray(tags.getText().toString()),"","",false, imagesNames);
 
                         if(recipeData==null){
-                            if(image != null ) {
-                                FireBaseModel.SaveImage(imageName, image, new Statics.SaveImageListener() {
-                                    @Override
-                                    public void complete(String url) {
-                                        FireBaseModel.SaveRecipe(recipeToSave);
-                                        showToast(getString(R.string.created_recipe));
-                                        endSession(true);
+                            if(images != null ) {
+                                count = 0;
+                                listSize = images.size();
+                                for(Bitmap image:images) {
+                                    count++;
+                                    FireBaseModel.SaveImage(recipeToSave.GetImagesNames().get(count-1), image, new Statics.SaveImageListener() {
+                                        @Override
+                                        public void complete(String url) {
+                                            if(count == listSize) {
+                                                FireBaseModel.SaveRecipe(recipeToSave);
+                                                showToast(getString(R.string.created_recipe));
+                                                endSession(true);
+                                            }
+                                        }
 
-                                    }
-
-                                    @Override
-                                    public void fail() {
-                                        endSession(true);
-                                        showToast(getString(R.string.error_created_recipe));
-
-                                    }
-                                });
+                                        @Override
+                                        public void fail() {
+                                            endSession(true);
+                                            showToast(getString(R.string.error_created_recipe));
+                                        }
+                                    });
+                                }
                             }
                             else{
                                 FireBaseModel.SaveRecipe(recipeToSave);
@@ -193,14 +203,16 @@ public class SaveRecipe extends Base {
         toast.show();
     }
 
-    private void handleImageRecipe(){
+    private void handleImageRecipe(ArrayList<Uri>imagesUri){
         InputStream input = null;
-        try {
-            input = this.getContentResolver().openInputStream(Uri.parse(uriImage));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        for(Uri uri:imagesUri) {
+            try {
+                input = this.getContentResolver().openInputStream(uri);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            images.add(BitmapFactory.decodeStream(input));
         }
-        image = BitmapFactory.decodeStream(input);
     }
 
     private void endSession(boolean update){

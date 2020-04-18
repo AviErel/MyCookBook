@@ -11,6 +11,23 @@
         android:orientation="vertical">
         <include layout="@layout/activity_base"/>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recipe_name"
+        android:layout_gravity="center"
+        android:textSize="25dp"
+        />
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/images_list"/>
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="500dp"-->
+<!--        android:id="@+id/recipe_image"-->
+<!--        android:layout_gravity="center"/>-->
+
         <ProgressBar
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
@@ -20,21 +37,8 @@
             android:indeterminateTint="@color/blue2"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/recipe_name"
-        android:layout_gravity="center"
-        android:textSize="25dp"
-        android:layout_marginTop="150dp"
-        />
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="500dp"
-        android:id="@+id/recipe_image"
-        android:layout_gravity="center"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
