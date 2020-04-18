@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -38,6 +40,8 @@ public class ManualRecipe extends AppCompatActivity {
     private AdView mAdView;
     List<String> ingredients,preparations;
     LinearLayout menuHeader,menuBuild;
+    ImageButton addIngredients,addStage;
+    Recipe recipeData;
 
     Button acceptButton,buildButton,discardButton;
     @Override
@@ -55,7 +59,9 @@ public class ManualRecipe extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
 
-        final Recipe recipeData=(Recipe)b.getSerializable("recipe");
+        if(b!=null){
+            recipeData=(Recipe)b.getSerializable("recipe");
+        }
 
         setContentView(R.layout.activity_manual_recipe);
 
@@ -73,6 +79,9 @@ public class ManualRecipe extends AppCompatActivity {
         acceptButton=(Button)findViewById(R.id.accept);
         acceptButton.setVisibility(View.GONE);
         discardButton=(Button)findViewById(R.id.discard);
+
+        addIngredients=(ImageButton)findViewById(R.id.addIngredient);
+        addStage=(ImageButton)findViewById(R.id.addStage);
 
         final Spinner courseSpin = (Spinner) findViewById(R.id.Courses);
 
@@ -168,7 +177,28 @@ public class ManualRecipe extends AppCompatActivity {
                 finish();
             }
         });
+
+        addIngredients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ingredient=((EditText)findViewById(R.id.ingredient)).getText().toString()+" ";
+                ingredient+=((EditText)findViewById(R.id.quantity)).getText().toString()+" ";
+                ingredient+=measures.getSelectedItem().toString();
+                ingredients.add(ingredient);
+                ((EditText)findViewById(R.id.ingredient)).setText("");
+                ((EditText)findViewById(R.id.quantity)).setText("");
+                measures.setSelection(-1);
+            }
+        });
+
+        addStage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                preparations.add(((EditText)findViewById(R.id.preparation)).getText().toString());
+            }
+        });
     }
+
     private void endSession(boolean update){
         if(update){
             Intent list=new Intent(getApplicationContext(),DisplayData.class);
