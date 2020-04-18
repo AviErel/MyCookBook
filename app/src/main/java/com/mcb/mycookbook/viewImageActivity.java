@@ -20,6 +20,7 @@ import java.util.List;
 public class viewImageActivity extends Base {
 
     ProgressBar spinner;
+    Recipe recipeData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,23 +28,23 @@ public class viewImageActivity extends Base {
         setContentView(R.layout.activity_view_image_activity);
 
         Bundle b = getIntent().getExtras();
-        final Recipe recipeData=(Recipe)b.getSerializable("recipe");
+        recipeData=(Recipe)b.getSerializable("recipe");
         if(recipeData != null){
-            ((TextView)findViewById(R.id.recipe_name)).setText(recipeData.GetHeader());
-            handleImage(recipeData.GetImagesNames());
+            handleImage();
             spinner = findViewById(R.id.viewProgressBar);
             spinner.setVisibility(View.VISIBLE);
         }
     }
 
-    private void handleImage(List<String> getImagesNames) {
-        if(getImagesNames.size()>0){
-            FireBaseModel.GetRecipeImage(getImagesNames.get(0), new Statics.GetImageListener() {
+    private void handleImage() {
+        if(recipeData.GetImagesNames().size()>0){
+            FireBaseModel.GetRecipeImage(recipeData.GetImagesNames().get(0), new Statics.GetImageListener() {
                 @Override
                 public void complete(byte[] image) {
                     Bitmap b = convertBytesToBitmap(image);
                     if(b != null){
                         ((ImageView)findViewById(R.id.recipe_image)).setImageBitmap(b);
+                        ((TextView)findViewById(R.id.recipe_name)).setText(recipeData.GetHeader());
                         spinner.setVisibility(View.GONE);
                     }
                 }

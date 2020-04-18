@@ -26,7 +26,7 @@ public class Recipe implements Serializable {
         this.imagesNames = new ArrayList<>();
     }
 
-    public Recipe(String id, String header, String course, String diet, String uri, String description, String userId,String[] tags, Boolean publicated, List<String>names){
+    public Recipe(String id, String header, String course, String diet, String uri, String description, String userId,String[] tags,String ingredients,String preparations, Boolean publicated, List<String>names){
         this.id = id;
         this.header = header;
         this.course = course;

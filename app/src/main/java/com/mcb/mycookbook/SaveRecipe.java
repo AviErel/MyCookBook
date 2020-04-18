@@ -138,8 +138,8 @@ public class SaveRecipe extends Base {
                         recipeToSave=new Recipe(uuid,header.getText().toString(),
                                 String.valueOf(courseSpin.getSelectedItemPosition()),String.valueOf(DietSpin.getSelectedItemPosition())
                                 ,uriString,description.getText().toString(),
-                                Statics.userId,Statics.BuildArray(tags.getText().toString()),"","",false);
-                                Statics.userId,Statics.BuildArray(tags.getText().toString()),false, imagesNames);
+                                Statics.userId,Statics.BuildArray(tags.getText().toString()),"","",false, imagesNames);
+
                         if(recipeData==null){
                             if(image != null ) {
                                 FireBaseModel.SaveImage(imageName, image, new Statics.SaveImageListener() {

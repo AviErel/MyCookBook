@@ -204,13 +204,11 @@ public class FireBaseModel {
                 recipeMap.get("uri")!= null? recipeMap.get("uri").toString(): "", recipeMap.get("description").toString(),
                 recipeMap.get("userId")!= null? recipeMap.get("userId").toString():"",
                 recipeMap.get("tags")!=null? Statics.BuildArray(recipeMap.get("tags").toString()): Statics.BuildArray(""),
+                recipeMap.get("ingredients")!=null? recipeMap.get("ingredients").toString() : "",
+                recipeMap.get("preparations")!=null? recipeMap.get("preparations").toString() : "",
                 (recipeMap.get("publicated").toString().equals("true")),
                  recipeMap.get("imagesNames")!= null?(List<String>) recipeMap.get("imagesNames") : new ArrayList<String>());
 
-//        recipeMap.get("imagesNames") != null?Statics.BuildList(recipeMap.get("imagesNames").toString()): Statics.BuildList("")
-                recipeMap.get("ingredients")!=null? recipeMap.get("ingredients").toString() : "",
-                recipeMap.get("preparations")!=null? recipeMap.get("preparations").toString() : "",
-                (recipeMap.get("publicated").toString().equals("true")));
         return recipe;
     }
 
