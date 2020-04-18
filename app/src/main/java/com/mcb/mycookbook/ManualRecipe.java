@@ -181,7 +181,7 @@ public class ManualRecipe extends AppCompatActivity {
         discardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                endSession(true);
             }
         });
 

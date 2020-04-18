@@ -42,6 +42,7 @@ public class RowsAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView=inf.inflate(R.layout.row,null);
         TextView data=convertView.findViewById(R.id.data);
+        data.setText(ingredients.get(position));
 /*
         del=convertView.findViewById(R.id.deleteRow);
         del.setTag(position);
