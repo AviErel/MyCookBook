@@ -89,25 +89,12 @@
                     android:layout_width="120px"
                     android:layout_height="120px"
                     android:id="@+id/viewRow"
-                    android:src="@drawable/worldwide"
+                    android:src="@drawable/view_recipe"
                     android:onClick="showRow"
                     android:padding="20px"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:background="@null"
-                    />
-
-                <ImageButton
-                    android:layout_width="120px"
-                    android:layout_height="120px"
-                    android:id="@+id/showImageRow"
-                    android:src="@drawable/show_image_icon"
-                    android:onClick="showImage"
-                    android:padding="20px"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:background="@null"
-                    android:tag="1"
                     />
 
             </LinearLayout>

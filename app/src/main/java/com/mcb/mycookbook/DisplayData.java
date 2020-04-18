@@ -3,8 +3,6 @@ package com.mcb.mycookbook;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +14,6 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -30,7 +27,6 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -53,7 +49,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     private ProgressBar spinner;
     private AdView mAdView;
     private View delView;
-    private View showImageView;
+    int count = 0, listImgSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -275,18 +271,10 @@ public class DisplayData extends Base implements Statics.GetDataListener {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
             startActivity(browserIntent);
         }
-
-    }
-
-    public void showImage(View v){
-//        int position=Integer.parseInt(v.getTag().toString());
-        int position = 0;
-        Recipe recipeToShow = showList.get(position);
-        if(recipeToShow.GetImagesNames().size() > 0){
+        else if(showList.get(position).GetImagesNames().size()>0) {
             Intent viewImageIntent = new Intent(this, viewImageActivity.class);
-            viewImageIntent.putExtra("recipe", recipeToShow);
+            viewImageIntent.putExtra("recipe", showList.get(position));
             startActivity(viewImageIntent);
-
         }
     }
 
@@ -300,7 +288,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
                 // The dialog is automatically dismissed when a dialog button is clicked.
                 .setPositiveButton("", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        deleteRecipe();
+                        deleteRecipeImages();
                         // Continue with delete operation
                     }
                 })
@@ -312,16 +300,45 @@ public class DisplayData extends Base implements Statics.GetDataListener {
                 .show();
     }
 
-    private void deleteRecipe(){
+    private void deleteRecipeImages(){
+        spinner = findViewById(R.id.progressBar);
+        spinner.setVisibility(View.VISIBLE);
         int position=Integer.parseInt(delView.getTag().toString());
-        Recipe recipeToDelete = showList.get(position);
+        final Recipe recipeToDelete = showList.get(position);
         List<String> imgs = recipeToDelete.GetImagesNames();
+        count = 0;
+        listImgSize = imgs.size();
 
-        for(String img: imgs){
-            FireBaseModel.DeleteRecipeImage(img);
+        if(imgs.size() > 0) {
+            for (String img : imgs) {
+                FireBaseModel.DeleteRecipeImage(img, new Statics.RemoveListener() {
+                    @Override
+                    public void complete(Boolean isSuccess) {
+                        count++;
+                        if (count == listImgSize) {
+                            deleteRecipe(recipeToDelete);
+                        }
+                    }
+                });
+            }
         }
+        else {
+            deleteRecipe(recipeToDelete);
+        }
+    }
 
-        FireBaseModel.DeleteRecipe(recipeToDelete.GetId());
+    private void deleteRecipe(Recipe recipeToDelete){
+        FireBaseModel.DeleteRecipe(recipeToDelete.GetId(), new Statics.RemoveListener() {
+            @Override
+            public void complete(Boolean isSuccess) {
+                spinner.setVisibility(View.GONE);
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(context, getText(R.string.delete_recipe), duration);
+                toast.show();
+            }
+        });
+
         FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
     }
 
@@ -338,7 +355,7 @@ class ReportAdapter extends BaseAdapter{
 
     private List<Recipe> recipes;
     LayoutInflater inf;
-    ImageButton del,update,view, showImg;
+    ImageButton del,update,view;
 
     ReportAdapter(Context con, List<Recipe>data){
         recipes=new LinkedList<>();
@@ -377,10 +394,6 @@ class ReportAdapter extends BaseAdapter{
 
         view=convertView.findViewById(R.id.viewRow);
         view.setTag(position);
-
-        showImg = convertView.findViewById(R.id.showImageRow);
-        if(showImg !=null)
-            showImg.setTag(position);
 
         header.setText(recipes.get(position).GetHeader());
         description.setText(recipes.get(position).GetDescription());

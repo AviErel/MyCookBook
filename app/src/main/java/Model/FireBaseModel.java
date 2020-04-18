@@ -2,8 +2,10 @@ package Model;
 
 import android.graphics.Bitmap;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +29,12 @@ public class FireBaseModel {
     public static void SaveRecipe(Recipe recipe){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("recipe").child(recipe.GetId().toString());
-        myRef.setValue(recipeToMap(recipe));
+        myRef.setValue(recipeToMap(recipe)).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
     }
 
     public static void SaveUser(User user){
@@ -60,7 +67,7 @@ public class FireBaseModel {
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference().child("images/" + imageName);
         final long ONE_MEGABYTE = 1024 * 1024;
-        storageReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+        storageReference.getBytes(5*ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
                 listener.complete(bytes);
@@ -73,18 +80,20 @@ public class FireBaseModel {
         });
     }
 
-    public static void DeleteRecipeImage(String imageName){
+    public static void DeleteRecipeImage(String imageName, final Statics.RemoveListener listener){
         FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference().child("images/" + imageName);
         storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 // File deleted successfully
+                listener.complete(true);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Uh-oh, an error occurred!
+                listener.complete(false);
             }
         });
     }
@@ -145,13 +154,14 @@ public class FireBaseModel {
         });
     }
 
-    public static void DeleteRecipe(String id){
+    public static void DeleteRecipe(String id, final Statics.RemoveListener listener){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        database.getReference("recipe").child(id).removeValue();
-//        FirebaseStorage databaseStorage = FirebaseStorage.getInstance();
-//        for(String image: images) {
-//
-//            databaseStorage.getReference().child("images").child(image);       }
+        database.getReference("recipe").child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                listener.complete(true);
+            }
+        });
     }
 
     public static void UpdateRecipe(Recipe recipe){

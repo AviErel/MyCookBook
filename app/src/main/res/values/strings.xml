@@ -82,4 +82,10 @@
     <string name="main_key">ca-app-pub-2739009739311215/2041994506</string>
     <string name="save_key">ca-app-pub-2739009739311215/5882033138</string>
     <string name="debug_key">ca-app-pub-3940256099942544/6300978111</string>
+
+<!--    toast messages-->
+    <string name="created_recipe">Recipe saved</string>
+    <string name="error_created_recipe">Error while save the recipe, please try again</string>
+    <string name="delete_recipe">recipe deleted</string>
+    <string name="error_view_image">can not show this recipe image</string>
 </resources>

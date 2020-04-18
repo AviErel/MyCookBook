@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -42,6 +43,8 @@ public class SaveRecipe extends Base {
     String imageName;
     Bitmap image;
     String uriImage;
+    Recipe recipeToSave;
+    ProgressBar spinner;
 
 
     @Override
@@ -55,7 +58,6 @@ public class SaveRecipe extends Base {
         }
 
         super.onCreate(savedInstanceState);
-
         Bundle b = getIntent().getExtras();
         uriString = b.getString("uri");
         final Recipe recipeData=(Recipe)b.getSerializable("recipe");
@@ -69,6 +71,8 @@ public class SaveRecipe extends Base {
 //        uriText=(TextView)findViewById(R.id.uriData);
         description=(EditText)findViewById(R.id.description);
         tags=(EditText)findViewById(R.id.tags);
+        spinner = findViewById(R.id.saveProgressBar);
+        spinner.setVisibility(View.GONE);
 
         final Spinner courseSpin = (Spinner) findViewById(R.id.Courses);
 
@@ -118,48 +122,53 @@ public class SaveRecipe extends Base {
                 Recipe recipe;
                 if(courseSpin.getSelectedItemPosition()<1 || DietSpin.getSelectedItemPosition()<1 ||
                 header.getText().toString().equals("")){
-                    Context context = getApplicationContext();
-                    CharSequence text = "Need to select course, diet and enter header";
-                    int duration = Toast.LENGTH_LONG;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    showToast("Need to select course, diet and enter header");
                 }else{
                     try{
                         String uuid=(recipeData==null?UUID.randomUUID().toString():recipeData.GetId());
                         List<String> imagesNames = new ArrayList<>();
+                        spinner.setVisibility(View.VISIBLE);
+                        findViewById(R.id.save_layout).setVisibility(View.GONE);
+                        findViewById(R.id.buttonLayout).setVisibility(View.GONE);
                         if(image != null){
                             imageName = uuid + "image" + imagesNames.size();
                             imagesNames.add(imageName);
                         }
 
-                        recipe=new Recipe(uuid,header.getText().toString(),
+                        recipeToSave=new Recipe(uuid,header.getText().toString(),
                                 String.valueOf(courseSpin.getSelectedItemPosition()),String.valueOf(DietSpin.getSelectedItemPosition())
                                 ,uriString,description.getText().toString(),
                                 Statics.userId,Statics.BuildArray(tags.getText().toString()),false, imagesNames);
                         if(recipeData==null){
-                            FireBaseModel.SaveRecipe(recipe);
                             if(image != null ) {
                                 FireBaseModel.SaveImage(imageName, image, new Statics.SaveImageListener() {
                                     @Override
                                     public void complete(String url) {
+                                        FireBaseModel.SaveRecipe(recipeToSave);
+                                        showToast(getString(R.string.created_recipe));
                                         endSession(true);
+
                                     }
 
                                     @Override
                                     public void fail() {
                                         endSession(true);
+                                        showToast(getString(R.string.error_created_recipe));
+
                                     }
                                 });
                             }
-                            else {
+                            else{
+                                FireBaseModel.SaveRecipe(recipeToSave);
+                                showToast(getString(R.string.created_recipe));
                                 endSession(true);
                             }
+
 
                         }
                         else
                         {
-                            FireBaseModel.UpdateRecipe(recipe);
+                            FireBaseModel.UpdateRecipe(recipeToSave);
                             endSession(false);
                         }
                     }catch (Exception e){}
@@ -174,6 +183,13 @@ public class SaveRecipe extends Base {
                 finish();
             }
         });
+    }
+
+    private void showToast(String stringToShow){
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, stringToShow, duration);
+        toast.show();
     }
 
     private void handleImageRecipe(){

@@ -43,6 +43,10 @@ public class Statics {
         void fail();
     }
 
+    public interface RemoveListener {
+        void complete(Boolean isSuccess);
+    }
+
     public static String FlatArray(String[] data){
         String answer="";
         for(String n : data){
