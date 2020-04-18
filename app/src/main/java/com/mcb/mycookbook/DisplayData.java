@@ -3,6 +3,7 @@ package com.mcb.mycookbook;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -28,6 +30,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -50,6 +53,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     private ProgressBar spinner;
     private AdView mAdView;
     private View delView;
+    private View showImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -267,8 +271,23 @@ public class DisplayData extends Base implements Statics.GetDataListener {
 
     public void showRow(View v){
         int position=Integer.parseInt(v.getTag().toString());
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
-        startActivity(browserIntent);
+        if(!showList.get(position).GetUri().equals("")){
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
+            startActivity(browserIntent);
+        }
+
+    }
+
+    public void showImage(View v){
+//        int position=Integer.parseInt(v.getTag().toString());
+        int position = 0;
+        Recipe recipeToShow = showList.get(position);
+        if(recipeToShow.GetImagesNames().size() > 0){
+            Intent viewImageIntent = new Intent(this, viewImageActivity.class);
+            viewImageIntent.putExtra("recipe", recipeToShow);
+            startActivity(viewImageIntent);
+
+        }
     }
 
     public void delRow(View v){
@@ -295,7 +314,14 @@ public class DisplayData extends Base implements Statics.GetDataListener {
 
     private void deleteRecipe(){
         int position=Integer.parseInt(delView.getTag().toString());
-        FireBaseModel.DeleteRecipe(showList.get(position).GetId());
+        Recipe recipeToDelete = showList.get(position);
+        List<String> imgs = recipeToDelete.GetImagesNames();
+
+        for(String img: imgs){
+            FireBaseModel.DeleteRecipeImage(img);
+        }
+
+        FireBaseModel.DeleteRecipe(recipeToDelete.GetId());
         FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
     }
 
@@ -312,7 +338,7 @@ class ReportAdapter extends BaseAdapter{
 
     private List<Recipe> recipes;
     LayoutInflater inf;
-    ImageButton del,update,view;
+    ImageButton del,update,view, showImg;
 
     ReportAdapter(Context con, List<Recipe>data){
         recipes=new LinkedList<>();
@@ -351,6 +377,10 @@ class ReportAdapter extends BaseAdapter{
 
         view=convertView.findViewById(R.id.viewRow);
         view.setTag(position);
+
+        showImg = convertView.findViewById(R.id.showImageRow);
+        if(showImg !=null)
+            showImg.setTag(position);
 
         header.setText(recipes.get(position).GetHeader());
         description.setText(recipes.get(position).GetDescription());

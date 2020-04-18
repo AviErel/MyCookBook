@@ -88,6 +88,18 @@
                 android:background="@null"
                 />
 
+            <ImageButton
+                android:layout_width="120px"
+                android:layout_height="120px"
+                android:id="@+id/viewImage"
+                android:src="@drawable/show_image_icon"
+                android:onClick="showImage"
+                android:padding="20px"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                />
+
         </LinearLayout>
 
     </LinearLayout>

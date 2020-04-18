@@ -6,6 +6,9 @@ import Model.Statics;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,7 +25,11 @@ import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 public class SaveRecipe extends Base {
@@ -32,6 +39,9 @@ public class SaveRecipe extends Base {
     TextView uriText;
     private AdView mAdView;
     String uriString;
+    String imageName;
+    Bitmap image;
+    String uriImage;
 
 
     @Override
@@ -49,6 +59,10 @@ public class SaveRecipe extends Base {
         Bundle b = getIntent().getExtras();
         uriString = b.getString("uri");
         final Recipe recipeData=(Recipe)b.getSerializable("recipe");
+        uriImage = b.getString("imageUrl");
+
+        if(uriImage!= null)
+            handleImageRecipe();
 
         setContentView(R.layout.activity_save_recipe);
         header=(EditText)findViewById(R.id.header);
@@ -113,14 +127,35 @@ public class SaveRecipe extends Base {
                 }else{
                     try{
                         String uuid=(recipeData==null?UUID.randomUUID().toString():recipeData.GetId());
+                        List<String> imagesNames = new ArrayList<>();
+                        if(image != null){
+                            imageName = uuid + "image" + imagesNames.size();
+                            imagesNames.add(imageName);
+                        }
 
                         recipe=new Recipe(uuid,header.getText().toString(),
                                 String.valueOf(courseSpin.getSelectedItemPosition()),String.valueOf(DietSpin.getSelectedItemPosition())
                                 ,uriString,description.getText().toString(),
-                                Statics.userId,Statics.BuildArray(tags.getText().toString()),false);
+                                Statics.userId,Statics.BuildArray(tags.getText().toString()),false, imagesNames);
                         if(recipeData==null){
                             FireBaseModel.SaveRecipe(recipe);
-                            endSession(true);
+                            if(image != null ) {
+                                FireBaseModel.SaveImage(imageName, image, new Statics.SaveImageListener() {
+                                    @Override
+                                    public void complete(String url) {
+                                        endSession(true);
+                                    }
+
+                                    @Override
+                                    public void fail() {
+                                        endSession(true);
+                                    }
+                                });
+                            }
+                            else {
+                                endSession(true);
+                            }
+
                         }
                         else
                         {
@@ -139,6 +174,16 @@ public class SaveRecipe extends Base {
                 finish();
             }
         });
+    }
+
+    private void handleImageRecipe(){
+        InputStream input = null;
+        try {
+            input = this.getContentResolver().openInputStream(Uri.parse(uriImage));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        image = BitmapFactory.decodeStream(input);
     }
 
     private void endSession(boolean update){
