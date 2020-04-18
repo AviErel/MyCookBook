@@ -73,6 +73,7 @@
     <string name="manualQuantityHint">quantity....</string>
     <string name="manualPreparationsHeader">PREPARATION</string>
     <string name="manualPreparationHint">next stage....</string>
+    <string name="buildButtonBack">BACK</string>
 
     <string-array name="manualMeasurment">
         <item>gr</item>

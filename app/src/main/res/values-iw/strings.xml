@@ -69,6 +69,7 @@
     <string name="manualQuantityHint">כמות...</string>
     <string name="manualPreparationsHeader">הוראות הכנה</string>
     <string name="manualPreparationHint">הצעד הבא.....</string>
+    <string name="buildButtonBack">חזור</string>
 
     <string-array name="manualMeasurment">
         <item>גרם</item>
