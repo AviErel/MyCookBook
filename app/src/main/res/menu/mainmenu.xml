@@ -21,6 +21,11 @@
         </menu>
     </item>
     <item
+        android:id="@+id/recipe_add"
+        android:title="@string/addRecipe"
+        android:icon="@drawable/plus_icon"
+        />
+    <item
         android:id="@+id/menu_show"
         android:title="@string/showList"
         android:icon="@drawable/list_recipe"

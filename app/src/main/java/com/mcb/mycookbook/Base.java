@@ -62,6 +62,10 @@ public class Base extends AppCompatActivity {
             case R.id.heb:
                 setLocale("he");
                 return true;
+            case R.id.recipe_add:
+                Intent addMe=new Intent(this,ManualRecipe.class);
+                startActivity(addMe);
+                return true;
             case R.id.menu_show:
                 Intent showMe=new Intent(this,DisplayData.class);
                 startActivity(showMe);

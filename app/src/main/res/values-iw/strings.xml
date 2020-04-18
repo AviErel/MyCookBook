@@ -23,6 +23,7 @@
     <string name="language">שפות</string>
     <string name="english">אנגלית</string>
     <string name="hebrew">עברית</string>
+    <string name="addRecipe">צור מתכון</string>
 
 
     <!--Save action section-->

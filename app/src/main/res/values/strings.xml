@@ -24,6 +24,7 @@
     <string name="language">Language</string>
     <string name="english">English</string>
     <string name="hebrew">Hebrew</string>
+    <string name="addRecipe">Create Recipe</string>
 
 
     <!--Save action section-->

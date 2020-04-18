@@ -93,6 +93,15 @@ public class ManualRecipe extends AppCompatActivity {
 // Apply the adapter to the spinner
         DietSpin.setAdapter(dAdapter);
 
+        final Spinner measures = (Spinner) findViewById(R.id.measure);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> mAdapter = ArrayAdapter.createFromResource(this,
+                R.array.manualMeasurment, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        measures.setAdapter(mAdapter);
+
         if(recipeData!=null){
             header.setText(recipeData.GetHeader());
             description.setText(recipeData.GetDescription());
