@@ -6,11 +6,15 @@ import Model.Statics;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -22,7 +26,11 @@ import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 public class SaveRecipe extends Base {
@@ -32,6 +40,11 @@ public class SaveRecipe extends Base {
     TextView uriText;
     private AdView mAdView;
     String uriString;
+    String imageName;
+    Bitmap image;
+    String uriImage;
+    Recipe recipeToSave;
+    ProgressBar spinner;
 
 
     @Override
@@ -45,16 +58,21 @@ public class SaveRecipe extends Base {
         }
 
         super.onCreate(savedInstanceState);
-
         Bundle b = getIntent().getExtras();
         uriString = b.getString("uri");
         final Recipe recipeData=(Recipe)b.getSerializable("recipe");
+        uriImage = b.getString("imageUrl");
+
+        if(uriImage!= null)
+            handleImageRecipe();
 
         setContentView(R.layout.activity_save_recipe);
         header=(EditText)findViewById(R.id.header);
 //        uriText=(TextView)findViewById(R.id.uriData);
         description=(EditText)findViewById(R.id.description);
         tags=(EditText)findViewById(R.id.tags);
+        spinner = findViewById(R.id.saveProgressBar);
+        spinner.setVisibility(View.GONE);
 
         final Spinner courseSpin = (Spinner) findViewById(R.id.Courses);
 
@@ -104,27 +122,54 @@ public class SaveRecipe extends Base {
                 Recipe recipe;
                 if(courseSpin.getSelectedItemPosition()<1 || DietSpin.getSelectedItemPosition()<1 ||
                 header.getText().toString().equals("")){
-                    Context context = getApplicationContext();
-                    CharSequence text = "Need to select course, diet and enter header";
-                    int duration = Toast.LENGTH_LONG;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    showToast("Need to select course, diet and enter header");
                 }else{
                     try{
                         String uuid=(recipeData==null?UUID.randomUUID().toString():recipeData.GetId());
+                        List<String> imagesNames = new ArrayList<>();
+                        spinner.setVisibility(View.VISIBLE);
+                        findViewById(R.id.save_layout).setVisibility(View.GONE);
+                        findViewById(R.id.buttonLayout).setVisibility(View.GONE);
+                        if(image != null){
+                            imageName = uuid + "image" + imagesNames.size();
+                            imagesNames.add(imageName);
+                        }
 
-                        recipe=new Recipe(uuid,header.getText().toString(),
+                        recipeToSave=new Recipe(uuid,header.getText().toString(),
                                 String.valueOf(courseSpin.getSelectedItemPosition()),String.valueOf(DietSpin.getSelectedItemPosition())
                                 ,uriString,description.getText().toString(),
-                                Statics.userId,Statics.BuildArray(tags.getText().toString()),"","",false);
+                                Statics.userId,Statics.BuildArray(tags.getText().toString()),"","",false, imagesNames);
+
                         if(recipeData==null){
-                            FireBaseModel.SaveRecipe(recipe);
-                            endSession(true);
+                            if(image != null ) {
+                                FireBaseModel.SaveImage(imageName, image, new Statics.SaveImageListener() {
+                                    @Override
+                                    public void complete(String url) {
+                                        FireBaseModel.SaveRecipe(recipeToSave);
+                                        showToast(getString(R.string.created_recipe));
+                                        endSession(true);
+
+                                    }
+
+                                    @Override
+                                    public void fail() {
+                                        endSession(true);
+                                        showToast(getString(R.string.error_created_recipe));
+
+                                    }
+                                });
+                            }
+                            else{
+                                FireBaseModel.SaveRecipe(recipeToSave);
+                                showToast(getString(R.string.created_recipe));
+                                endSession(true);
+                            }
+
+
                         }
                         else
                         {
-                            FireBaseModel.UpdateRecipe(recipe);
+                            FireBaseModel.UpdateRecipe(recipeToSave);
                             endSession(false);
                         }
                     }catch (Exception e){}
@@ -139,6 +184,23 @@ public class SaveRecipe extends Base {
                 finish();
             }
         });
+    }
+
+    private void showToast(String stringToShow){
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context, stringToShow, duration);
+        toast.show();
+    }
+
+    private void handleImageRecipe(){
+        InputStream input = null;
+        try {
+            input = this.getContentResolver().openInputStream(Uri.parse(uriImage));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        image = BitmapFactory.decodeStream(input);
     }
 
     private void endSession(boolean update){

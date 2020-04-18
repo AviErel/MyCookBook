@@ -20,10 +20,21 @@
             android:background="@drawable/design">
 
             <include layout="@layout/activity_base"/>
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveProgressBar"
+                android:progressDrawable="@drawable/circular_progress_bar"
+                android:indeterminateTint="@color/blue2"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/save_layout">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -174,12 +185,14 @@
 
             <!--buttons-->
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/buttonLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:gravity="center"
+
                 >
 
                 <Button

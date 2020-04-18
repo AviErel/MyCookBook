@@ -1,13 +1,22 @@
 package Model;
 
-import android.util.Log;
+import android.graphics.Bitmap;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,13 +29,73 @@ public class FireBaseModel {
     public static void SaveRecipe(Recipe recipe){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("recipe").child(recipe.GetId().toString());
-        myRef.setValue(recipeToMap(recipe));
+        myRef.setValue(recipeToMap(recipe)).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
     }
 
     public static void SaveUser(User user){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("user").child(user.GetId());
         myRef.setValue(UserToMap(user));
+    }
+
+    public static void SaveImage(final String imageName, Bitmap image, final Statics.SaveImageListener listener){
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference imagesRef = storage.getReference().child("images").child(imageName);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+        UploadTask uploadTask = imagesRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception exception) {
+                listener.fail();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                listener.complete(imageName);
+            }
+        });
+    }
+
+    public static void GetRecipeImage(String imageName,final Statics.GetImageListener listener ){
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference().child("images/" + imageName);
+        final long ONE_MEGABYTE = 1024 * 1024;
+        storageReference.getBytes(5*ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                listener.complete(bytes);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                listener.fail();
+            }
+        });
+    }
+
+    public static void DeleteRecipeImage(String imageName, final Statics.RemoveListener listener){
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference().child("images/" + imageName);
+        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // File deleted successfully
+                listener.complete(true);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Uh-oh, an error occurred!
+                listener.complete(false);
+            }
+        });
     }
 
     public static void GetUserLanguagePre(final String userId, final Statics.GetUserListener listener){
@@ -85,9 +154,14 @@ public class FireBaseModel {
         });
     }
 
-    public static void DeleteRecipe(String id){
+    public static void DeleteRecipe(String id, final Statics.RemoveListener listener){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        database.getReference("recipe").child(id).removeValue();
+        database.getReference("recipe").child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                listener.complete(true);
+            }
+        });
     }
 
     public static void UpdateRecipe(Recipe recipe){
@@ -119,6 +193,7 @@ public class FireBaseModel {
         recipeMap.put("ingredients",recipe.GetIngredients());
         recipeMap.put("preparations",recipe.GetPreparetions());
         recipeMap.put("publicated", recipe.GetPublicated());
+        recipeMap.put("imagesNames",recipe.GetImagesNames());
 
         return recipeMap;
     }
@@ -126,12 +201,14 @@ public class FireBaseModel {
     private static Recipe MapToRecipe(Map<String, Object> recipeMap){
         Recipe recipe = new Recipe(recipeMap.get("id").toString(), recipeMap.get("header").toString(),
                 recipeMap.get("course").toString(), recipeMap.get("diet").toString(),
-                recipeMap.get("uri").toString(), recipeMap.get("description").toString(),
+                recipeMap.get("uri")!= null? recipeMap.get("uri").toString(): "", recipeMap.get("description").toString(),
                 recipeMap.get("userId")!= null? recipeMap.get("userId").toString():"",
                 recipeMap.get("tags")!=null? Statics.BuildArray(recipeMap.get("tags").toString()): Statics.BuildArray(""),
                 recipeMap.get("ingredients")!=null? recipeMap.get("ingredients").toString() : "",
                 recipeMap.get("preparations")!=null? recipeMap.get("preparations").toString() : "",
-                (recipeMap.get("publicated").toString().equals("true")));
+                (recipeMap.get("publicated").toString().equals("true")),
+                 recipeMap.get("imagesNames")!= null?(List<String>) recipeMap.get("imagesNames") : new ArrayList<String>());
+
         return recipe;
     }
 

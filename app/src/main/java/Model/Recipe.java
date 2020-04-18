@@ -1,11 +1,13 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Recipe implements Serializable {
     public Recipe(){
-
+        this.imagesNames = new ArrayList<>();
     }
 
     public Recipe(String id, String header, String course, String diet, String uri, String description,
@@ -21,6 +23,23 @@ public class Recipe implements Serializable {
         this.ingredients=ingredients;
         this.preparations=preparations;
         this.publicated = publicated;
+        this.imagesNames = new ArrayList<>();
+    }
+
+    public Recipe(String id, String header, String course, String diet, String uri, String description, String userId,String[] tags,String ingredients,String preparations, Boolean publicated, List<String>names){
+        this.id = id;
+        this.header = header;
+        this.course = course;
+        this.diet = diet;
+        this.uri = uri;
+        this.description = description;
+        this.userId = userId;
+        this.tags=tags;
+        this.publicated = publicated;
+        this.imagesNames = new ArrayList<>();
+
+        if(names != null)
+            this.imagesNames.addAll(names);
     }
 
     String id;
@@ -34,6 +53,7 @@ public class Recipe implements Serializable {
     String[] tags;
     String ingredients;
     String preparations;
+    List<String> imagesNames;
 
     public void SetId(String id){this.id = id;}
     public String GetId(){return this.id;}
@@ -67,4 +87,10 @@ public class Recipe implements Serializable {
 
     public void SetPublicated(Boolean publicated){this.publicated = publicated;}
     public Boolean GetPublicated(){return this.publicated;}
+
+    public void SetImagesNames(List<String> names){
+        this.imagesNames.clear();
+        this.imagesNames.addAll(names);
+    }
+    public List<String> GetImagesNames(){return this.imagesNames;}
 }

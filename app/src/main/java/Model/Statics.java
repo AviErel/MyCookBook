@@ -11,6 +11,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,6 +31,20 @@ public class Statics {
     public interface GetUserListener{
         void onComplete(User user);
         void onCancled(String error, String accountId);
+    }
+
+    public interface SaveImageListener {
+        void complete(String url);
+        void fail();
+    }
+
+    public interface GetImageListener{
+        void complete(byte[] image);
+        void fail();
+    }
+
+    public interface RemoveListener {
+        void complete(Boolean isSuccess);
     }
 
     public static String FlatArray(String[] data){

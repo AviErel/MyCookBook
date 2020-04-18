@@ -103,4 +103,10 @@
     <string name="save_key">ca-app-pub-2739009739311215/5882033138</string>
     <string name="debug_key">ca-app-pub-3940256099942544/6300978111</string>
 
+    <!--    toast messages-->
+    <string name="created_recipe">המתכון נשמר</string>
+    <string name="error_created_recipe">ארעה שגיאה בעת שמירת המתכון, נסה שוב בבקשה</string>
+    <string name="delete_recipe">המתכון נמחק</string>
+    <string name="error_view_image">ארעה שגיאה בעת הצגת התמונה</string>
+
 </resources>
