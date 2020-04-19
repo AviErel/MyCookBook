@@ -103,6 +103,8 @@
     <string name="welcom">Welcom to - My Cook Book!!</string>
     <string name="understand">got it</string>
 
+    <string name="not_fav_recipe">You have not used any recipe yet...</string>
+
     <!--    google-ad-keys-->
     <string name="display_data_key">ca-app-pub-2739009739311215/2149837537</string>
     <string name="main_key">ca-app-pub-2739009739311215/2041994506</string>

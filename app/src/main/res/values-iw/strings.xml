@@ -100,6 +100,8 @@
     <string name="welcom">ברוכים הבאים לספר המתכונים!!</string>
     <string name="understand">הבנתי</string>
 
+    <string name="not_fav_recipe">לא השתמשת עוד באף מתכון...</string>
+
     <!--    google-ad-keys-->
     <string name="display_data_key">ca-app-pub-2739009739311215/2149837537</string>
     <string name="main_key">ca-app-pub-2739009739311215/2041994506</string>
