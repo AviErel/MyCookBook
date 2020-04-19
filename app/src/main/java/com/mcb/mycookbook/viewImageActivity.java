@@ -19,7 +19,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,6 +38,7 @@ public class viewImageActivity extends Base {
     ListView lst;
     int count=0, size = 0;
     List<Bitmap> images;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +48,8 @@ public class viewImageActivity extends Base {
         lst = findViewById(R.id.images_list);
         images = new ArrayList<>();
 
+        loadGoogleAdd();
+
         Bundle b = getIntent().getExtras();
         recipeData=(Recipe)b.getSerializable("recipe");
         if(recipeData != null){
@@ -46,6 +57,21 @@ public class viewImageActivity extends Base {
             spinner = findViewById(R.id.viewProgressBar);
             spinner.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void loadGoogleAdd() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        MobileAds.setRequestConfiguration(
+                new RequestConfiguration.Builder().setTestDeviceIds(Arrays.asList("ABCDEF012345"))
+                        .build());
+        mAdView = findViewById(R.id.view_adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     private void handleImage() {
