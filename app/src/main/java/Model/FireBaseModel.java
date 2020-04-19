@@ -164,6 +164,12 @@ public class FireBaseModel {
         });
     }
 
+    public static void UpdateCount(String id,int count){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference recipeToUpdate = database.getReference("recipe").child(id);
+        recipeToUpdate.child("counter").setValue(recipeToUpdate.child("counter")==null? "1":String.valueOf(count+1));
+    }
+
     public static void UpdateRecipe(Recipe recipe){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference recipeToUpdate = database.getReference("recipe").child(recipe.GetId());
@@ -178,6 +184,7 @@ public class FireBaseModel {
             recipeToUpdate.child("tags").setValue(Statics.FlatArray(recipe.GetTags()));
             recipeToUpdate.child("ingredients").setValue(recipe.GetIngredients());
             recipeToUpdate.child("preparations").setValue(recipe.GetPreparetions());
+            recipeToUpdate.child("freetext").setValue(recipe.GetFreeText());
             recipeToUpdate.child("publicated").setValue(recipe.GetPublicated());
         }
     }
@@ -185,6 +192,7 @@ public class FireBaseModel {
     private static Map<String, Object> recipeToMap(Recipe recipe){
         Map<String, Object> recipeMap = new HashMap<>();
         recipeMap.put("id", recipe.GetId().toString());
+        recipeMap.put("counter",recipe.GetCounter());
         recipeMap.put("header", recipe.GetHeader());
         recipeMap.put("course", recipe.GetCourse());
         recipeMap.put("diet", recipe.GetDiet());
@@ -194,6 +202,7 @@ public class FireBaseModel {
         recipeMap.put("tags",Statics.FlatArray(recipe.GetTags()));
         recipeMap.put("ingredients",recipe.GetIngredients());
         recipeMap.put("preparations",recipe.GetPreparetions());
+        recipeMap.put("freetext",recipe.GetFreeText());
         recipeMap.put("publicated", recipe.GetPublicated());
         recipeMap.put("imagesNames",recipe.GetImagesNames());
 
@@ -201,13 +210,16 @@ public class FireBaseModel {
     }
 
     private static Recipe MapToRecipe(Map<String, Object> recipeMap){
-        Recipe recipe = new Recipe(recipeMap.get("id").toString(), recipeMap.get("header").toString(),
+        Recipe recipe = new Recipe(recipeMap.get("id").toString(),
+                recipeMap.get("counter")!=null? recipeMap.get("counter").toString(): "0",
+                recipeMap.get("header").toString(),
                 recipeMap.get("course").toString(), recipeMap.get("diet").toString(),
                 recipeMap.get("uri")!= null? recipeMap.get("uri").toString(): "", recipeMap.get("description").toString(),
                 recipeMap.get("userId")!= null? recipeMap.get("userId").toString():"",
                 recipeMap.get("tags")!=null? Statics.BuildArray(recipeMap.get("tags").toString()): Statics.BuildArray(""),
                 recipeMap.get("ingredients")!=null? recipeMap.get("ingredients").toString() : "",
                 recipeMap.get("preparations")!=null? recipeMap.get("preparations").toString() : "",
+                recipeMap.get("freetext")!=null? recipeMap.get("freetext").toString():"",
                 (recipeMap.get("publicated").toString().equals("true")),
                  recipeMap.get("imagesNames")!= null?(List<String>) recipeMap.get("imagesNames") : new ArrayList<String>());
 

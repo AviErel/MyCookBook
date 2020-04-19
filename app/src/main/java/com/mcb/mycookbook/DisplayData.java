@@ -267,6 +267,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
 
     public void showRow(View v){
         int position=Integer.parseInt(v.getTag().toString());
+        FireBaseModel.UpdateCount(showList.get(position).GetId(),showList.get(position).GetCounter());
         if(!showList.get(position).GetUri().equals("")){
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
             startActivity(browserIntent);
@@ -403,12 +404,14 @@ class ReportAdapter extends BaseAdapter{
 
         update=convertView.findViewById(R.id.updateRow);
         update.setTag(recipes.get(position));
-
+/*
         view=convertView.findViewById(R.id.viewRow);
         view.setTag(position);
-
+*/
         header.setText(recipes.get(position).GetHeader());
+        header.setTag(position);
         description.setText(recipes.get(position).GetDescription());
+        description.setTag(position);
 
         return convertView;
     }
