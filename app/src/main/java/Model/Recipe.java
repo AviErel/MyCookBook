@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.UUID;
 
 public class Recipe implements Serializable {
-    public Recipe(){
-        this.imagesNames = new ArrayList<>();
-    }
 
-    public Recipe(String id, String header, String course, String diet, String uri, String description,
-                  String userId,String[] tags,String ingredients,String preparations, Boolean publicated){
+    public Recipe(String id,String counter, String header, String course, String diet, String uri,
+                  String description, String userId,String[] tags,String ingredients,String preparations,
+                  String freeText, Boolean publicated, List<String>names){
         this.id = id;
+        this.counter=Integer.parseInt(counter);
         this.header = header;
         this.course = course;
         this.diet = diet;
@@ -22,21 +21,7 @@ public class Recipe implements Serializable {
         this.tags=tags;
         this.ingredients=ingredients;
         this.preparations=preparations;
-        this.publicated = publicated;
-        this.imagesNames = new ArrayList<>();
-    }
-
-    public Recipe(String id, String header, String course, String diet, String uri, String description, String userId,String[] tags,String ingredients,String preparations, Boolean publicated, List<String>names){
-        this.id = id;
-        this.header = header;
-        this.course = course;
-        this.diet = diet;
-        this.uri = uri;
-        this.description = description;
-        this.userId = userId;
-        this.tags=tags;
-        this.ingredients=ingredients;
-        this.preparations=preparations;
+        this.freeText=freeText;
         this.publicated = publicated;
         this.imagesNames = new ArrayList<>();
 
@@ -45,6 +30,7 @@ public class Recipe implements Serializable {
     }
 
     String id;
+    int counter;
     String header;
     String course;
     String diet;
@@ -55,10 +41,14 @@ public class Recipe implements Serializable {
     String[] tags;
     String ingredients;
     String preparations;
+    String freeText;
     List<String> imagesNames;
 
     public void SetId(String id){this.id = id;}
     public String GetId(){return this.id;}
+
+    public void AddCounter(){counter++;}
+    public int GetCounter(){return counter;}
 
     public void SetHeader(String header){this.header = header;}
     public String GetHeader(){return this.header;}
@@ -86,6 +76,9 @@ public class Recipe implements Serializable {
 
     public void SetPreparetions(String preps){this.preparations=preps;}
     public String GetPreparetions(){return preparations;}
+
+    public void SetFreeText(String free){this.freeText=free;}
+    public String GetFreeText(){return freeText;}
 
     public void SetPublicated(Boolean publicated){this.publicated = publicated;}
     public Boolean GetPublicated(){return this.publicated;}
