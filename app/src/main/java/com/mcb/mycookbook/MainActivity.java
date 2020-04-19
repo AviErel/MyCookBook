@@ -50,6 +50,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 
 public class MainActivity extends Base {
 
@@ -80,6 +81,12 @@ public class MainActivity extends Base {
     protected void onStart() {
         loadUserTools();
         super.onStart();
+
+        if(Statics.isFirstEnter) {
+            DialogFragment dialogFragment = new ExplainationDialog();
+            dialogFragment.show(getSupportFragmentManager(), "explain");
+            Statics.isFirstEnter = false;
+        }
     }
 
     @Override

@@ -16,62 +16,56 @@
     tools:ignore="MissingConstraints">
 
     <include layout="@layout/activity_base"/>
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp">
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/welcom"
-            android:textSize="25dp" />
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/recipes"/>
+<!--    <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:paddingTop="50dp"-->
+<!--        android:paddingBottom="50dp">-->
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/welcom"-->
+<!--            android:textSize="25dp" />-->
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:src="@drawable/recipes"/>-->
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-    
-    <TextView
-        android:layout_width="250dp"
-        android:textSize="15dp"
-        android:layout_height="wrap_content"
-        android:text="@string/first_sen"
-        android:layout_gravity="center"
-        />
-    <TextView
-        android:layout_width="250dp"
-        android:textSize="15dp"
-        android:layout_height="wrap_content"
-        android:text="@string/sec_sen"
-        android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="250dp"
-        android:textSize="15dp"
-        android:layout_height="wrap_content"
-        android:text="@string/thr_sen"
-        android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="250dp"
-        android:textSize="15dp"
-        android:layout_height="wrap_content"
-        android:text="@string/four_sen"
-        android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="250dp"
-        android:textSize="20dp"
-        android:layout_height="wrap_content"
-        android:text="@string/good_luck"
-        android:layout_gravity="center"/>
+<!--    </androidx.appcompat.widget.LinearLayoutCompat>-->
+<!--    -->
+<!--    <TextView-->
+<!--        android:layout_width="250dp"-->
+<!--        android:textSize="15dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/first_sen"-->
+<!--        android:layout_gravity="center"-->
+<!--        />-->
+<!--    <TextView-->
+<!--        android:layout_width="250dp"-->
+<!--        android:textSize="15dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/sec_sen"-->
+<!--        android:layout_gravity="center"/>-->
+<!--    <TextView-->
+<!--        android:layout_width="250dp"-->
+<!--        android:textSize="15dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/thr_sen"-->
+<!--        android:layout_gravity="center"/>-->
+<!--    <TextView-->
+<!--        android:layout_width="250dp"-->
+<!--        android:textSize="15dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/four_sen"-->
+<!--        android:layout_gravity="center"/>-->
+<!--    <TextView-->
+<!--        android:layout_width="250dp"-->
+<!--        android:textSize="20dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/good_luck"-->
+<!--        android:layout_gravity="center"/>-->
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/test_image"
-        android:layout_gravity="center"
-        />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 
