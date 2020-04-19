@@ -21,7 +21,13 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.AdRequest;
@@ -44,7 +50,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
+import Model.FireBaseModel;
+import Model.Recipe;
 import Model.Statics;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -52,10 +64,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
-public class MainActivity extends Base {
+public class MainActivity extends Base implements Statics.GetDataListener {
 
     Intent showMe;
     private AdView mAdView;
+    ListView lst;
+    List<Recipe> topFiveRecipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +89,11 @@ public class MainActivity extends Base {
             e.printStackTrace();
         }
         loadGoogleAdd();
+        lst = findViewById(R.id.top_5_list);
+    }
+
+    private void handleFavoriteRecipe() {
+        FireBaseModel.GetAllRecupesByUserId(Statics.userId, this);
     }
 
     @Override
@@ -87,6 +106,9 @@ public class MainActivity extends Base {
             dialogFragment.show(getSupportFragmentManager(), "explain");
             Statics.isFirstEnter = false;
         }
+
+        if(!Statics.userId.equals(""))
+            handleFavoriteRecipe();
     }
 
     @Override
@@ -193,5 +215,93 @@ public class MainActivity extends Base {
         Intent saveActivity = new Intent(this, SaveRecipe.class);
         saveActivity.putExtra(key, objToSend);
         startActivity(saveActivity);
+    }
+
+    @Override
+    public void onComplete(List<Recipe> data) {
+        topFiveRecipes = new ArrayList<>();
+        Collections.sort(data, Recipe.StuRollno);
+
+        for(Recipe recipe: data){
+            if(recipe.GetCounter() >0)
+                topFiveRecipes.add(recipe);
+
+            if(topFiveRecipes.size() == 5)
+                break;
+        }
+        TextView textView = findViewById(R.id.not_fav_recipe);
+
+        if(topFiveRecipes.size() == 0){
+            textView.setVisibility(View.VISIBLE);
+            textView.setText(R.string.not_fav_recipe);
+        }else {
+            lst.setAdapter(new FavoriteRecipesAdapter(MainActivity.this, topFiveRecipes));
+            textView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onCancled(String error) {
+
+    }
+
+    public void showRow(View v){
+        int position=Integer.parseInt(v.getTag().toString());
+        FireBaseModel.UpdateCount(topFiveRecipes.get(position).GetId(),topFiveRecipes.get(position).GetCounter());
+        if(!topFiveRecipes.get(position).GetUri().equals("")){
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(topFiveRecipes.get(position).GetUri()));
+            startActivity(browserIntent);
+        }
+        else if(topFiveRecipes.get(position).GetImagesNames().size()>0) {
+            Intent viewImageIntent = new Intent(this, viewImageActivity.class);
+            viewImageIntent.putExtra("recipe", topFiveRecipes.get(position));
+            startActivity(viewImageIntent);
+        }
+        else {
+            Intent viewManualIntent = new Intent(this, ViewManualRecipeActivity.class);
+            viewManualIntent.putExtra("recipe", topFiveRecipes.get(position));
+            startActivity(viewManualIntent);
+        }
+    }
+}
+class FavoriteRecipesAdapter extends BaseAdapter{
+
+    private List<Recipe> bestRecipes;
+    LayoutInflater inf;
+
+    FavoriteRecipesAdapter(Context con, List<Recipe>data){
+        bestRecipes=new LinkedList<>();
+        if(data!=null){
+            bestRecipes=data;
+        }
+        inf=LayoutInflater.from(con);
+    }
+
+    @Override
+    public int getCount() {
+        return bestRecipes.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return bestRecipes.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        convertView=inf.inflate(R.layout.fav_recipe_row,null);
+        TextView header=convertView.findViewById(R.id.fav_recipe_title);
+        TextView description=convertView.findViewById(R.id.fav_recipe_description);
+        header.setText(bestRecipes.get(position).GetHeader());
+        header.setTag(position);
+        description.setText(bestRecipes.get(position).GetDescription());
+        description.setTag(position);
+
+        return convertView;
     }
 }

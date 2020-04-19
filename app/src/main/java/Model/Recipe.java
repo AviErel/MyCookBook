@@ -2,6 +2,7 @@ package Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -88,4 +89,18 @@ public class Recipe implements Serializable {
         this.imagesNames.addAll(names);
     }
     public List<String> GetImagesNames(){return this.imagesNames;}
+
+    public static Comparator<Recipe> StuRollno = new Comparator<Recipe>() {
+
+        public int compare(Recipe s1, Recipe s2) {
+
+            int rollno1 = s1.GetCounter();
+            int rollno2 = s2.GetCounter();
+
+            /*For ascending order*/
+            return rollno2-rollno1;
+
+            /*For descending order*/
+            //rollno2-rollno1;
+        }};
 }
