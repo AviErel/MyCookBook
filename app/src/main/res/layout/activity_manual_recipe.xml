@@ -322,7 +322,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/save_key"
+        ads:adUnitId="@string/test_id"
         android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

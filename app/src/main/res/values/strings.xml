@@ -107,6 +107,10 @@
     <string name="main_key">ca-app-pub-2739009739311215/2041994506</string>
     <string name="save_key">ca-app-pub-2739009739311215/5882033138</string>
     <string name="debug_key">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="create_manual_recipe">ca-app-pub-2739009739311215/7166021181</string>
+    <string name="view_manual_recipe">ca-app-pub-2739009739311215/7988341789</string>
+    <string name="view_image_recipe">ca-app-pub-2739009739311215/4049096779</string>
+    <string name="test_id">ca-app-pub-3940256099942544/6300978111</string>
 
     <!--    toast messages-->
     <string name="created_recipe">Recipe saved</string>
