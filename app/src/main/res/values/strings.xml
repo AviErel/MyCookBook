@@ -95,12 +95,13 @@
     <string name="is_refresh">false</string>
 
     <!--    main explaination-->
-    <string name="first_sen">1. Open a recipe on chrome or on youtube</string>
+    <string name="first_sen">1. Open a recipe on chrome or on youtube or photo</string>
     <string name="sec_sen">2. Select share option</string>
     <string name="thr_sen">3. Select this application - my cook book</string>
     <string name="four_sen">4. Save the recipe</string>
     <string name="good_luck">Good luck! Go to cook :)</string>
     <string name="welcom">Welcom to - My Cook Book!!</string>
+    <string name="understand">got it</string>
 
     <!--    google-ad-keys-->
     <string name="display_data_key">ca-app-pub-2739009739311215/2149837537</string>

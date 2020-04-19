@@ -77,6 +77,7 @@ public class LogginActivity extends Base implements View.OnClickListener, Static
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
+            Statics.isFirstEnter = true;
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             FireBaseModel.GetUserLanguagePre(account.getId(), this);
 //            saveUserToFB(account.getId());

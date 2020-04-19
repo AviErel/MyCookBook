@@ -92,12 +92,13 @@
     <string name="is_refresh">false</string>
 
 <!--    main explaination-->
-    <string name="first_sen">1. פתח מתכון בchrome או בyoutube</string>
+    <string name="first_sen">1. פתח מתכון בchrome או ב youtube או בתמונה</string>
     <string name="sec_sen">2. בחר את אופצית השיתוף (share)</string>
     <string name="thr_sen">3. בחר לשתף עם האפליקציה הזאת</string>
     <string name="four_sen">4. שמור את המתכון</string>
     <string name="good_luck">בהצלחה! לכו לבשל :)</string>
     <string name="welcom">ברוכים הבאים לספר המתכונים!!</string>
+    <string name="understand">הבנתי</string>
 
     <!--    google-ad-keys-->
     <string name="display_data_key">ca-app-pub-2739009739311215/2149837537</string>

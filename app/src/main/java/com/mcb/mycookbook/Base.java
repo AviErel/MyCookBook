@@ -5,6 +5,7 @@ import Model.Statics;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -56,6 +57,11 @@ public class Base extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
+            case R.id.help:{
+                DialogFragment dialogFragment = new ExplainationDialog();
+                dialogFragment.show(getSupportFragmentManager(), "explain");
+                return true;
+            }
             case R.id.eng:
                 setLocale("en");
                 return true;

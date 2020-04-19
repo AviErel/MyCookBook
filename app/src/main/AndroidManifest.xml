@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:targetSandboxVersion="2"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewManualRecipeActivity"></activity>
+        <activity android:name=".ExplainationDialog"></activity>
+        <activity android:name=".ViewManualRecipeActivity" />
         <activity android:name=".ManualRecipe" />
         <activity android:name=".viewImageActivity" />
         <activity android:name=".Base" />
@@ -29,17 +30,23 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="text/*" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="image/*" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
