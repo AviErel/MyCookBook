@@ -127,6 +127,7 @@ public class SaveRecipe extends Base {
                 }else{
                     try{
                         String uuid=(recipeData==null?UUID.randomUUID().toString():recipeData.GetId());
+                        String counter=(recipeData==null ? "0" : String.valueOf(recipeData.GetCounter()));
                         List<String> imagesNames = new ArrayList<>();
                         spinner.setVisibility(View.VISIBLE);
                         findViewById(R.id.save_layout).setVisibility(View.GONE);
@@ -140,10 +141,10 @@ public class SaveRecipe extends Base {
                             }
                         }
 
-                        recipeToSave=new Recipe(uuid,header.getText().toString(),
+                        recipeToSave=new Recipe(uuid,counter,header.getText().toString(),
                                 String.valueOf(courseSpin.getSelectedItemPosition()),String.valueOf(DietSpin.getSelectedItemPosition())
                                 ,uriString,description.getText().toString(),
-                                Statics.userId,Statics.BuildArray(tags.getText().toString()),"","",false, imagesNames);
+                                Statics.userId,Statics.BuildArray(tags.getText().toString()),"","","",false, imagesNames);
 
                         if(recipeData==null){
                             if(images != null ) {

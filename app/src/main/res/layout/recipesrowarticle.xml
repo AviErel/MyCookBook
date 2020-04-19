@@ -20,19 +20,14 @@
             android:textSize="20dp"
             android:fontFamily="@font/felixti"
             android:background="@color/blue2"
+            android:onClick="showRow"
             />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/target"
-                android:layout_gravity="start"
-                />
+            android:orientation="horizontal"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -41,6 +36,7 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/felixti"
                 android:layout_gravity="end"
+                android:onClick="showRow"
                 />
         </LinearLayout>
 
@@ -75,7 +71,7 @@
                 android:adjustViewBounds="true"
                 android:background="@null"
                 />
-
+<!--
             <ImageButton
                 android:layout_width="120px"
                 android:layout_height="120px"
@@ -87,7 +83,7 @@
                 android:adjustViewBounds="true"
                 android:background="@null"
                 />
-
+-->
         </LinearLayout>
 
     </LinearLayout>
