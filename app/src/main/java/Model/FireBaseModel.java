@@ -19,6 +19,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -129,6 +130,29 @@ public class FireBaseModel {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("user").child(user.GetId());
         myRef.setValue(UserToMap(user));
+    }
+
+    public static void GetRecipesByUserId(final String userId,final Statics.GetDataListener listener){
+        DatabaseReference db=FirebaseDatabase.getInstance().getReference("recipe");
+        Query myRef=db.orderByChild("userId").equalTo(userId);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Recipe> recipes = new LinkedList<>();
+
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    Map<String, Object> recipeMap = (Map<String, Object>) snapshot.getValue();
+                    recipes.add(MapToRecipe(recipeMap));
+                }
+                listener.onComplete(recipes);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onCancled(databaseError.getMessage());
+            }
+        });
     }
 
     public static void GetAllRecupesByUserId(final String userId, final Statics.GetDataListener listener){
