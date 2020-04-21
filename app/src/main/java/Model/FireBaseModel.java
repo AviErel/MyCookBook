@@ -19,6 +19,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -131,20 +132,18 @@ public class FireBaseModel {
         myRef.setValue(UserToMap(user));
     }
 
-    public static void GetAllRecupesByUserId(final String userId, final Statics.GetDataListener listener){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("recipe");
+    public static void GetRecipesByUserId(final String userId,final Statics.GetDataListener listener){
+        DatabaseReference db=FirebaseDatabase.getInstance().getReference("recipe");
+        Query myRef=db.orderByChild("userId").equalTo(userId);
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<Recipe> recipes = new LinkedList<>();
+
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Map<String, Object> recipeMap = (Map<String, Object>) snapshot.getValue();
-
-                    if((recipeMap.get("userId")!= null)&&(recipeMap.get("userId").toString()).equals(userId)) {
-                        recipes.add(MapToRecipe(recipeMap));
-                    }
+                    recipes.add(MapToRecipe(recipeMap));
                 }
                 listener.onComplete(recipes);
             }

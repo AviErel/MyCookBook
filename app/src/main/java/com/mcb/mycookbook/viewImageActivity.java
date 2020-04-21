@@ -4,6 +4,7 @@ import Model.FireBaseModel;
 import Model.Recipe;
 import Model.Statics;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,8 +13,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -50,13 +53,51 @@ public class viewImageActivity extends Base {
 
         loadGoogleAdd();
 
+        LinearLayout imageLayout = findViewById(R.id.image_layout);
+        LinearLayout webLayout = findViewById(R.id.webLayout);
+        LinearLayout viewRecipeLayout = findViewById(R.id.manual_recipe_layout);
+
         Bundle b = getIntent().getExtras();
         recipeData=(Recipe)b.getSerializable("recipe");
         if(recipeData != null){
-            handleImage();
-            spinner = findViewById(R.id.viewProgressBar);
-            spinner.setVisibility(View.VISIBLE);
+            if(recipeData.GetUri() != null && !recipeData.GetUri().equals("")){
+                imageLayout.setVisibility(View.GONE);
+                viewRecipeLayout.setVisibility(View.GONE);
+                webLayout.setVisibility(View.VISIBLE);
+                WebView webView = findViewById(R.id.web_recipe_view);
+                webView.loadUrl(recipeData.GetUri());
+            }
+            else if(recipeData.GetImagesNames().size() > 0) {
+                imageLayout.setVisibility(View.VISIBLE);
+                viewRecipeLayout.setVisibility(View.GONE);
+                webLayout.setVisibility(View.GONE);
+                spinner = findViewById(R.id.viewProgressBar);
+                spinner.setVisibility(View.VISIBLE);
+                handleImage();
+            }
+            else{
+                imageLayout.setVisibility(View.GONE);
+                viewRecipeLayout.setVisibility(View.VISIBLE);
+                webLayout.setVisibility(View.GONE);
+                handleView();
+            }
         }
+    }
+
+    private void handleView() {
+        List<String> ingredients= Arrays.asList(Statics.BuildArray(recipeData.GetIngredients()));
+        List<String> stages=Arrays.asList(Statics.BuildArray(recipeData.GetPreparetions()));
+
+        ((TextView)findViewById(R.id.viewHeader)).setText(recipeData.GetHeader());
+
+        RowsAdapter adapter;
+        ListView ings=(ListView)findViewById(R.id.ingredientsView);
+        adapter=new RowsAdapter(viewImageActivity.this,ingredients);
+        ings.setAdapter(adapter);
+
+        ListView stgs=(ListView)findViewById(R.id.stagesView);
+        adapter=new RowsAdapter(viewImageActivity.this,stages);
+        stgs.setAdapter(adapter);
     }
 
     private void loadGoogleAdd() {

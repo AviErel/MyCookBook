@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -159,7 +161,8 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     private void loadData(){
         spinner = findViewById(R.id.progressBar);
         spinner.setVisibility(View.VISIBLE);
-        FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
+        FireBaseModel.GetRecipesByUserId(Statics.userId,this);
+//        FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
 
         UpdateView();
     }
@@ -268,20 +271,9 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     public void showRow(View v){
         int position=Integer.parseInt(v.getTag().toString());
         FireBaseModel.UpdateCount(showList.get(position).GetId(),showList.get(position).GetCounter());
-        if(!showList.get(position).GetUri().equals("")){
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
-            startActivity(browserIntent);
-        }
-        else if(showList.get(position).GetImagesNames().size()>0) {
-            Intent viewImageIntent = new Intent(this, viewImageActivity.class);
-            viewImageIntent.putExtra("recipe", showList.get(position));
-            startActivity(viewImageIntent);
-        }
-        else {
-            Intent viewManualIntent = new Intent(this, ViewManualRecipeActivity.class);
-            viewManualIntent.putExtra("recipe", showList.get(position));
-            startActivity(viewManualIntent);
-        }
+        Intent viewImageIntent = new Intent(this, viewImageActivity.class);
+        viewImageIntent.putExtra("recipe", showList.get(position));
+        startActivity(viewImageIntent);
     }
 
     public void delRow(View v){
@@ -345,7 +337,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
             }
         });
 
-        FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
+        FireBaseModel.GetRecipesByUserId(Statics.userId,this);
     }
 
     public void updateRow(View v){
@@ -398,10 +390,10 @@ class ReportAdapter extends BaseAdapter{
         convertView=inf.inflate(R.layout.recipesrowarticle,null);
         TextView header=convertView.findViewById(R.id.rowHeader);
         TextView description=convertView.findViewById(R.id.rowDescription);
+//        ImageView recipeImage = convertView.findViewById(R.id.image_recipe);
 
         del=convertView.findViewById(R.id.deleteRow);
         del.setTag(position);
-
         update=convertView.findViewById(R.id.updateRow);
         update.setTag(recipes.get(position));
 /*
@@ -414,5 +406,8 @@ class ReportAdapter extends BaseAdapter{
         description.setTag(position);
 
         return convertView;
+    }
+
+    private void setImage(Recipe recipe) {
     }
 }

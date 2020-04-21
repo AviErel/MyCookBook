@@ -15,7 +15,6 @@
         android:targetSandboxVersion="2"
         android:theme="@style/AppTheme">
         <activity android:name=".ExplainationDialog"></activity>
-        <activity android:name=".ViewManualRecipeActivity" />
         <activity android:name=".ManualRecipe" />
         <activity android:name=".viewImageActivity" />
         <activity android:name=".Base" />
