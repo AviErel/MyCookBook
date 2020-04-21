@@ -147,7 +147,7 @@ public class SaveRecipe extends Base {
                                 Statics.userId,Statics.BuildArray(tags.getText().toString()),"","","",false, imagesNames);
 
                         if(recipeData==null){
-                            if(images != null ) {
+                            if(images != null && images.size() >0 ) {
                                 count = 0;
                                 listSize = images.size();
                                 for(Bitmap image:images) {

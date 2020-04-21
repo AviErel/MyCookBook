@@ -6,8 +6,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15.0dp"
     android:elevation="30.0dp"
+    android:layout_margin="10dp"
     android:background="@color/blue3"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+<!--        <ImageView-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:id="@+id/image_recipe"-->
+<!--            android:src="@drawable/main"/>-->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,12 +39,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-
-<!--            <ImageView-->
-<!--                android:layout_width="100dp"-->
-<!--                android:layout_height="100dp"-->
-<!--                android:id="@+id/image_recipe"-->
-<!--                android:src="@drawable/main"/>-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -91,6 +96,8 @@
                 />
 -->
         </LinearLayout>
+
+    </LinearLayout>
 
     </LinearLayout>
 
