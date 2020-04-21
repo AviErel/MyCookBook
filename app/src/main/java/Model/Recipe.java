@@ -4,9 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.UUID;
 
-public class Recipe implements Serializable {
+public class Recipe implements Serializable , Comparable<Recipe> {
 
     public Recipe(String id,String counter, String header, String course, String diet, String uri,
                   String description, String userId,String[] tags,String ingredients,String preparations,
@@ -103,4 +102,9 @@ public class Recipe implements Serializable {
             /*For descending order*/
             //rollno2-rollno1;
         }};
+
+    @Override
+    public int compareTo(Recipe o) {
+        return (int)(Math.signum(counter-o.counter));
+    }
 }

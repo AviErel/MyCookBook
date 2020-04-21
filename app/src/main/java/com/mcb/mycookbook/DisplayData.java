@@ -161,7 +161,8 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     private void loadData(){
         spinner = findViewById(R.id.progressBar);
         spinner.setVisibility(View.VISIBLE);
-        FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
+        FireBaseModel.GetRecipesByUserId(Statics.userId,this);
+//        FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
 
         UpdateView();
     }
