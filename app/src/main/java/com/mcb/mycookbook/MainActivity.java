@@ -93,7 +93,7 @@ public class MainActivity extends Base implements Statics.GetDataListener {
     }
 
     private void handleFavoriteRecipe() {
-        FireBaseModel.GetAllRecupesByUserId(Statics.userId, this);
+        FireBaseModel.GetRecipesByUserId(Statics.userId, this);
     }
 
     @Override
@@ -248,20 +248,10 @@ public class MainActivity extends Base implements Statics.GetDataListener {
     public void showRow(View v){
         int position=Integer.parseInt(v.getTag().toString());
         FireBaseModel.UpdateCount(topFiveRecipes.get(position).GetId(),topFiveRecipes.get(position).GetCounter());
-        if(!topFiveRecipes.get(position).GetUri().equals("")){
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(topFiveRecipes.get(position).GetUri()));
-            startActivity(browserIntent);
-        }
-        else if(topFiveRecipes.get(position).GetImagesNames().size()>0) {
-            Intent viewImageIntent = new Intent(this, viewImageActivity.class);
-            viewImageIntent.putExtra("recipe", topFiveRecipes.get(position));
-            startActivity(viewImageIntent);
-        }
-        else {
-            Intent viewManualIntent = new Intent(this, ViewManualRecipeActivity.class);
-            viewManualIntent.putExtra("recipe", topFiveRecipes.get(position));
-            startActivity(viewManualIntent);
-        }
+
+        Intent viewImageIntent = new Intent(this, viewImageActivity.class);
+        viewImageIntent.putExtra("recipe", topFiveRecipes.get(position));
+        startActivity(viewImageIntent);
     }
 }
 class FavoriteRecipesAdapter extends BaseAdapter{

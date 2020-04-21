@@ -271,20 +271,9 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     public void showRow(View v){
         int position=Integer.parseInt(v.getTag().toString());
         FireBaseModel.UpdateCount(showList.get(position).GetId(),showList.get(position).GetCounter());
-        if(!showList.get(position).GetUri().equals("")){
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(showList.get(position).GetUri()));
-            startActivity(browserIntent);
-        }
-        else if(showList.get(position).GetImagesNames().size()>0) {
-            Intent viewImageIntent = new Intent(this, viewImageActivity.class);
-            viewImageIntent.putExtra("recipe", showList.get(position));
-            startActivity(viewImageIntent);
-        }
-        else {
-            Intent viewManualIntent = new Intent(this, ViewManualRecipeActivity.class);
-            viewManualIntent.putExtra("recipe", showList.get(position));
-            startActivity(viewManualIntent);
-        }
+        Intent viewImageIntent = new Intent(this, viewImageActivity.class);
+        viewImageIntent.putExtra("recipe", showList.get(position));
+        startActivity(viewImageIntent);
     }
 
     public void delRow(View v){
@@ -348,7 +337,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
             }
         });
 
-        FireBaseModel.GetAllRecupesByUserId(Statics.userId,this);
+        FireBaseModel.GetRecipesByUserId(Statics.userId,this);
     }
 
     public void updateRow(View v){
@@ -401,7 +390,7 @@ class ReportAdapter extends BaseAdapter{
         convertView=inf.inflate(R.layout.recipesrowarticle,null);
         TextView header=convertView.findViewById(R.id.rowHeader);
         TextView description=convertView.findViewById(R.id.rowDescription);
-        ImageView recipeImage = convertView.findViewById(R.id.image_recipe);
+//        ImageView recipeImage = convertView.findViewById(R.id.image_recipe);
 
         del=convertView.findViewById(R.id.deleteRow);
         del.setTag(position);

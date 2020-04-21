@@ -155,31 +155,6 @@ public class FireBaseModel {
         });
     }
 
-    public static void GetAllRecupesByUserId(final String userId, final Statics.GetDataListener listener){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("recipe");
-
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<Recipe> recipes = new LinkedList<>();
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    Map<String, Object> recipeMap = (Map<String, Object>) snapshot.getValue();
-
-                    if((recipeMap.get("userId")!= null)&&(recipeMap.get("userId").toString()).equals(userId)) {
-                        recipes.add(MapToRecipe(recipeMap));
-                    }
-                }
-                listener.onComplete(recipes);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                listener.onCancled(databaseError.getMessage());
-            }
-        });
-    }
-
     public static void DeleteRecipe(String id, final Statics.RemoveListener listener){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.getReference("recipe").child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {

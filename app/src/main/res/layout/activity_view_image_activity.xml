@@ -5,18 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".viewImageActivity">
-    <androidx.appcompat.widget.LinearLayoutCompat
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_layout"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_base"
+            android:id="@+id/base_include"
+            />
+
+     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/top_layout"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/view_adView"
+        android:id="@+id/image_layout"
+         android:visibility="gone"
         >
-        <include layout="@layout/activity_base" />
-
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,11 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/images_list"/>
-<!--    <androidx.appcompat.widget.AppCompatImageView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="500dp"-->
-<!--        android:id="@+id/recipe_image"-->
-<!--        android:layout_gravity="center"/>-->
 
         <ProgressBar
             style="?android:attr/progressBarStyleLarge"
@@ -43,7 +44,101 @@
             android:indeterminateTint="@color/blue2"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webLayout"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <WebView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/web_recipe_view"/>
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/manual_recipe_layout"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewHeader"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="45dp"
+                android:background="@color/blue2"
+                android:textColor="@color/white"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="17.0dp"
+                android:elevation="30.0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/manualIngredientsHeader"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue3"
+                    />
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ingredientsView"/>
+
+            </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="17.0dp"
+                android:elevation="30.0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/manualPreparationsHeader"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue3"
+                    />
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/stagesView"/>
+
+            </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -56,7 +151,6 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/test_id"
         android:layout_marginBottom="0dp"
-        ads:layout_constraintTop_toBottomOf="@+id/top_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
