@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -398,10 +400,10 @@ class ReportAdapter extends BaseAdapter{
         convertView=inf.inflate(R.layout.recipesrowarticle,null);
         TextView header=convertView.findViewById(R.id.rowHeader);
         TextView description=convertView.findViewById(R.id.rowDescription);
+        ImageView recipeImage = convertView.findViewById(R.id.image_recipe);
 
         del=convertView.findViewById(R.id.deleteRow);
         del.setTag(position);
-
         update=convertView.findViewById(R.id.updateRow);
         update.setTag(recipes.get(position));
 /*
@@ -414,5 +416,8 @@ class ReportAdapter extends BaseAdapter{
         description.setTag(position);
 
         return convertView;
+    }
+
+    private void setImage(Recipe recipe) {
     }
 }
