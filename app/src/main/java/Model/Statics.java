@@ -23,6 +23,7 @@ public class Statics {
     public static GoogleSignInClient mGoogleSignInClient;
     public static String lang_prefer = "";
     public static Boolean isFirstEnter = false;
+    public static List<Recipe> showList;
 
     public interface GetDataListener{
         void onComplete(List<Recipe> data);
