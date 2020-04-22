@@ -13,11 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-<!--        <ImageView-->
-<!--            android:layout_width="100dp"-->
-<!--            android:layout_height="100dp"-->
-<!--            android:id="@+id/image_recipe"-->
-<!--            android:src="@drawable/main"/>-->
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/image_recipe" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,9 +29,10 @@
             android:id="@+id/rowHeader"
             android:textSize="20dp"
             android:fontFamily="@font/felixti"
-            android:background="@color/blue2"
+            android:textColor="@color/blue2"
             android:onClick="showRow"
             />
+<!--        android:background="@color/blue2"-->
 
         <LinearLayout
             android:layout_width="wrap_content"
