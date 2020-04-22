@@ -3,6 +3,7 @@ package com.mcb.mycookbook;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -30,6 +31,7 @@ import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,6 +46,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     ListView lst;
     List<Recipe> recipesList;
     List<Recipe> showList;
+    List<Drawable> courseImages;
     Spinner cSpin,
             dSpin;
     ImageButton searchButton,filterZone,searchZone;
@@ -62,6 +65,16 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         setContentView(R.layout.activity_display_data);
 
         loadGoogleAdd();
+
+        courseImages = new ArrayList<>();
+//        R.drawable.bakery
+        courseImages.add(getResources().getDrawable(R.drawable.soup));
+        courseImages.add(getResources().getDrawable(R.drawable.starters));
+        courseImages.add(getResources().getDrawable(R.drawable.main));
+        courseImages.add(getResources().getDrawable(R.drawable.extras));
+        courseImages.add(getResources().getDrawable(R.drawable.salad));
+        courseImages.add(getResources().getDrawable(R.drawable.desert));
+        courseImages.add(getResources().getDrawable(R.drawable.bakery));
 
         flag=false;
         recipesList=new LinkedList<>();
@@ -200,7 +213,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     private void UpdateView(){
         if(flag){
             spinner.setVisibility(View.GONE);
-            lst.setAdapter(new ReportAdapter(DisplayData.this,showList));
+            lst.setAdapter(new ReportAdapter(DisplayData.this,showList, courseImages));
         }
     }
 
@@ -361,12 +374,14 @@ class ReportAdapter extends BaseAdapter{
     private List<Recipe> recipes;
     LayoutInflater inf;
     ImageButton del,update,view;
+    private List<Drawable> sources;
 
-    ReportAdapter(Context con, List<Recipe>data){
+    ReportAdapter(Context con, List<Recipe>data, List<Drawable> sourceImages){
         recipes=new LinkedList<>();
         if(data!=null){
             recipes=data;
         }
+        sources = sourceImages;
         inf=LayoutInflater.from(con);
     }
 
@@ -390,7 +405,7 @@ class ReportAdapter extends BaseAdapter{
         convertView=inf.inflate(R.layout.recipesrowarticle,null);
         TextView header=convertView.findViewById(R.id.rowHeader);
         TextView description=convertView.findViewById(R.id.rowDescription);
-//        ImageView recipeImage = convertView.findViewById(R.id.image_recipe);
+        ImageView recipeImage = convertView.findViewById(R.id.image_recipe);
 
         del=convertView.findViewById(R.id.deleteRow);
         del.setTag(position);
@@ -404,6 +419,9 @@ class ReportAdapter extends BaseAdapter{
         header.setTag(position);
         description.setText(recipes.get(position).GetDescription());
         description.setTag(position);
+        int x =Integer.parseInt(recipes.get(position).GetCourse());
+//        Integer.getInteger(recipes.get(position).GetCourse(), x);
+        recipeImage.setImageDrawable(sources.get(x-1));
 
         return convertView;
     }
