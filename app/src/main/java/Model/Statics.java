@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.DisplayMetrics;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.mcb.mycookbook.R;
 
 import org.json.JSONArray;
 
