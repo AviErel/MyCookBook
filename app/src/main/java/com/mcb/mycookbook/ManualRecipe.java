@@ -40,7 +40,7 @@ import Model.FireBaseModel;
 import Model.Recipe;
 import Model.Statics;
 
-public class ManualRecipe extends AppCompatActivity {
+public class ManualRecipe extends Base {
 
     EditText header;
     EditText description,tags;
