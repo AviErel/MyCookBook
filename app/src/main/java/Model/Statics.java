@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.DisplayMetrics;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.mcb.mycookbook.R;
 
 import org.json.JSONArray;
 
@@ -23,7 +25,6 @@ public class Statics {
     public static GoogleSignInClient mGoogleSignInClient;
     public static String lang_prefer = "";
     public static Boolean isFirstEnter = false;
-
     public interface GetDataListener{
         void onComplete(List<Recipe> data);
         void onCancled(String error);

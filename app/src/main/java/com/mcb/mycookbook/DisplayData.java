@@ -67,7 +67,6 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         loadGoogleAdd();
 
         courseImages = new ArrayList<>();
-//        R.drawable.bakery
         courseImages.add(getResources().getDrawable(R.drawable.soup));
         courseImages.add(getResources().getDrawable(R.drawable.starters));
         courseImages.add(getResources().getDrawable(R.drawable.main));
@@ -420,7 +419,6 @@ class ReportAdapter extends BaseAdapter{
         description.setText(recipes.get(position).GetDescription());
         description.setTag(position);
         int x =Integer.parseInt(recipes.get(position).GetCourse());
-//        Integer.getInteger(recipes.get(position).GetCourse(), x);
         recipeImage.setImageDrawable(sources.get(x-1));
 
         return convertView;

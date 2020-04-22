@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
@@ -70,6 +71,7 @@ public class MainActivity extends Base implements Statics.GetDataListener {
     private AdView mAdView;
     ListView lst;
     List<Recipe> topFiveRecipes;
+    List<Drawable> courseImages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,15 @@ public class MainActivity extends Base implements Statics.GetDataListener {
         loadUserTools();
         Intent logginIntet = new Intent(this, LogginActivity.class);
         startActivity(logginIntet);
+
+        courseImages = new ArrayList<>();
+        courseImages.add(getResources().getDrawable(R.drawable.soup));
+        courseImages.add(getResources().getDrawable(R.drawable.starters));
+        courseImages.add(getResources().getDrawable(R.drawable.main));
+        courseImages.add(getResources().getDrawable(R.drawable.extras));
+        courseImages.add(getResources().getDrawable(R.drawable.salad));
+        courseImages.add(getResources().getDrawable(R.drawable.desert));
+        courseImages.add(getResources().getDrawable(R.drawable.bakery));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -235,7 +246,7 @@ public class MainActivity extends Base implements Statics.GetDataListener {
             textView.setVisibility(View.VISIBLE);
             textView.setText(R.string.not_fav_recipe);
         }else {
-            lst.setAdapter(new FavoriteRecipesAdapter(MainActivity.this, topFiveRecipes));
+            lst.setAdapter(new FavoriteRecipesAdapter(MainActivity.this, topFiveRecipes, courseImages));
             textView.setVisibility(View.GONE);
         }
     }
@@ -258,12 +269,14 @@ class FavoriteRecipesAdapter extends BaseAdapter{
 
     private List<Recipe> bestRecipes;
     LayoutInflater inf;
+    List<Drawable> courses;
 
-    FavoriteRecipesAdapter(Context con, List<Recipe>data){
+    FavoriteRecipesAdapter(Context con, List<Recipe>data, List<Drawable> coursesImages){
         bestRecipes=new LinkedList<>();
         if(data!=null){
             bestRecipes=data;
         }
+        courses = coursesImages;
         inf=LayoutInflater.from(con);
     }
 
@@ -287,10 +300,14 @@ class FavoriteRecipesAdapter extends BaseAdapter{
         convertView=inf.inflate(R.layout.fav_recipe_row,null);
         TextView header=convertView.findViewById(R.id.fav_recipe_title);
         TextView description=convertView.findViewById(R.id.fav_recipe_description);
+        ImageView recipeImage = convertView.findViewById(R.id.image_course_recipe);
         header.setText(bestRecipes.get(position).GetHeader());
         header.setTag(position);
         description.setText(bestRecipes.get(position).GetDescription());
         description.setTag(position);
+
+        int x =Integer.parseInt(bestRecipes.get(position).GetCourse());
+        recipeImage.setImageDrawable(courses.get(x-1));
 
         return convertView;
     }
