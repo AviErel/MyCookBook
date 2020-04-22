@@ -70,7 +70,8 @@ public class MainActivity extends Base implements Statics.GetDataListener {
     Intent showMe;
     private AdView mAdView;
     ListView lst;
-    List<Recipe> topFiveRecipes;
+//    List<Recipe> topFiveRecipes;
+//    List<Recipe> topFiveRecipes;
     List<Drawable> courseImages;
 
     @Override
@@ -230,23 +231,23 @@ public class MainActivity extends Base implements Statics.GetDataListener {
 
     @Override
     public void onComplete(List<Recipe> data) {
-        topFiveRecipes = new ArrayList<>();
+        Statics.showList = new ArrayList<>();
         Collections.sort(data, Recipe.StuRollno);
 
         for(Recipe recipe: data){
             if(recipe.GetCounter() >0)
-                topFiveRecipes.add(recipe);
+                Statics.showList.add(recipe);
 
-            if(topFiveRecipes.size() == 5)
+            if(Statics.showList.size() == 5)
                 break;
         }
         TextView textView = findViewById(R.id.not_fav_recipe);
 
-        if(topFiveRecipes.size() == 0){
+        if(Statics.showList.size() == 0){
             textView.setVisibility(View.VISIBLE);
             textView.setText(R.string.not_fav_recipe);
         }else {
-            lst.setAdapter(new FavoriteRecipesAdapter(MainActivity.this, topFiveRecipes, courseImages));
+            lst.setAdapter(new FavoriteRecipesAdapter(MainActivity.this, Statics.showList, courseImages));
             textView.setVisibility(View.GONE);
         }
     }
@@ -258,10 +259,10 @@ public class MainActivity extends Base implements Statics.GetDataListener {
 
     public void showRow(View v){
         int position=Integer.parseInt(v.getTag().toString());
-        FireBaseModel.UpdateCount(topFiveRecipes.get(position).GetId(),topFiveRecipes.get(position).GetCounter());
+        FireBaseModel.UpdateCount(Statics.showList.get(position).GetId(),Statics.showList.get(position).GetCounter());
 
         Intent viewImageIntent = new Intent(this, viewImageActivity.class);
-        viewImageIntent.putExtra("recipe", topFiveRecipes.get(position));
+        viewImageIntent.putExtra("recipe", Statics.showList.get(position));
         startActivity(viewImageIntent);
     }
 }
