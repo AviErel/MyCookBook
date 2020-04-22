@@ -52,7 +52,20 @@ public class viewImageActivity extends Base {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_image_activity);
+        Bundle b = getIntent().getExtras();
+        recipeData = (Recipe) b.getSerializable("recipe");
 
+        for (int index = 0; index < Statics.showList.size(); index++) {
+            if (Statics.showList.get(index).GetId().equals(recipeData.GetId())) {
+                position = index;
+                break;
+            }
+        }
+
+        BuildLayout();
+    }
+
+    private void BuildLayout(){
         lst = findViewById(R.id.images_list);
         images = new ArrayList<>();
 
@@ -61,16 +74,6 @@ public class viewImageActivity extends Base {
         LinearLayout imageLayout = findViewById(R.id.image_layout);
         LinearLayout webLayout = findViewById(R.id.webLayout);
         LinearLayout viewRecipeLayout = findViewById(R.id.manual_recipe_layout);
-
-        Bundle b = getIntent().getExtras();
-        recipeData=(Recipe)b.getSerializable("recipe");
-
-        for(int index=0;index<Statics.showList.size();index++){
-            if(Statics.showList.get(index).GetId().equals(recipeData.GetId())){
-                position=index;
-                break;
-            }
-        }
 
         if(recipeData != null){
             if(recipeData.GetUri() != null && !recipeData.GetUri().equals("")){
@@ -95,6 +98,20 @@ public class viewImageActivity extends Base {
                 handleView();
             }
         }
+    }
+
+    public void moveFwd(View v){
+        position++;
+        position%=Statics.showList.size();
+        recipeData=Statics.showList.get(position);
+        BuildLayout();
+    }
+
+    public void moveBack(View v){
+        position--;
+        position=position<0? Statics.showList.size()-1: position;
+        recipeData=Statics.showList.get(position);
+        BuildLayout();
     }
 
     private void handleView() {
