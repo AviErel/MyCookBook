@@ -208,7 +208,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:src="@drawable/plus_icon"
-                            android:id="@+id/addIngredient"/>
+                            android:id="@+id/addIngredient"
+                            android:background="@null"/>
 
                     </LinearLayout>
 
@@ -267,7 +268,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:src="@drawable/plus_icon"
-                            android:id="@+id/addStage"/>
+                            android:id="@+id/addStage"
+                            android:background="@null"/>
 
                     </LinearLayout>
 
