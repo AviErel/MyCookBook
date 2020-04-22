@@ -17,49 +17,50 @@
             />
 
 <!--        image view-->
-     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/image_layout"
-         android:visibility="gone"
-        >
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/recipe_name"
-        android:layout_gravity="center"
-        android:textSize="25dp"
-        />
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/images_list"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/image_layout"
+            android:visibility="gone"
+            >
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/recipe_name"
+                android:layout_gravity="center"
+                android:textSize="25dp"
+                />
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/images_list"/>
 
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewProgressBar"
-            android:progressDrawable="@drawable/circular_progress_bar"
-            android:indeterminateTint="@color/blue2"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewProgressBar"
+                android:progressDrawable="@drawable/circular_progress_bar"
+                android:indeterminateTint="@color/blue2"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"/>
+        </LinearLayout>
 
 <!--        web view-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/webLayout"
-        android:visibility="gone"
-        android:orientation="vertical">
-        <WebView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/web_recipe_view"/>
+            android:id="@+id/webLayout"
+            android:visibility="gone"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <WebView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/web_recipe_view"/>
+
+        </LinearLayout>
 
 <!--        recipe view-->
         <LinearLayout
@@ -67,83 +68,89 @@
             android:layout_height="match_parent"
             android:id="@+id/manual_recipe_layout"
             android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:weightSum="13">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:id="@+id/viewHeader"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="45dp"
-                android:background="@color/blue2"
-                android:textColor="@color/white"
-                android:layout_weight="2"
-                />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_margin="20dp"
-                app:cardCornerRadius="17.0dp"
-                android:elevation="30.0dp"
-                android:layout_weight="5">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:weightSum="13">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/manualIngredientsHeader"
-                    android:textSize="25dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/viewHeader"
+                    android:gravity="center"
                     android:textStyle="bold"
-                    android:textColor="@color/blue3"
-                    />
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ingredientsView"/>
-
-            </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_margin="20dp"
-                app:cardCornerRadius="17.0dp"
-                android:elevation="30.0dp"
-                android:layout_weight="5">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/manualPreparationsHeader"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/blue3"
+                    android:textSize="45dp"
+                    android:background="@color/blue2"
+                    android:textColor="@color/white"
+                    android:layout_weight="2"
                     />
 
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/stagesView"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_margin="20dp"
+                    app:cardCornerRadius="17.0dp"
+                    android:elevation="30.0dp"
+                    android:layout_weight="5">
 
-            </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/manualIngredientsHeader"
+                            android:textSize="25dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/blue3"
+                            />
+                        <ListView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/ingredientsView"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_margin="20dp"
+                    app:cardCornerRadius="17.0dp"
+                    android:elevation="30.0dp"
+                    android:layout_weight="5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/manualPreparationsHeader"
+                            android:textSize="25dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/blue3"
+                            />
+
+                        <ListView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/stagesView"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+           </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -6,15 +6,19 @@ import Model.Statics;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -39,9 +43,10 @@ public class viewImageActivity extends Base {
     ProgressBar spinner;
     Recipe recipeData;
     ListView lst;
-    int count=0, size = 0;
+    int count=0, size = 0,position;
     List<Bitmap> images;
     private AdView mAdView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,14 @@ public class viewImageActivity extends Base {
 
         Bundle b = getIntent().getExtras();
         recipeData=(Recipe)b.getSerializable("recipe");
+
+        for(int index=0;index<Statics.showList.size();index++){
+            if(Statics.showList.get(index).GetId().equals(recipeData.GetId())){
+                position=index;
+                break;
+            }
+        }
+
         if(recipeData != null){
             if(recipeData.GetUri() != null && !recipeData.GetUri().equals("")){
                 imageLayout.setVisibility(View.GONE);

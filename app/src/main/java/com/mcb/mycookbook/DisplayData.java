@@ -45,7 +45,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
 
     ListView lst;
     List<Recipe> recipesList;
-    List<Recipe> showList;
+//    List<Recipe> showList;
     List<Drawable> courseImages;
     Spinner cSpin,
             dSpin;
@@ -78,7 +78,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
 
         flag=false;
         recipesList=new LinkedList<>();
-        showList=new LinkedList<>();
+        Statics.showList=new LinkedList<>();
 
         cSpin=findViewById(R.id.course);
         ArrayAdapter<CharSequence> cAdapter = ArrayAdapter.createFromResource(this,
@@ -198,9 +198,9 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     @Override
     public void onComplete(List<Recipe> data) {
         recipesList.clear();
-        showList.clear();
+        Statics.showList.clear();
         recipesList.addAll(data);
-        showList.addAll(data);
+        Statics.showList.addAll(data);
         flag=true;
         UpdateView();
     }
@@ -213,14 +213,14 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     private void UpdateView(){
         if(flag){
             spinner.setVisibility(View.GONE);
-            lst.setAdapter(new ReportAdapter(DisplayData.this,showList, courseImages));
+            lst.setAdapter(new ReportAdapter(DisplayData.this,Statics.showList, courseImages));
         }
     }
 
     private void filterAway(int diet,int course){
         List<Recipe> temp=new LinkedList<>();
         temp.addAll(recipesList);
-        showList.clear();
+        Statics.showList.clear();
         if(course>0)
         {
             temp.clear();
@@ -231,14 +231,14 @@ public class DisplayData extends Base implements Statics.GetDataListener {
                 }
             }
         }
-        showList.addAll(temp);
+        Statics.showList.addAll(temp);
         if(diet>0)
         {
-            showList.clear();
+            Statics.showList.clear();
             for(Recipe recipe:temp)
             {
                 if(recipe.GetDiet().equals(String.valueOf(diet))){
-                    showList.add(recipe);
+                    Statics.showList.add(recipe);
                 }
             }
         }
@@ -248,17 +248,17 @@ public class DisplayData extends Base implements Statics.GetDataListener {
     private void searchAway(String[] array,boolean head,boolean tag){
         List<Recipe>temp=new LinkedList<>();
         filterAway(dSpin.getSelectedItemPosition(),cSpin.getSelectedItemPosition());
-        temp.addAll(showList);
-        showList.clear();
+        temp.addAll(Statics.showList);
+        Statics.showList.clear();
         if(array.length==0){
-            showList.addAll(temp);
+            Statics.showList.addAll(temp);
         }
         else{
             if(head){
                 for(Recipe r : temp) {
                     for (String d : array) {
                         if (r.GetHeader().contains(d)) {
-                            showList.add(r);
+                            Statics.showList.add(r);
                             r.SetTags(new String[0]);
                             break;
                         }
@@ -270,7 +270,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
                     for(String d:array){
                         for(String t:r.GetTags()){
                             if(d.equals(t)){
-                                showList.add(r);
+                                Statics.showList.add(r);
                                 break;
                             }
                         }
@@ -283,9 +283,9 @@ public class DisplayData extends Base implements Statics.GetDataListener {
 
     public void showRow(View v){
         int position=Integer.parseInt(v.getTag().toString());
-        FireBaseModel.UpdateCount(showList.get(position).GetId(),showList.get(position).GetCounter());
+        FireBaseModel.UpdateCount(Statics.showList.get(position).GetId(),Statics.showList.get(position).GetCounter());
         Intent viewImageIntent = new Intent(this, viewImageActivity.class);
-        viewImageIntent.putExtra("recipe", showList.get(position));
+        viewImageIntent.putExtra("recipe", Statics.showList.get(position));
         startActivity(viewImageIntent);
     }
 
@@ -315,7 +315,7 @@ public class DisplayData extends Base implements Statics.GetDataListener {
         spinner = findViewById(R.id.progressBar);
         spinner.setVisibility(View.VISIBLE);
         int position=Integer.parseInt(delView.getTag().toString());
-        final Recipe recipeToDelete = showList.get(position);
+        final Recipe recipeToDelete = Statics.showList.get(position);
         List<String> imgs = recipeToDelete.GetImagesNames();
         count = 0;
         listImgSize = imgs.size();
