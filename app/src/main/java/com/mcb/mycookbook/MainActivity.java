@@ -69,7 +69,7 @@ public class MainActivity extends Base implements Statics.GetDataListener {
     Intent showMe;
     private AdView mAdView;
     ListView lst;
-//    List<Recipe> topFiveRecipes;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
