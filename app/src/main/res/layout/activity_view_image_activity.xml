@@ -29,65 +29,66 @@
                 android:src="@drawable/back_icon"
                 android:id="@+id/back_button"
                 android:onClick="moveBack"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:background="@null"/>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="10">
+                android:layout_weight="10"
+                android:orientation="vertical">
 
                 <!--        image view-->
                 <LinearLayout
+                    android:id="@+id/image_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:id="@+id/image_layout"
-                    android:visibility="gone"
-                    >
+                    android:visibility="gone">
+
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:id="@+id/recipe_name"
-                        android:layout_gravity="center"
-                        android:textSize="25dp"
-                        />
-                    <ListView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/images_list"/>
+                        android:layout_gravity="center"
+                        android:textSize="25dp" />
+
+                    <ListView
+                        android:id="@+id/images_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                     <ProgressBar
+                        android:id="@+id/viewProgressBar"
                         style="?android:attr/progressBarStyleLarge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/viewProgressBar"
-                        android:progressDrawable="@drawable/circular_progress_bar"
-                        android:indeterminateTint="@color/blue2"
                         android:layout_alignParentBottom="true"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:indeterminateTint="@color/blue2"
+                        android:progressDrawable="@drawable/circular_progress_bar" />
                 </LinearLayout>
 
                 <!--        web view-->
                 <LinearLayout
+                    android:id="@+id/webLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/webLayout"
-                    android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <WebView
+                        android:id="@+id/web_recipe_view"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:id="@+id/web_recipe_view"/>
+                        android:layout_height="match_parent" />
 
                 </LinearLayout>
 
                 <!--        recipe view-->
                 <LinearLayout
+                    android:id="@+id/manual_recipe_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/manual_recipe_layout"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -97,24 +98,23 @@
                         android:weightSum="13">
 
                         <TextView
+                            android:id="@+id/viewHeader"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:id="@+id/viewHeader"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            android:textSize="45dp"
-                            android:background="@color/blue2"
-                            android:textColor="@color/white"
                             android:layout_weight="2"
-                            />
+                            android:background="@color/blue2"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="25dp"
+                            android:textStyle="bold" />
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_margin="20dp"
-                            app:cardCornerRadius="17.0dp"
+                            android:layout_weight="5"
                             android:elevation="30.0dp"
-                            android:layout_weight="5">
+                            app:cardCornerRadius="17.0dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -126,14 +126,14 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/manualIngredientsHeader"
-                                    android:textSize="25dp"
-                                    android:textStyle="bold"
                                     android:textColor="@color/blue3"
-                                    />
+                                    android:textSize="25dp"
+                                    android:textStyle="bold" />
+
                                 <ListView
+                                    android:id="@+id/ingredientsView"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/ingredientsView"/>
+                                    android:layout_height="wrap_content" />
 
                             </LinearLayout>
 
@@ -143,9 +143,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_margin="20dp"
-                            app:cardCornerRadius="17.0dp"
+                            android:layout_weight="5"
                             android:elevation="30.0dp"
-                            android:layout_weight="5">
+                            app:cardCornerRadius="17.0dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -157,15 +157,14 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/manualPreparationsHeader"
-                                    android:textSize="25dp"
-                                    android:textStyle="bold"
                                     android:textColor="@color/blue3"
-                                    />
+                                    android:textSize="25dp"
+                                    android:textStyle="bold" />
 
                                 <ListView
+                                    android:id="@+id/stagesView"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/stagesView"/>
+                                    android:layout_height="wrap_content" />
 
                             </LinearLayout>
 
@@ -176,7 +175,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1" />
 
                 </LinearLayout>
 
@@ -184,12 +183,13 @@
             </LinearLayout>
 
             <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/fwd_icon"
                 android:id="@+id/fwd_button"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
                 android:onClick="moveFwd"
-                android:layout_weight="1"/>
+                android:src="@drawable/fwd_icon"
+                android:background="@null"/>
 
         </LinearLayout>
 
