@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -41,7 +42,7 @@ public class RowsStagesEditAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView=inf.inflate(R.layout.row_stages_edit,null);
-        TextView data=convertView.findViewById(R.id.data);
+        EditText data=convertView.findViewById(R.id.data);
         data.setText(ingredients.get(position));
 
         ImageButton del=convertView.findViewById(R.id.deleteRow);
