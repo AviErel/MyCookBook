@@ -78,10 +78,10 @@
 
     <string-array name="manualMeasurment">
         <item></item>
-        <item>kg</item>
-        <item>gr</item>
-        <item>Liter</item>
-        <item>cc</item>
+        <item>lb</item>
+        <item>oz</item>
+        <item>gal</item>
+        <item>pt</item>
         <item>Teaspoon</item>
         <item>Spoon</item>
         <item>Cup</item>
