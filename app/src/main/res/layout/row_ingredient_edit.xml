@@ -9,7 +9,7 @@
         android:orientation="horizontal"
         android:weightSum="10">
 
-        <TextView
+        <EditText
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:id="@+id/data"

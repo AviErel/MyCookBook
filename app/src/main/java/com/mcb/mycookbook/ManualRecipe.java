@@ -28,6 +28,7 @@ import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -165,132 +166,19 @@ public class ManualRecipe extends Base {
                         String uuid=(recipeData==null? UUID.randomUUID().toString():recipeData.GetId());
                         String counter= recipeData==null? "0" :  String.valueOf(recipeData.GetCounter());
 
+                        if(recipeData!=null){
+                            updateData();
+                        }
+
                         recipe=new Recipe(uuid, counter, header.getText().toString(),
                                 String.valueOf(courseSpin.getSelectedItemPosition()), String.valueOf(DietSpin.getSelectedItemPosition())
                                 , "", description.getText().toString(),
                                 Statics.userId, Statics.BuildArray(tags.getText().toString()),
                                 Statics.FlatArray(ingredients.toArray(new String[0])),
-                                Statics.FlatArray(preparations.toArray(new String[0])), "", false, new List<String>() {
-                            @Override
-                            public int size() {
-                                return 0;
-                            }
-
-                            @Override
-                            public boolean isEmpty() {
-                                return false;
-                            }
-
-                            @Override
-                            public boolean contains(@Nullable Object o) {
-                                return false;
-                            }
-
-                            @NonNull
-                            @Override
-                            public Iterator<String> iterator() {
-                                return null;
-                            }
-
-                            @Nullable
-                            @Override
-                            public Object[] toArray() {
-                                return new Object[0];
-                            }
-
-                            @Override
-                            public <T> T[] toArray(@Nullable T[] a) {
-                                return null;
-                            }
-
-                            @Override
-                            public boolean add(String s) {
-                                return false;
-                            }
-
-                            @Override
-                            public boolean remove(@Nullable Object o) {
-                                return false;
-                            }
-
-                            @Override
-                            public boolean containsAll(@NonNull Collection<?> c) {
-                                return false;
-                            }
-
-                            @Override
-                            public boolean addAll(@NonNull Collection<? extends String> c) {
-                                return false;
-                            }
-
-                            @Override
-                            public boolean addAll(int index, @NonNull Collection<? extends String> c) {
-                                return false;
-                            }
-
-                            @Override
-                            public boolean removeAll(@NonNull Collection<?> c) {
-                                return false;
-                            }
-
-                            @Override
-                            public boolean retainAll(@NonNull Collection<?> c) {
-                                return false;
-                            }
-
-                            @Override
-                            public void clear() {
-
-                            }
-
-                            @Override
-                            public String get(int index) {
-                                return null;
-                            }
-
-                            @Override
-                            public String set(int index, String element) {
-                                return null;
-                            }
-
-                            @Override
-                            public void add(int index, String element) {
-
-                            }
-
-                            @Override
-                            public String remove(int index) {
-                                return null;
-                            }
-
-                            @Override
-                            public int indexOf(@Nullable Object o) {
-                                return 0;
-                            }
-
-                            @Override
-                            public int lastIndexOf(@Nullable Object o) {
-                                return 0;
-                            }
-
-                            @NonNull
-                            @Override
-                            public ListIterator<String> listIterator() {
-                                return null;
-                            }
-
-                            @NonNull
-                            @Override
-                            public ListIterator<String> listIterator(int index) {
-                                return null;
-                            }
-
-                            @NonNull
-                            @Override
-                            public List<String> subList(int fromIndex, int toIndex) {
-                                return null;
-                            }
-                        });
+                                Statics.FlatArray(preparations.toArray(new String[0])),
+                                "",
+                                false,
+                                new ArrayList<String>());
                         if(recipeData==null){
                             FireBaseModel.SaveRecipe(recipe);
                             endSession(true);
@@ -377,6 +265,26 @@ public class ManualRecipe extends Base {
         ViewGroup.LayoutParams sParam=stages.getLayoutParams();
         sParam.height=preparations.size()*100;
         stages.setLayoutParams(sParam);
+    }
+
+    public void updateData(){
+        ingredients.clear();
+        for(int index=0;index<ings.getChildCount();index++){
+            LinearLayout l1=(LinearLayout)ings.getChildAt(index);
+            LinearLayout l2=(LinearLayout)(l1.getChildAt(0));
+            EditText e1=(EditText)(l2.getChildAt(0));
+            String temp=e1.getText().toString();
+            ingredients.add(temp);
+        }
+        preparations.clear();
+        for(int index=0;index<stages.getChildCount();index++){
+            LinearLayout l1=(LinearLayout)stages.getChildAt(index);
+            LinearLayout l2=(LinearLayout)(l1.getChildAt(0));
+            EditText e1=(EditText)(l2.getChildAt(0));
+            String temp=e1.getText().toString();
+            preparations.add(temp);
+        }
+        String temp="fgfgfg";
     }
 
     public void delIngredientRow(View v){

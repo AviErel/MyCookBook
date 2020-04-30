@@ -12,92 +12,103 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:id="@+id/image_recipe" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rowHeader"
-            android:textSize="20dp"
-            android:fontFamily="@font/felixti"
-            android:textColor="@color/blue2"
-            android:onClick="showRow"
-            />
-<!--        android:background="@color/blue2"-->
-
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <!--Image Pane-->
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            >
+            <ImageView
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:id="@+id/image_recipe" />
+        </LinearLayout>
+
+        <!--Recipe article-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="8"
             >
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rowHeader"
+                android:textSize="20dp"
+                android:fontFamily="@font/felixti"
+                android:textColor="@color/blue2"
+                android:onClick="showRow"
+                />
+    <!--        android:background="@color/blue2"-->
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/rowDescription"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/felixti"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rowDescription"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/felixti"
+                    android:layout_gravity="end"
+                    android:onClick="showRow"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_gravity="end"
-                android:onClick="showRow"
-                />
+                android:gravity="end"
+                >
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/deleteRow"
+                    android:src="@drawable/garbage"
+                    android:onClick="delRow"
+                    android:padding="20px"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:background="@null"
+                    />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/updateRow"
+                    android:src="@drawable/edit"
+                    android:onClick="updateRow"
+                    android:padding="20px"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:background="@null"
+                    />
+    <!--
+                <ImageButton
+                    android:layout_width="120px"
+                    android:layout_height="120px"
+                    android:id="@+id/viewRow"
+                    android:src="@drawable/view_recipe"
+                    android:onClick="showRow"
+                    android:padding="20px"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:background="@null"
+                    />
+    -->
+            </LinearLayout>
+
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="end"
-            android:gravity="end"
-            >
-
-            <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/deleteRow"
-                android:src="@drawable/garbage"
-                android:onClick="delRow"
-                android:padding="20px"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:background="@null"
-                />
-
-            <ImageButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/updateRow"
-                android:src="@drawable/edit"
-                android:onClick="updateRow"
-                android:padding="20px"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:background="@null"
-                />
-<!--
-            <ImageButton
-                android:layout_width="120px"
-                android:layout_height="120px"
-                android:id="@+id/viewRow"
-                android:src="@drawable/view_recipe"
-                android:onClick="showRow"
-                android:padding="20px"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:background="@null"
-                />
--->
-        </LinearLayout>
-
-    </LinearLayout>
 
     </LinearLayout>
 
