@@ -208,9 +208,9 @@ public class ManualRecipe extends Base {
         addIngredients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ingredient=((EditText)findViewById(R.id.ingredient)).getText().toString()+" ";
-                ingredient+=((EditText)findViewById(R.id.quantity)).getText().toString()+" ";
-                ingredient+=measures.getSelectedItem().toString();
+                String ingredient=((EditText)findViewById(R.id.quantity)).getText().toString()+" ";
+                ingredient+=measures.getSelectedItem().toString()+" ";
+                ingredient+=((EditText)findViewById(R.id.ingredient)).getText().toString();
                 ingredients.add(ingredient);
                 ((EditText)findViewById(R.id.ingredient)).setText("");
                 ((EditText)findViewById(R.id.quantity)).setText("");
@@ -259,11 +259,11 @@ public class ManualRecipe extends Base {
     private void updateLists(){
         ings.setAdapter(new RowsIngredientsEditAdapter(ManualRecipe.this,ingredients));
         ViewGroup.LayoutParams iParam=ings.getLayoutParams();
-        iParam.height=ingredients.size()*100;
+        iParam.height=ingredients.size()*165;
         ings.setLayoutParams(iParam);
         stages.setAdapter(new RowsStagesEditAdapter(ManualRecipe.this,preparations));
         ViewGroup.LayoutParams sParam=stages.getLayoutParams();
-        sParam.height=preparations.size()*100;
+        sParam.height=preparations.size()*165;
         stages.setLayoutParams(sParam);
     }
 

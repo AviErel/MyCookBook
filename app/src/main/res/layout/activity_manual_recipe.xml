@@ -161,72 +161,72 @@
                     android:layout_height="match_parent"
                     android:layout_margin="20dp"
                     app:cardCornerRadius="17.0dp"
-                    android:elevation="30.0dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:elevation="30.0dp"
                     >
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/manualIngredientsHeader"
-                        android:textColor="@color/blue3"
-                        android:textSize="25dp"
-                        />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:weightSum="12">
-
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/manualIngredientHint"
-                            android:id="@+id/ingredient"
-                            android:layout_weight="6"/>
-
-                        <EditText
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/manualQuantityHint"
-                            android:id="@+id/quantity"
-                            android:inputType="number"
-                            android:layout_weight="2"/>
-
-                        <Spinner
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/measure"
-                            android:layout_weight="3"/>
-
-                        <ImageButton
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:src="@drawable/plus_icon"
-                            android:id="@+id/addIngredient"
-                            android:background="@null"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:orientation="vertical"
                         >
 
-                        <ListView
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/ingrediantsView"
+                            android:text="@string/manualIngredientsHeader"
+                            android:textColor="@color/blue3"
+                            android:textSize="25dp"
                             />
 
-                    </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="12">
 
-                </LinearLayout>
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/manualQuantityHint"
+                                android:id="@+id/quantity"
+                                android:layout_weight="2"/>
+
+                            <Spinner
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/measure"
+                                android:layout_weight="3"/>
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/manualIngredientHint"
+                                android:id="@+id/ingredient"
+                                android:layout_weight="6"/>
+
+                            <ImageButton
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:src="@drawable/plus_icon"
+                                android:id="@+id/addIngredient"
+                                android:background="@null"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+
+                            <ListView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/ingrediantsView"
+                                />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
