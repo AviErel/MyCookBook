@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
@@ -81,6 +82,9 @@ public class viewImageActivity extends Base {
                 viewRecipeLayout.setVisibility(View.GONE);
                 webLayout.setVisibility(View.VISIBLE);
                 WebView webView = findViewById(R.id.web_recipe_view);
+                WebSettings settings = webView.getSettings();
+                settings.setJavaScriptEnabled(true);
+                settings.setDomStorageEnabled(true);
                 webView.loadUrl(recipeData.GetUri());
             }
             else if(recipeData.GetImagesNames().size() > 0) {
