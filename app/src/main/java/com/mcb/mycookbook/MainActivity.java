@@ -136,7 +136,6 @@ public class MainActivity extends Base implements Statics.GetDataListener {
         editor.commit();
     }
 
-
     private void loadUserTools() {
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.tools_file_name), Context.MODE_PRIVATE);
         String name = sharedPref.getString(getString(R.string.user_name), "");
