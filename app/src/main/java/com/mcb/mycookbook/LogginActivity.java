@@ -54,10 +54,7 @@ public class LogginActivity extends Base implements View.OnClickListener, Static
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (account!= null){
-            if(currentUser == null){
-                firebaseAuthWithGoogle(account.getIdToken());
-            }
+        if (account!= null && currentUser!= null){
             FireBaseModel.GetUserLanguagePre(account.getId(), this);
 
             handleUi(account);
