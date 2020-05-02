@@ -3,6 +3,7 @@ package com.mcb.mycookbook;
 import Model.FireBaseModel;
 import Model.Statics;
 import Model.User;
+import androidx.annotation.NonNull;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,22 +17,32 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LogginActivity extends Base implements View.OnClickListener, Statics.GetUserListener {
 
     private static final int RC_SIGN_IN = 497;
     private static final String TAG = "SignInGoogle";
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loggin);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .requestProfile()
                 .build();
         Statics.mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        mAuth = FirebaseAuth.getInstance();
 
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
@@ -42,8 +53,13 @@ public class LogginActivity extends Base implements View.OnClickListener, Static
     protected void onStart(){
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         if (account!= null){
+            if(currentUser == null){
+                firebaseAuthWithGoogle(account.getIdToken());
+            }
             FireBaseModel.GetUserLanguagePre(account.getId(), this);
+
             handleUi(account);
         }
     }
@@ -80,6 +96,7 @@ public class LogginActivity extends Base implements View.OnClickListener, Static
             Statics.isFirstEnter = true;
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             FireBaseModel.GetUserLanguagePre(account.getId(), this);
+            firebaseAuthWithGoogle(account.getIdToken());
 //            saveUserToFB(account.getId());
             saveUserTools("name", account.getGivenName());
             handleUi(account);
@@ -92,6 +109,24 @@ public class LogginActivity extends Base implements View.OnClickListener, Static
 
     private void saveUserToFB(String accountId){
         FireBaseModel.SaveUser(new User(accountId, getUserLang()));
+    }
+
+    private void firebaseAuthWithGoogle(String idToken){
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                        }
+                    }
+                });
     }
 
     private void saveUserTools(String key, String value){
